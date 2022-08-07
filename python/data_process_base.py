@@ -1,3 +1,4 @@
+import random
 import pandas as pd
 import numpy as np
 from datetime import timedelta
@@ -22,7 +23,7 @@ class DataAction:
 
   def data_imp(self, file_name):
     # import from data location
-    folder_path = '..\\data\\'
+    folder_path = r'G:\My Drive\docs\Education\University\ALUF\SSE\6 sem\Bachelor Thesis\\data\\'
     file_path = folder_path + file_name
     self.imp = pd.read_csv(file_path, low_memory = False)
 
@@ -84,9 +85,9 @@ class DataAction:
         print("Error: Evening_date is not part of the selected dataset!")
 
 
-  def time_wind(self, ts, wind_length):
+  def time_wind(self, ts, wind_length, parties=1):
     # select random night time window of length wind_length
-    length = len(ts.index) - wind_length
+    length = len(ts.index) - wind_length*parties + 1 # due to zero based indexing
     time_0 = np.random.randint(0,length)
     foo = ts.index[time_0]
 
@@ -169,5 +170,45 @@ class DataAction:
         # writes directly to night_mw
         start, end = self.time_wind(night_mw, 60)
         self.sgen_write(night_mw, start, end, i, val)
+    
+    return night_mw
+
+
+  def sgen_comm(self, ts, wind_length, sgen_val, parties):
+    """
+    Write sgen vals over random time window for cols
+
+    """
+
+    # create mw night dataset copy
+    night_mw = ts.copy()/1000000   # convert to MW
+
+    # create sgen columns
+    night_mw.insert(1, 'sgen_1', 0)
+    night_mw.insert(3, 'sgen_2', 0)
+    night_mw.insert(5, 'sgen_3', 0)
+    night_mw.insert(7, 'sgen_4', 0)
+    all_sgens = ['sgen_1','sgen_2','sgen_3','sgen_4']
+    
+    # create list of active sgens
+    sgens = random.sample(all_sgens, parties)
+
+    # get random start time (w/ respect to nmbr of parties)
+    start_og, end_og = self.time_wind(night_mw, wind_length, parties)
+    start = start_og
+
+    
+    np.random.shuffle(sgens)
+    wind_length = wind_length-1 # due to zero based index  
+    for i in sgens:
+        # fill sgen columns with sgen_val
+        foo = pd.to_datetime(start)
+        bar = foo + timedelta(minutes=wind_length)
+        end = bar.strftime('%Y-%m-%d %H:%M:%S')
+        self.sgen_write(night_mw, start, end, i, sgen_val)
+
+        # update new start value with old one + 1 min
+        next = bar + timedelta(minutes=1)
+        start = next.strftime('%Y-%m-%d %H:%M:%S')
     
     return night_mw
