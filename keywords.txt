@@ -1,0 +1,31 @@
+Thesis Key Terms
+
+
+hosting capacity
+  performance index
+  limits
+overcurrent
+fast/slow voltage magnitude variations
+voltage unbalance
+harmonics & supraharmonics (interharmonics, low freq subharmonics)
+under/overvoltage
+flicker
+stochastic approach to hosting capacity
+three phase vs single phase
+inverter (PV installations)
+stakeholders
+network operator
+planning approach vs time series approach
+positive/negative sequence impedance
+phase-to-ground voltage
+no-load voltage
+sensitivity analysis
+active vs reactive power
+over-sophistication in models
+peak-shaving
+frequency regulation
+aggregator
+energy services providers (ESPs)
+distribution system operator (DSO)
+transmission system operator (TSO)
+wholesale market
