@@ -2,6 +2,17 @@ import random
 import pandas as pd
 import numpy as np
 from datetime import timedelta
+import pandapower as pp
+import pandapower.networks as pn
+import pandapower.plotting as plot
+from pandapower.timeseries import DFData
+from pandapower.timeseries import OutputWriter
+from pandapower.timeseries.run_time_series import run_timeseries
+from pandapower.control import ConstControl
+import matplotlib
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+matplotlib.rcParams['timezone'] = 'Europe/Berlin'
 
 
 
@@ -196,7 +207,6 @@ class DataAction:
     # get random start time (w/ respect to nmbr of parties)
     start_og, end_og = self.time_wind(night_mw, wind_length, parties)
     start = start_og
-
     
     np.random.shuffle(sgens)
     wind_length = wind_length-1 # due to zero based index  
@@ -212,3 +222,39 @@ class DataAction:
         start = next.strftime('%Y-%m-%d %H:%M:%S')
     
     return night_mw
+
+
+
+class net_calc:
+  """
+  Automation of net-specific pandapower computations
+  
+  """
+
+  def __init__(self):
+    self.net = None
+    
+
+  def four_loads_branched(test_set):
+    net = pn.four_loads_with_branches_out()
+    pp.create_sgen(net, 6, p_mw=0, name='sgen_1', q_mvar=0)
+    pp.create_sgen(net, 7, p_mw=0, name='sgen_2', q_mvar=0)
+    pp.create_sgen(net, 8, p_mw=0, name='sgen_3', q_mvar=0)
+    pp.create_sgen(net, 9, p_mw=0, name='sgen_4', q_mvar=0)
+    net.load.name.at[0] = "load_1"
+    net.load.name.at[1] = "load_2"
+    net.load.name.at[2] = "load_3"
+    net.load.name.at[3] = "load_4"
+
+    ds = DFData(test_set)
+    ConstControl(net, element="sgen", variable="p_mw", element_index=net.sgen.index,
+                profile_name=["sgen_1","sgen_2","sgen_3","sgen_4"], data_source=ds)
+    ConstControl(net, element="load", variable="p_mw", element_index=net.load.index,
+                profile_name=["load_1","load_2","load_3","load_4"], data_source=ds)
+    net.controller
+
+
+  
+
+
+    
