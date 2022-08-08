@@ -1,3 +1,4 @@
+import os
 import random
 import pandas as pd
 import numpy as np
@@ -27,6 +28,7 @@ class DataAction:
     self.df = None
     self.chunk_size = 10000
     self.dfList = []
+    self.conv_fac = 1000*60*(20) # convert to W (1 min avg) 
     self.night_evening_t = '20:00:00'
     self.night_morning_t = '06:00:00'
     self.night_mw = None
@@ -148,9 +150,8 @@ class DataAction:
               night2.rename(columns = names2, inplace=True)
 
               # convert units to W (avg value over a minute)
-              factor = 1000*60*(20)
-              night1 = night1*factor
-              night2 = night2*factor
+              night1 = night1*self.conv_fac
+              night2 = night2*self.conv_fac
               night_merge = night1.join(night2)
               
               return night_merge
@@ -220,6 +221,8 @@ class DataAction:
         # update new start value with old one + 1 min
         next = bar + timedelta(minutes=1)
         start = next.strftime('%Y-%m-%d %H:%M:%S')
+
+    self.night_mw = night_mw
     
     return night_mw
 
@@ -233,9 +236,14 @@ class net_calc:
 
   def __init__(self):
     self.net = None
+    self.night_mw = None
+    self.n_timesteps = None
+    self.time_steps = None
+    self.ll = None # line loading results df
     
 
-  def four_loads_branched(test_set):
+  def four_loads_branched_make(self, night_mw):
+    # create net and assign load names
     net = pn.four_loads_with_branches_out()
     pp.create_sgen(net, 6, p_mw=0, name='sgen_1', q_mvar=0)
     pp.create_sgen(net, 7, p_mw=0, name='sgen_2', q_mvar=0)
@@ -246,12 +254,69 @@ class net_calc:
     net.load.name.at[2] = "load_3"
     net.load.name.at[3] = "load_4"
 
-    ds = DFData(test_set)
+    # create dataset copy w/ index for timeseries
+    night_ts = night_mw.copy()
+    night_ts.index = range(0, night_ts.shape[0])
+
+    # create controllers
+    ds = DFData(night_ts)
     ConstControl(net, element="sgen", variable="p_mw", element_index=net.sgen.index,
                 profile_name=["sgen_1","sgen_2","sgen_3","sgen_4"], data_source=ds)
     ConstControl(net, element="load", variable="p_mw", element_index=net.load.index,
                 profile_name=["load_1","load_2","load_3","load_4"], data_source=ds)
-    net.controller
+
+    # save network, ts (future ref) and timesteps
+    self.net = net
+    self.night_mw = night_mw
+    self.n_timesteps = night_mw.shape[0]
+    self.time_steps = range(0, self.n_timesteps)
+
+    
+  def four_loads_branched_out(self, var, index):
+    # create output writer to store results
+    path = '..\\results\\'
+    ow = OutputWriter(self.net, time_steps=self.time_steps, output_path=path, output_file_type=".xlsx")
+    ow.log_variable(var, index)
+
+
+  def four_loads_branched_run(self):
+    # run timeseries calculation
+    run_timeseries(self.net, time_steps=self.time_steps)
+
+
+  def four_loads_branched_read_loadpct(self):
+    # read output data
+    path = '..\\results\\'
+    ll_file = os.path.join(path, "res_line", "loading_percent.xlsx")
+    line_loading = pd.read_excel(ll_file, index_col=0)
+    line_loading.columns = line_loading.columns.astype('str')
+    names1 = {'0': 'line_1', '1': 'line_2', '2': 'line_3','3': 'line_4','4': 'line_5',
+              '5': 'line_6', '6': 'line_7', '7': 'line_8'}
+    line_loading.rename(columns = names1, inplace=True)
+    self.ll = line_loading.rolling(3).sum()
+
+
+  def four_loads_branched_plot_linepct(self):
+    # plot timestep loaded in
+    fig, ax = plt.subplots(figsize=(15,10))
+    hours = mdates.HourLocator(interval = 1)
+    h_fmt = mdates.DateFormatter('%H:%M')
+
+    ax.plot(self.night_mw.index, self.ll.values)
+    ax.xaxis.set_major_locator(hours)
+    ax.xaxis.set_major_formatter(h_fmt)
+    fig.autofmt_xdate()
+
+    secax = ax.twiny()
+    secax.plot(self.ll.index, self.ll.values)
+
+    ax.set_ylabel("line loading [%]")
+    ax.set_xlabel("time")
+    secax.set_xlabel('time step')
+    ax.legend(self.ll.columns)
+
+    plt.show()
+  
 
 
   
