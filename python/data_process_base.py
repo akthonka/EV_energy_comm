@@ -328,6 +328,21 @@ class net_calc:
     lc = plot.create_line_collection(net, net.line.index, zorder=1, cmap=cmap, 
                                      norm=norm, linewidths=2, use_bus_geodata=True)
     plot.draw_collections([lc], figsize=(8,6))
+
+
+  def end_val_step(self, ll, end_val):
+    """
+    append vals to end_val df
+    
+    """
+    # get inputs from df
+    max_val = ll.max()
+    
+    # append series as last line
+    end_val.loc[end_val.shape[0]] = max_val
+
+
+  
   
 
 
