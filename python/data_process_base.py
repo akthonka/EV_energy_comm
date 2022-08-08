@@ -206,7 +206,7 @@ class DataAction:
     sgens = random.sample(all_sgens, parties)
 
     # get random start time (w/ respect to nmbr of parties)
-    start_og, end_og = self.time_wind(night_mw, wind_length, parties)
+    start_og, _ = self.time_wind(night_mw, wind_length, parties)
     start = start_og
     
     np.random.shuffle(sgens)
@@ -293,7 +293,7 @@ class net_calc:
     names1 = {'0': 'line_1', '1': 'line_2', '2': 'line_3','3': 'line_4','4': 'line_5',
               '5': 'line_6', '6': 'line_7', '7': 'line_8'}
     line_loading.rename(columns = names1, inplace=True)
-    self.ll = line_loading.rolling(3).sum()
+    self.ll = line_loading
 
 
   def four_loads_branched_plot_linepct(self):
@@ -316,6 +316,18 @@ class net_calc:
     ax.legend(self.ll.columns)
 
     plt.show()
+
+
+  def load_graph(self, net, time_step):
+    # update network with step value
+    run_timeseries(net, time_steps=(0,time_step))
+
+    # plot line loading graph
+    cmap_list=[(20, "green"), (50, "yellow"), (60, "red")]
+    cmap, norm = plot.cmap_continuous(cmap_list)
+    lc = plot.create_line_collection(net, net.line.index, zorder=1, cmap=cmap, 
+                                     norm=norm, linewidths=2, use_bus_geodata=True)
+    plot.draw_collections([lc], figsize=(8,6))
   
 
 
