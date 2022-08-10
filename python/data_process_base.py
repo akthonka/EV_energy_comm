@@ -73,8 +73,7 @@ class DataAction:
     df.index = pd.to_datetime(df.index, exact=True, cache=True, format='%Y-%m-%d %H:%M:%S', dayfirst=True, utc=True)
     df = df.tz_convert('Europe/Berlin')
     ts = df.diff()
-    # ts.drop(str(ts.index[0]), inplace=True) # drop first NaN row
-    ts.dropna(inplace=True)
+    ts.dropna(inplace=True) # drops only the first row, from the diff()
     return ts
 
 
@@ -94,7 +93,6 @@ class DataAction:
     # check for available date
     dates = self.unique_date(ts)
     if evening_date in dates:
-        # print("Date is accepted.")
         return ts.loc[start : end]
     else:
         print("Error: Evening_date is not part of the selected dataset!")
@@ -109,9 +107,7 @@ class DataAction:
     start = foo.strftime('%Y-%m-%d %H:%M:%S')
     bar = foo + timedelta(minutes=wind_length)
     end = bar.strftime('%Y-%m-%d %H:%M:%S')
-    # print("Start time: ", start)
-    # print("End time: ", end)
-    
+
     return start, end
 
 
@@ -158,7 +154,8 @@ class DataAction:
               
               return night_merge
 
-      except: # deprecated error handling - should now be fixed via parameters
+      except Exception as str_error: # deprecated error handling - should now be fixed via parameters
+          print(str_error) 
           print("Huh, grabbing a different touple of dates...")
 
 
@@ -332,7 +329,7 @@ class net_calc:
     plot.draw_collections([lc], figsize=(8,6))
 
 
-  def end_val_step(self, ll, end_val):
+  def end_vals_step(self, ll, end_vals):
     """
     append vals to end_val df
     
@@ -341,7 +338,22 @@ class net_calc:
     max_val = ll.max()
     
     # append series as last line
-    end_val.loc[end_val.shape[0]] = max_val
+    end_vals.loc[end_vals.shape[0]] = max_val
+
+
+  def end_times_step(self, ll, end_times):
+    """
+    append vals to end_times df
+    
+    """
+    # get inputs
+    max_ind = ll.idxmax()
+    k = self.night_mw.index.values[max_ind.tolist()]
+    max_time = pd.to_datetime(k).strftime('%H:%M:%S').tolist()
+
+    # append to end_times
+    end_times.loc[end_times.shape[0]] = max_time
+
 
 
   
