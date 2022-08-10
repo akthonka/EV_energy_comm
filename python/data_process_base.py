@@ -48,7 +48,7 @@ class DataAction:
         col_names.remove(col)
     df.drop(columns=col_names, inplace = True)
     df.dropna(inplace=True)
-    df.rename(columns = {'cet_cest_timestamp':'date_time'}, inplace = True)
+    df.rename(columns = {'utc_timestamp':'date_time'}, inplace = True)
     self.df = df.set_index('date_time')
 
 
@@ -70,9 +70,11 @@ class DataAction:
   def parse_procc(self, df):
     # parse dates and convert index to time series
     # take the row difference and drop first NaN
-    df.index = pd.to_datetime(df.index, exact=True, cache=True, format='%Y-%m-%d %H:%M:%S', dayfirst=True)
+    df.index = pd.to_datetime(df.index, exact=True, cache=True, format='%Y-%m-%d %H:%M:%S', dayfirst=True, utc=True)
+    df = df.tz_convert('Europe/Berlin')
     ts = df.diff()
-    ts.drop(str(ts.index[0]), inplace=True) # drop first NaN row
+    # ts.drop(str(ts.index[0]), inplace=True) # drop first NaN row
+    ts.dropna(inplace=True)
     return ts
 
 
@@ -81,13 +83,13 @@ class DataAction:
     return df.index.map(lambda t: str(t.date())).unique().tolist()
 
 
-  def get_night(self, ts, evening_date, start_time, end_time):
+  def get_night(self, ts, evening_date):
     # get the dates for loc slice
-    start = evening_date + ' ' + start_time
+    start = evening_date + ' ' + self.night_evening_t
     foo = pd.to_datetime(evening_date)
-    bar = foo.replace(hour=int(end_time[0:2]), minute=int(end_time[3:5]),
-                      second=int(end_time[6:8])).strftime('%H:%M:%S')
-    end = str(foo + timedelta(days=1))[:11] + bar
+    bar = foo + timedelta(days=1)
+    end = bar.replace(hour=int(self.night_morning_t[0:2]), minute=int(self.night_morning_t[3:5]),
+                      second=int(self.night_morning_t[6:8])).strftime('%Y-%m-%d %H:%M:%S')
 
     # check for available date
     dates = self.unique_date(ts)
@@ -128,17 +130,17 @@ class DataAction:
     while True:
       try:
           # pick two random TimeSeries
-          df_rand = np.random.choice(len(self.dfList), 2, replace=False)
+          df_rand = np.random.choice(len(self.dfList[:-1]), 2, replace=False)
           ts1 = self.parse_procc(self.dfList[df_rand[0]])
           ts2 = self.parse_procc(self.dfList[df_rand[1]])
 
           # test that they are the same size then merge
           if ts1.size == ts2.size:            
-              # limit TS to night window
-              night1 = self.get_night(ts1, self.unique_date(ts1)[0],
-                                      self.night_evening_t, self.night_morning_t).copy()
-              night2 = self.get_night(ts2, self.unique_date(ts2)[0],
-                                      self.night_evening_t, self.night_morning_t).copy()
+              # limit TS to random night window (except for last one, for night over-roll)
+              date1 = np.random.choice(self.unique_date(ts1)[2:-2])
+              date2 = np.random.choice(self.unique_date(ts2)[2:-2])
+              night1 = self.get_night(ts1, date1).copy()
+              night2 = self.get_night(ts2, date2).copy()
               night2.index = night1.index # use the first index for both, since only the time matters
 
               # rename cols
@@ -156,8 +158,8 @@ class DataAction:
               
               return night_merge
 
-      except:
-          print("Whoops, grabbing a different touple of dates...")
+      except: # deprecated error handling - should now be fixed via parameters
+          print("Huh, grabbing a different touple of dates...")
 
 
   def sgen_rand(self, ts, sgen_val):
