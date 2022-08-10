@@ -21,6 +21,7 @@ class DataAction:
     """The nuclear data-processing method."""
 
     def __init__(self):
+        self.folder_path = None
         self.imp = None
         self.df = None
         self.chunk_size = 10000
@@ -32,7 +33,7 @@ class DataAction:
 
     def data_imp(self, file_name):
         # import from data location
-        folder_path = r"G:\\My Drive\\docs\\Education\\University\\ALUF\\SSE\\6 sem\\Bachelor Thesis\\data\\"
+        folder_path = self.folder_path
         file_path = folder_path + file_name
         self.imp = pd.read_csv(file_path, low_memory=False)
 
@@ -116,6 +117,7 @@ class DataAction:
 
     def power_merge(self):
         """Randomly select two days and merge them into a single df"""
+
         while True:
             try:
                 # pick two random TimeSeries
@@ -345,6 +347,7 @@ class net_calc:
 
     def end_vals_step(self, ll, end_vals):
         """append vals to end_val df"""
+
         # get inputs from df
         max_val = ll.max()
 
@@ -353,6 +356,7 @@ class net_calc:
 
     def end_times_step(self, ll, end_times):
         """append vals to end_times df"""
+
         # get inputs
         max_ind = ll.idxmax()
         k = self.night_mw.index.values[max_ind.tolist()]
