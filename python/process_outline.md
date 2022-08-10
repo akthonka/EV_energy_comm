@@ -1,6 +1,3 @@
-# Electric Vehicles in Energy Communities: Investigating the Distribution Grid Hosting Capacity
-BSc SSE Thesis of Daniil Aktanka
-
 ### Creating a case network
 1. Randomly select load profile for a single day
 2. Limit the profile to night window
@@ -40,4 +37,4 @@ FOR _x_ IN range(_n_) :
         2. Run timeseries on time window
         3. Calculate max line load(s), save output to df
 
-Calculate probability of line overload per scenario.
+Calculate line overload occurance per scenario.
