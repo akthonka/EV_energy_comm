@@ -26,7 +26,7 @@ class DataAction:
         self.df = None
         self.chunk_size = 10000
         self.dfList = []
-        self.conv_fac = 1000 * 60 * (10)  # convert to W (1 min avg)
+        self.conv_fac = 1000 * 60 * (1)  # convert to W (1 min avg)
         self.night_evening_t = "20:00:00"
         self.night_morning_t = "06:00:00"
         self.night_mw = None
