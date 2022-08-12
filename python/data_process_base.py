@@ -272,6 +272,46 @@ class net_calc:
         self.n_timesteps = night_mw.shape[0]
         self.time_steps = range(0, self.n_timesteps)
 
+    def euro_lv(self, night_mw):
+        # create net and assign load names
+        net = pn.ieee_european_lv_asymmetric("off_peak_1440")
+
+        for i in range(0, len(net.asymmetric_load)):
+            bus_nmbr = net.asymmetric_load.bus.at[i]
+            load_name = "loadh_" + str(i)
+            sgen_name = "sgen_" + str(i)
+            pp.create_load(net, bus_nmbr, 0, name=load_name)
+            pp.create_sgen(net, bus_nmbr, 0, name=sgen_name)
+
+        # create dataset copy w/ index for timeseries
+        night_ts = night_mw.copy()
+        night_ts.index = range(0, night_ts.shape[0])
+
+        # create controllers
+        ds = DFData(night_ts)
+        ConstControl(
+            net,
+            element="sgen",
+            variable="p_mw",
+            element_index=net.sgen.index,
+            profile_name=net.sgen.name.tolist(),
+            data_source=ds,
+        )
+        ConstControl(
+            net,
+            element="load",
+            variable="p_mw",
+            element_index=net.load.index,
+            profile_name=net.load.name.tolist(),
+            data_source=ds,
+        )
+
+        # save network, ts (future ref) and timesteps
+        self.net = net
+        self.night_mw = night_mw
+        self.n_timesteps = night_mw.shape[0]
+        self.time_steps = range(0, self.n_timesteps)
+
     def four_loads_branched_out(self, var, index):
         # create output writer to store results
         path = "..\\results\\"
