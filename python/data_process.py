@@ -168,6 +168,35 @@ class DataAction:
             start, end = self.time_wind(self.night_sgens, 60)
             self.sgen_write(self.night_sgens, start, end, name, sgen_val)
 
+    def sgen_comm(self, night_sgens, wind_length, sgen_val, parties):
+        """Write sgen vals over random time window for cols"""
+
+        all_sgens = self.night_sgens.columns.tolist()
+
+        # create list of active sgens
+        sgens = random.sample(all_sgens, parties)
+
+        # get random start time (w/ respect to nmbr of parties)
+        start_og, _ = self.time_wind(night_sgens, wind_length, parties)
+        start = start_og
+
+        np.random.shuffle(sgens)
+        wind_length = wind_length - 1  # due to zero based index
+        for i in sgens:
+            # fill sgen columns with sgen_val
+            foo = pd.to_datetime(start)
+            bar = foo + timedelta(minutes=wind_length)
+            end = bar.strftime("%Y-%m-%d %H:%M:%S")
+            self.sgen_write(night_sgens, start, end, i, sgen_val)
+
+            # update new start value with old one + 1 min
+            next = bar + timedelta(minutes=1)
+            start = next.strftime("%Y-%m-%d %H:%M:%S")
+
+        self.night_sgens = night_sgens
+
+        return night_sgens
+
 
 class net_calc:
     """Automation of net-specific pandapower computations"""
