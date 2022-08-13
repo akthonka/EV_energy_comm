@@ -29,7 +29,8 @@ class DataAction:
         self.conv_fac = 1000 * 60 * (1)  # convert to W (1 min avg)
         self.night_evening_t = "20:00:00"
         self.night_morning_t = "06:00:00"
-        self.night_mw = None
+        self.night_loads = None
+        self.night_sgens = None
 
     def data_imp(self, file_name):
         # import from data location
@@ -115,110 +116,56 @@ class DataAction:
         ts.loc[start:end, col_name] = val
         return ts
 
-        # def power_merge(self):
-        #     """Randomly select two days and merge them into a single df"""
+    def night_rand(self):
+        """Helper function. Create time-limited randomly sampled series"""
 
-        #     while True:
-        #         try:
-        #             # pick two random TimeSeries
-        #             df_rand = np.random.choice(
-        #                 len(self.dfList[:-1]), 2, replace=False
-        #             )  # last list dropped, likely not full
-        #             ts1 = self.parse_procc(self.dfList[df_rand[0]])
-        #             ts2 = self.parse_procc(self.dfList[df_rand[1]])
+        # choose random list number for df
+        df_rand = np.random.choice(len(self.dfList[:-1]))
 
-        #             # test that they are the same size then merge
-        #             if ts1.size == ts2.size:
-        #                 # limit TS to random night window (except for first one and last two, for night over-roll)
-        #                 date1 = np.random.choice(self.unique_date(ts1)[1:-2])
-        #                 date2 = np.random.choice(self.unique_date(ts2)[1:-2])
-        #                 night1 = self.get_night(ts1, date1).copy()
-        #                 night2 = self.get_night(ts2, date2).copy()
-        #                 night2.index = (
-        #                     night1.index
-        #                 )  # use the first index for both, since only the time matters
+        # parse random data and convert to time index, limit to single series
+        rand_col = np.random.randint(0, 2)  # rand pick between two load profiles
+        ts1 = self.parse_procc(self.dfList[df_rand].iloc[:, rand_col])
 
-        #                 # rename cols
-        #                 names1 = {
-        #                     "DE_KN_residential1_grid_import": "load_1",
-        #                     "DE_KN_residential2_grid_import": "load_2",
-        #                 }
-        #                 night1.rename(columns=names1, inplace=True)
-        #                 names2 = {
-        #                     "DE_KN_residential1_grid_import": "load_3",
-        #                     "DE_KN_residential2_grid_import": "load_4",
-        #                 }
-        #                 night2.rename(columns=names2, inplace=True)
+        # limit to night time, random date
+        date1 = np.random.choice(self.unique_date(ts1)[1:-2])
+        night1 = self.get_night(ts1, date1).copy()
 
-        #                 # convert units to W (avg value over a minute)
-        #                 night1 = night1 * self.conv_fac
-        #                 night2 = night2 * self.conv_fac
-        #                 night_merge = night1.join(night2)
+        return night1
 
-        #             return night_merge
+    def load_sgen_make(self, load_number=55):
+        """Create time series test dataframe for any number of loads.
+        load_number goes from 1 to n, number designation of load in network"""
 
-        #         except Exception as str_error:  # deprecated error handling - should now be fixed via parameters
-        #             print(str_error)
-        #             print("Huh, grabbing a different touple of dates...")
+        # targets
+        night_loads = pd.DataFrame()
+        list_loads = []
+        night_sgens = pd.DataFrame()
+        list_sgens = []
 
-        # def sgen_rand(self, ts, sgen_val):
-        #     """Write sgen vals over random time window for cols"""
+        # generate list of Series for concatenation
+        for i in range(1, load_number + 1):
+            night1 = self.night_rand()
+            list_loads.append(pd.Series(night1.values, name="loadh_" + str(i)))
+            list_sgens.append(pd.Series([0] * night1.shape[0], name="sgen_" + str(i)))
 
-        #     # create mw night dataset copy
-        #     night_mw = ts.copy() / 1000000  # convert to MW
+        # merge series into data frames
+        night_loads = pd.concat(list_loads, axis=1) * self.conv_fac / 1000000  # to MW
+        night_loads.index = night1.index
+        night_sgens = pd.concat(list_sgens, axis=1)
+        night_sgens.index = night1.index
 
-        #     # create sgen columns
-        #     night_mw.insert(1, "sgen_1", 0)
-        #     night_mw.insert(3, "sgen_2", 0)
-        #     night_mw.insert(5, "sgen_3", 0)
-        #     night_mw.insert(7, "sgen_4", 0)
+        # write values
+        self.night_loads = night_loads
+        self.night_sgens = night_sgens
 
-        #     sgens = ["sgen_1", "sgen_2", "sgen_3", "sgen_4"]
-        #     val = sgen_val  # 0.010 or 10kW is typical high-end
+    def sgen_rand(self, sgen_val):
+        """Write sgen vals over random time window for cols"""
+        sgens = self.night_sgens.columns
 
-        #     for i in sgens:
-        #         # writes directly to night_mw
-        #         start, end = self.time_wind(night_mw, 60)
-        #         self.sgen_write(night_mw, start, end, i, val)
-
-        return night_mw
-
-    # def sgen_comm(self, ts, wind_length, sgen_val, parties):
-    #     """Write sgen vals over random time window for cols"""
-
-    #     # create mw night dataset copy
-    #     night_mw = ts.copy() / 1000000  # convert to MW
-
-    #     # create sgen columns
-    #     night_mw.insert(1, "sgen_1", 0)
-    #     night_mw.insert(3, "sgen_2", 0)
-    #     night_mw.insert(5, "sgen_3", 0)
-    #     night_mw.insert(7, "sgen_4", 0)
-    #     all_sgens = ["sgen_1", "sgen_2", "sgen_3", "sgen_4"]
-
-    #     # create list of active sgens
-    #     sgens = random.sample(all_sgens, parties)
-
-    #     # get random start time (w/ respect to nmbr of parties)
-    #     start_og, _ = self.time_wind(night_mw, wind_length, parties)
-    #     start = start_og
-
-    #     np.random.shuffle(sgens)
-    #     wind_length = wind_length - 1  # due to zero based index
-    #     for i in sgens:
-    #         # fill sgen columns with sgen_val
-    #         foo = pd.to_datetime(start)
-    #         bar = foo + timedelta(minutes=wind_length)
-    #         end = bar.strftime("%Y-%m-%d %H:%M:%S")
-    #         self.sgen_write(night_mw, start, end, i, sgen_val)
-
-    #         # update new start value with old one + 1 min
-    #         next = bar + timedelta(minutes=1)
-    #         start = next.strftime("%Y-%m-%d %H:%M:%S")
-
-    #     self.night_mw = night_mw
-
-    #     return night_mw
+        for name in sgens:
+            # writes directly to night_mw
+            start, end = self.time_wind(self.night_sgens, 60)
+            self.sgen_write(self.night_sgens, start, end, name, sgen_val)
 
 
 class net_calc:
@@ -231,50 +178,9 @@ class net_calc:
         self.time_steps = None
         self.ll = None  # line loading results df
 
-    # def four_loads_branched_make(self, night_mw):
-    #     # create net and assign load names
-    #     net = pn.four_loads_with_branches_out()
-    #     pp.create_sgen(net, 6, p_mw=0, name="sgen_1", q_mvar=0)
-    #     pp.create_sgen(net, 7, p_mw=0, name="sgen_2", q_mvar=0)
-    #     pp.create_sgen(net, 8, p_mw=0, name="sgen_3", q_mvar=0)
-    #     pp.create_sgen(net, 9, p_mw=0, name="sgen_4", q_mvar=0)
-    #     net.load.name.at[0] = "load_1"
-    #     net.load.name.at[1] = "load_2"
-    #     net.load.name.at[2] = "load_3"
-    #     net.load.name.at[3] = "load_4"
-
-    #     # create dataset copy w/ index for timeseries
-    #     night_ts = night_mw.copy()
-    #     night_ts.index = range(0, night_ts.shape[0])
-
-    #     # create controllers
-    #     ds = DFData(night_ts)
-    #     ConstControl(
-    #         net,
-    #         element="sgen",
-    #         variable="p_mw",
-    #         element_index=net.sgen.index,
-    #         profile_name=["sgen_1", "sgen_2", "sgen_3", "sgen_4"],
-    #         data_source=ds,
-    #     )
-    #     ConstControl(
-    #         net,
-    #         element="load",
-    #         variable="p_mw",
-    #         element_index=net.load.index,
-    #         profile_name=["load_1", "load_2", "load_3", "load_4"],
-    #         data_source=ds,
-    #     )
-
-    #     # save network, ts (future ref) and timesteps
-    #     self.net = net
-    #     self.night_mw = night_mw
-    #     self.n_timesteps = night_mw.shape[0]
-    #     self.time_steps = range(0, self.n_timesteps)
-
-    def euro_lv(self, night_mw):
+    def euro_asym(self, net, night_loads, night_sgens):
         # create net and assign load names
-        net = pn.ieee_european_lv_asymmetric("off_peak_1440")
+        self.net = net
 
         for i in range(0, len(net.asymmetric_load)):
             bus_nmbr = net.asymmetric_load.bus.at[i]
@@ -284,35 +190,36 @@ class net_calc:
             pp.create_sgen(net, bus_nmbr, 0, name=sgen_name)
 
         # create dataset copy w/ index for timeseries
-        night_ts = night_mw.copy()
-        night_ts.index = range(0, night_ts.shape[0])
+        night_loads_ts = night_loads.copy()
+        night_loads_ts.index = range(0, night_loads.shape[0])
+        night_sgens_ts = night_sgens.copy()
+        night_sgens_ts.index = range(0, night_sgens.shape[0])
 
         # create controllers
-        ds = DFData(night_ts)
-        ConstControl(
-            net,
-            element="sgen",
-            variable="p_mw",
-            element_index=net.sgen.index,
-            profile_name=net.sgen.name.tolist(),
-            data_source=ds,
-        )
+        ds_loads = DFData(night_loads_ts)
         ConstControl(
             net,
             element="load",
             variable="p_mw",
             element_index=net.load.index,
-            profile_name=net.load.name.tolist(),
-            data_source=ds,
+            profile_name=night_loads_ts.columns.tolist(),
+            data_source=ds_loads,
         )
 
-        # save network, ts (future ref) and timesteps
-        self.net = net
-        self.night_mw = night_mw
-        self.n_timesteps = night_mw.shape[0]
+        ds_sgens = DFData(night_sgens_ts)
+        ConstControl(
+            net,
+            element="sgen",
+            variable="p_mw",
+            element_index=net.sgen.index,
+            profile_name=night_sgens_ts.columns.tolist(),
+            data_source=ds_sgens,
+        )
+
+        self.n_timesteps = night_loads_ts.shape[0]
         self.time_steps = range(0, self.n_timesteps)
 
-    def four_loads_branched_out(self, var, index):
+    def output_writer(self, var, index):
         # create output writer to store results
         path = "..\\results\\"
         ow = OutputWriter(
@@ -323,67 +230,67 @@ class net_calc:
         )
         ow.log_variable(var, index)
 
-    def four_loads_branched_run(self):
+    def ts_run(self):
         # run timeseries calculation
         run_timeseries(self.net, time_steps=self.time_steps)
 
-    def four_loads_branched_read_loadpct(self):
-        # read output data
-        path = "..\\results\\"
-        ll_file = os.path.join(path, "res_line", "loading_percent.xlsx")
-        line_loading = pd.read_excel(ll_file, index_col=0)
-        line_loading.columns = line_loading.columns.astype("str")
-        names1 = {
-            "0": "line_1",
-            "1": "line_2",
-            "2": "line_3",
-            "3": "line_4",
-            "4": "line_5",
-            "5": "line_6",
-            "6": "line_7",
-            "7": "line_8",
-        }
-        line_loading.rename(columns=names1, inplace=True)
-        self.ll = line_loading
+    # def four_loads_branched_read_loadpct(self):
+    #     # read output data
+    #     path = "..\\results\\"
+    #     ll_file = os.path.join(path, "res_line", "loading_percent.xlsx")
+    #     line_loading = pd.read_excel(ll_file, index_col=0)
+    #     line_loading.columns = line_loading.columns.astype("str")
+    #     names1 = {
+    #         "0": "line_1",
+    #         "1": "line_2",
+    #         "2": "line_3",
+    #         "3": "line_4",
+    #         "4": "line_5",
+    #         "5": "line_6",
+    #         "6": "line_7",
+    #         "7": "line_8",
+    #     }
+    #     line_loading.rename(columns=names1, inplace=True)
+    #     self.ll = line_loading
 
-    def four_loads_branched_plot_linepct(self):
-        # plot timestep loaded in
-        fig, ax = plt.subplots(figsize=(15, 10))
-        hours = mdates.HourLocator(interval=1)
-        h_fmt = mdates.DateFormatter("%H:%M")
+    # def four_loads_branched_plot_linepct(self):
+    #     # plot timestep loaded in
+    #     fig, ax = plt.subplots(figsize=(15, 10))
+    #     hours = mdates.HourLocator(interval=1)
+    #     h_fmt = mdates.DateFormatter("%H:%M")
 
-        ax.plot(self.night_mw.index, self.ll.values)
-        ax.xaxis.set_major_locator(hours)
-        ax.xaxis.set_major_formatter(h_fmt)
-        fig.autofmt_xdate()
+    #     ax.plot(self.night_mw.index, self.ll.values)
+    #     ax.xaxis.set_major_locator(hours)
+    #     ax.xaxis.set_major_formatter(h_fmt)
+    #     fig.autofmt_xdate()
 
-        secax = ax.twiny()
-        secax.plot(self.ll.index, self.ll.values)
+    #     secax = ax.twiny()
+    #     secax.plot(self.ll.index, self.ll.values)
 
-        ax.set_ylabel("line loading [%]")
-        ax.set_xlabel("time")
-        secax.set_xlabel("time step")
-        ax.legend(self.ll.columns)
+    #     ax.set_ylabel("line loading [%]")
+    #     ax.set_xlabel("time")
+    #     secax.set_xlabel("time step")
+    #     ax.legend(self.ll.columns)
 
-        plt.show()
+    #     plt.show()
 
-    def load_graph(self, net, time_step):
-        # update network with step value
-        run_timeseries(net, time_steps=(0, time_step))
+    # def load_graph(self, net, time_step):
+    #     # update network with step value
+    #     run_timeseries(net, time_steps=(0, time_step))
 
-        # plot line loading graph
-        cmap_list = [(20, "green"), (50, "yellow"), (60, "red")]
-        cmap, norm = plot.cmap_continuous(cmap_list)
-        lc = plot.create_line_collection(
-            net,
-            net.line.index,
-            zorder=1,
-            cmap=cmap,
-            norm=norm,
-            linewidths=2,
-            use_bus_geodata=True,
-        )
-        plot.draw_collections([lc], figsize=(8, 6))
+    #     # plot line loading graph
+    #     cmap_list = [(20, "green"), (50, "yellow"), (60, "red")]
+    #     cmap, norm = plot.cmap_continuous(cmap_list)
+    #     lc = plot.create_line_collection(
+    #         net,
+    #         net.line.index,
+    #         zorder=1,
+    #         cmap=cmap,
+    #         norm=norm,
+    #         linewidths=2,
+    #         use_bus_geodata=True,
+    #     )
+    #     plot.draw_collections([lc], figsize=(8, 6))
 
     def end_vals_step(self, ll, end_vals):
         """append vals to end_val df"""
