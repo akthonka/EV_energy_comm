@@ -55,6 +55,7 @@ class DataAction:
         print("Number of data frame segments = ", len(self.dfList))
 
     def imp_procc(self, file_name, keep_cols):
+        """All in one helper function """
         # easy import, data filter and split
         self.data_imp(file_name)
         self.data_filter(self.imp, keep_cols)
@@ -234,63 +235,31 @@ class net_calc:
         # run timeseries calculation
         run_timeseries(self.net, time_steps=self.time_steps)
 
-    # def four_loads_branched_read_loadpct(self):
-    #     # read output data
-    #     path = "..\\results\\"
-    #     ll_file = os.path.join(path, "res_line", "loading_percent.xlsx")
-    #     line_loading = pd.read_excel(ll_file, index_col=0)
-    #     line_loading.columns = line_loading.columns.astype("str")
-    #     names1 = {
-    #         "0": "line_1",
-    #         "1": "line_2",
-    #         "2": "line_3",
-    #         "3": "line_4",
-    #         "4": "line_5",
-    #         "5": "line_6",
-    #         "6": "line_7",
-    #         "7": "line_8",
-    #     }
-    #     line_loading.rename(columns=names1, inplace=True)
-    #     self.ll = line_loading
+    def read_output(self):
+        # load excel file
+        path = "..\\results\\"
+        vm_file = os.path.join(path, "res_bus", "vm_pu.xlsx")
+        vm_pu = pd.read_excel(vm_file, index_col=0)
 
-    # def four_loads_branched_plot_linepct(self):
-    #     # plot timestep loaded in
-    #     fig, ax = plt.subplots(figsize=(15, 10))
-    #     hours = mdates.HourLocator(interval=1)
-    #     h_fmt = mdates.DateFormatter("%H:%M")
+        # renaming dictionary
+        line_dict = {}
+        keys = vm_pu.columns.tolist()
+        values = []
+        for i in range(vm_pu.shape[1]):
+            line_name = "line_" + str(i)
+            values.append(line_name)
 
-    #     ax.plot(self.night_mw.index, self.ll.values)
-    #     ax.xaxis.set_major_locator(hours)
-    #     ax.xaxis.set_major_formatter(h_fmt)
-    #     fig.autofmt_xdate()
+        for i in range(vm_pu.shape[1]):
+            line_dict[keys[i]] = values[i]
 
-    #     secax = ax.twiny()
-    #     secax.plot(self.ll.index, self.ll.values)
+        # rename cols
+        vm_pu.rename(columns=line_dict, inplace=True)
 
-    #     ax.set_ylabel("line loading [%]")
-    #     ax.set_xlabel("time")
-    #     secax.set_xlabel("time step")
-    #     ax.legend(self.ll.columns)
+        return vm_pu
 
-    #     plt.show()
-
-    # def load_graph(self, net, time_step):
-    #     # update network with step value
-    #     run_timeseries(net, time_steps=(0, time_step))
-
-    #     # plot line loading graph
-    #     cmap_list = [(20, "green"), (50, "yellow"), (60, "red")]
-    #     cmap, norm = plot.cmap_continuous(cmap_list)
-    #     lc = plot.create_line_collection(
-    #         net,
-    #         net.line.index,
-    #         zorder=1,
-    #         cmap=cmap,
-    #         norm=norm,
-    #         linewidths=2,
-    #         use_bus_geodata=True,
-    #     )
-    #     plot.draw_collections([lc], figsize=(8, 6))
+    def load_graph(self, net, time_step):
+        # update network with step value
+        run_timeseries(net, time_steps=(0, time_step))
 
     def end_vals_step(self, ll, end_vals):
         """append vals to end_val df"""
