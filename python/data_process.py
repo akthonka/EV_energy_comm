@@ -49,8 +49,10 @@ class DataAction:
         self.chunk_size = 10000  # number of datapoints in each df
         self.dfList = []
         self.conv_fac = 1000 * 60  # convert from MW/min to W (1 min avg)
-        self.night_evening_t = "20:00:00"
+        self.night_evening_t = "18:00:00"
         self.night_morning_t = "06:00:00"
+        self.night_max_t = "19:19:00"  # obtained from max_load_times.ipynb
+        self.wind_length = 60
         self.night_loads = None
         self.night_sgens = None
 
@@ -116,7 +118,7 @@ class DataAction:
         start = evening_date + " " + self.night_evening_t
         foo = pd.to_datetime(evening_date)
         bar = foo + timedelta(days=1)
-        end = bar.replace(
+        end = bar.replace(  # replace time section of string
             hour=int(self.night_morning_t[0:2]),
             minute=int(self.night_morning_t[3:5]),
             second=int(self.night_morning_t[6:8]),
@@ -157,27 +159,6 @@ class DataAction:
 
         return night1
 
-    def sgen_write(self, ts, start, end, col_name, val):  # helper function
-        """write sgen value to df on column across a given time window"""
-
-        ts.loc[start:end, col_name] = val  # 'start' & 'end' variables are str
-
-        return ts
-
-    def sgen_rand(self, sgen_val):
-        """fill self.night_sgens df at random times with select sgen value"""
-
-        sgens = self.night_sgens.columns
-        for name in sgens:
-            # writes directly to night_mw
-            start, end = self.time_wind(self.night_sgens, 60)
-            self.sgen_write(self.night_sgens, start, end, name, sgen_val)
-
-    def sgen_max(self, sgen_val):
-        """fill self.night_sgens df at single peak load time for all households"""
-        # TODO
-        pass
-
     def load_sgen_make(self, load_number=55):
         """create pandapower time series simulation df's for any number of households"""
 
@@ -202,6 +183,38 @@ class DataAction:
         # write output to class variables for later use
         self.night_loads = night_loads
         self.night_sgens = night_sgens
+
+    def sgen_write(self, ts, start, end, col_name, val):  # helper function
+        """write sgen value to df on column across a given time window"""
+
+        ts.loc[start:end, col_name] = val  # 'start' & 'end' variables are str
+
+        return ts
+
+    def sgen_rand(self, sgen_val):
+        """fill self.night_sgens df at random times with select sgen value"""
+
+        sgens = self.night_sgens.columns
+        for name in sgens:
+            # writes directly to night_mw
+            start, end = self.time_wind(self.night_sgens, self.wind_length)
+            self.sgen_write(self.night_sgens, start, end, name, sgen_val)
+
+    def sgen_max(self, sgen_val):
+        """fill self.night_sgens df at single peak load time for all households"""
+
+        # calculate end window time based on max load time
+        foo = self.night_sgens.index[0]
+        bar = foo.replace(  # replace time section of string
+            hour=int(self.night_max_t[0:2]),
+            minute=int(self.night_max_t[3:5]),
+            second=int(self.night_max_t[6:8]),
+        )
+        start = bar.strftime("%Y-%m-%d %H:%M:%S")
+        end = (bar + timedelta(minutes=self.wind_length)).strftime("%Y-%m-%d %H:%M:%S")
+
+        # fill all columns with same value
+        self.night_sgens.loc[start:end] = sgen_val
 
 
 class net_calc:
@@ -301,7 +314,7 @@ class net_calc:
         keys = vm_pu.columns.tolist()
         values = []
         for i in range(vm_pu.shape[1]):
-            line_name = "line_" + str(i)
+            line_name = "bus_" + str(i)
             values.append(line_name)
 
         for i in range(vm_pu.shape[1]):
