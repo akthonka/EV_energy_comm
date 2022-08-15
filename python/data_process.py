@@ -45,7 +45,7 @@ class DataAction:
 
         self.folder_path = None
         self.imp = None
-        self.df = None
+        self.df = None  # comment abbreviation from hereon: df = DataFrame
         self.chunk_size = 10000  # number of datapoints in each df
         self.dfList = []
         self.conv_fac = 1000 * 60  # convert from MW/min to W (1 min avg)
@@ -104,7 +104,7 @@ class DataAction:
 
         return ts
 
-    def unique_date(self, df):
+    def unique_date(self, df):  # helper function
         """find unique days in the time-series index df"""
 
         return df.index.map(lambda t: str(t.date())).unique().tolist()
@@ -129,49 +129,63 @@ class DataAction:
         else:
             print("Error: Evening_date is not part of the selected dataset!")
 
-    def time_wind(self, ts, wind_length, parties=1):
-        """select random night time window of length wind_length"""
+    def time_wind(self, ts, wind_length):
+        """select random night time window for a single party (household)"""
 
-        length = len(ts.index) - wind_length * parties + 1  # due to zero based indexing
+        length = len(ts.index) - wind_length + 1  # +1 due to zero based indexing
         time_0 = np.random.randint(0, length)
         foo = ts.index[time_0]
-
         start = foo.strftime("%Y-%m-%d %H:%M:%S")
         bar = foo + timedelta(minutes=wind_length)
         end = bar.strftime("%Y-%m-%d %H:%M:%S")
 
         return start, end
 
-    def sgen_write(self, ts, start, end, col_name, val):
-        # write sgen val to df on col in time window
-        ts.loc[start:end, col_name] = val
-        return ts
-
     def night_rand(self):
-        """Helper function. Create time-limited randomly sampled series"""
+        """create a random night load profile"""
 
-        # choose random list number for df
-        df_rand = np.random.choice(len(self.dfList[:-1]))
+        # choose random df identifying list number from fragemented import set
+        df_rand = np.random.choice(len(self.dfList[:-1]))  # incomplete list excluded
 
-        # parse random data and convert to time index, limit to single series
-        rand_col = np.random.randint(0, 2)  # rand pick between two load profiles
+        # choose random load profile (between two) and parse selected data
+        rand_col = np.random.randint(0, 2)
         ts1 = self.parse_procc(self.dfList[df_rand].iloc[:, rand_col])
 
-        # limit to night time, random date
+        # limit df to a random night in data set
         date1 = np.random.choice(self.unique_date(ts1)[1:-2])
         night1 = self.get_night(ts1, date1).copy()
 
         return night1
 
-    def load_sgen_make(self, load_number=55):
-        """Create time series test dataframe for any number of loads.
-        load_number goes from 1 to n, number designation of load in network"""
+    def sgen_write(self, ts, start, end, col_name, val):  # helper function
+        """write sgen value to df on column across a given time window"""
 
-        # targets
-        night_loads = pd.DataFrame()
-        list_loads = []
-        night_sgens = pd.DataFrame()
-        list_sgens = []
+        ts.loc[start:end, col_name] = val  # 'start' & 'end' variables are str
+
+        return ts
+
+    def sgen_rand(self, sgen_val):
+        """fill self.night_sgens df at random times with select sgen value"""
+
+        sgens = self.night_sgens.columns
+        for name in sgens:
+            # writes directly to night_mw
+            start, end = self.time_wind(self.night_sgens, 60)
+            self.sgen_write(self.night_sgens, start, end, name, sgen_val)
+
+    def sgen_max(self, sgen_val):
+        """fill self.night_sgens df at single peak load time for all households"""
+        # TODO
+        pass
+
+    def load_sgen_make(self, load_number=55):
+        """create pandapower time series simulation df's for any number of households"""
+
+        # initialize targets
+        night_loads = pd.DataFrame()  # output df
+        list_loads = []  # helper list
+        night_sgens = pd.DataFrame()  # output df
+        list_sgens = []  # helper list
 
         # generate list of Series for concatenation
         for i in range(1, load_number + 1):
@@ -179,69 +193,45 @@ class DataAction:
             list_loads.append(pd.Series(night1.values, name="loadh_" + str(i)))
             list_sgens.append(pd.Series([0] * night1.shape[0], name="sgen_" + str(i)))
 
-        # merge series into data frames
+        # merge series into output df's
         night_loads = pd.concat(list_loads, axis=1) * self.conv_fac / 1000000  # to MW
         night_loads.index = night1.index
         night_sgens = pd.concat(list_sgens, axis=1)
         night_sgens.index = night1.index
 
-        # write values
+        # write output to class variables for later use
         self.night_loads = night_loads
         self.night_sgens = night_sgens
 
-    def sgen_rand(self, sgen_val):
-        """Write sgen vals over random time window for cols"""
-        sgens = self.night_sgens.columns
-
-        for name in sgens:
-            # writes directly to night_mw
-            start, end = self.time_wind(self.night_sgens, 60)
-            self.sgen_write(self.night_sgens, start, end, name, sgen_val)
-
-    def sgen_comm(self, night_sgens, wind_length, sgen_val, parties):
-        """Write sgen vals over random time window for cols"""
-
-        all_sgens = self.night_sgens.columns.tolist()
-
-        # create list of active sgens
-        sgens = random.sample(all_sgens, parties)
-
-        # get random start time (w/ respect to nmbr of parties)
-        start_og, _ = self.time_wind(night_sgens, wind_length, parties)
-        start = start_og
-
-        np.random.shuffle(sgens)
-        wind_length = wind_length - 1  # due to zero based index
-        for i in sgens:
-            # fill sgen columns with sgen_val
-            foo = pd.to_datetime(start)
-            bar = foo + timedelta(minutes=wind_length)
-            end = bar.strftime("%Y-%m-%d %H:%M:%S")
-            self.sgen_write(night_sgens, start, end, i, sgen_val)
-
-            # update new start value with old one + 1 min
-            next = bar + timedelta(minutes=1)
-            start = next.strftime("%Y-%m-%d %H:%M:%S")
-
-        self.night_sgens = night_sgens
-
-        return night_sgens
-
 
 class net_calc:
-    """Automation of net-specific pandapower computations"""
+    """
+    This class is used in conjunction with the DataAction class. It contains functions for time series
+    simulations using the pandapower module. The main goal is to run the time series iteration using
+    preset controllers and settings.
+
+    Further data analysis and results can be found in external python files.
+
+    Written by Daniil Akthonka for his Bachelor thesis:
+    'Electric Vehicles in Energy Communities: Investigating the Distribution Grid Hosting Capacity'
+    """
 
     def __init__(self):
+        """ititialization of class variables"""
+
         self.net = None
         self.night_mw = None
         self.n_timesteps = None
         self.time_steps = None
         self.ll = None  # line loading results df
 
-    def euro_asym(self, net, night_loads, night_sgens):
-        # create net and assign load names
+    def net_asym_prep(self, net, night_loads, night_sgens):
+        """prepare an asymmetric load network for time series iteration"""
+
+        # passed network will be stored as a class variable
         self.net = net
 
+        # create load and sgen columns at asymmetric load bus locations
         for i in range(0, len(net.asymmetric_load)):
             bus_nmbr = net.asymmetric_load.bus.at[i]
             load_name = "loadh_" + str(i)
@@ -255,7 +245,7 @@ class net_calc:
         night_sgens_ts = night_sgens.copy()
         night_sgens_ts.index = range(0, night_sgens.shape[0])
 
-        # create controllers
+        # create load controller
         ds_loads = DFData(night_loads_ts)
         ConstControl(
             net,
@@ -266,6 +256,7 @@ class net_calc:
             data_source=ds_loads,
         )
 
+        # create sgen controller
         ds_sgens = DFData(night_sgens_ts)
         ConstControl(
             net,
@@ -276,12 +267,14 @@ class net_calc:
             data_source=ds_sgens,
         )
 
+        # note the time series iteration step variables
         self.n_timesteps = night_loads_ts.shape[0]
         self.time_steps = range(0, self.n_timesteps)
 
     def output_writer(self, var, index):
-        # create output writer to store results
-        path = "..\\results\\"
+        """create output writer to store results"""
+
+        path = "..\\results\\"  # one folder up the file tree
         ow = OutputWriter(
             self.net,
             time_steps=self.time_steps,
@@ -291,16 +284,19 @@ class net_calc:
         ow.log_variable(var, index)
 
     def ts_run(self):
-        # run timeseries calculation
+        """run the time series iteration"""
+
         run_timeseries(self.net, time_steps=self.time_steps)
 
     def read_output(self):
+        """load the saved output files as df for further processing"""
+
         # load excel file
         path = "..\\results\\"
         vm_file = os.path.join(path, "res_bus", "vm_pu.xlsx")
         vm_pu = pd.read_excel(vm_file, index_col=0)
 
-        # renaming dictionary
+        # create renaming dictionary
         line_dict = {}
         keys = vm_pu.columns.tolist()
         values = []
@@ -316,12 +312,12 @@ class net_calc:
 
         return vm_pu
 
-    def load_graph(self, net, time_step):
-        # update network with step value
-        run_timeseries(net, time_steps=(0, time_step))
+    # def load_graph(self, net, time_step): # helper function
+    #     # update network with step value
+    #     run_timeseries(net, time_steps=(0, time_step))
 
-    def end_vals_step(self, ll, end_vals):
-        """append vals to end_val df"""
+    def end_vals_step(self, ll, end_vals):  # helper function
+        """append max 'll' df values to 'end_val' df"""
 
         # get inputs from df
         max_val = ll.max()
@@ -329,8 +325,8 @@ class net_calc:
         # append series as last line
         end_vals.loc[end_vals.shape[0]] = max_val
 
-    def end_times_step(self, ll, end_times):
-        """append vals to end_times df"""
+    def end_times_step(self, ll, end_times):  # helper function
+        """append times of max values in 'll' df to 'end_times' df"""
 
         # get inputs
         max_ind = ll.idxmax()
