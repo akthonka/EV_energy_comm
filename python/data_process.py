@@ -18,28 +18,52 @@ matplotlib.rcParams["timezone"] = "Europe/Berlin"
 
 
 class DataAction:
-    """The nuclear data-processing method."""
+    """
+    This class contains the most common data processing functions specifically for
+    working with the Open Power System Household Data sets. The main goal is to process
+    raw data using pandas module in preparation for computation with pandapower module.
+    
+    The cricital data processing steps include:
+    - file import
+    - initial raw data filtering and formatting
+    - splitting of imported data for piece-wise processing
+    - datetime index parsing
+
+    This class includes several helper functions for common actions, such as unique date
+    identification for data spanning several days.
+
+    Lastly, composite functions for heavy data manipulation are written here. These concern
+    themselves with generation of test data sets for pandapower simulations - in particular,
+    the timeseries iterations.
+
+    Written by Daniil Akthonka for his Bachelor thesis:
+    'Electric Vehicles in Energy Communities: Investigating the Distribution Grid Hosting Capacity'
+    """
 
     def __init__(self):
+        """ititialization of class variables"""
+
         self.folder_path = None
         self.imp = None
         self.df = None
-        self.chunk_size = 10000
+        self.chunk_size = 10000  # number of datapoints in each df
         self.dfList = []
-        self.conv_fac = 1000 * 60 * (1)  # convert to W (1 min avg)
+        self.conv_fac = 1000 * 60  # convert from MW/min to W (1 min avg)
         self.night_evening_t = "20:00:00"
         self.night_morning_t = "06:00:00"
         self.night_loads = None
         self.night_sgens = None
 
     def data_imp(self, file_name):
-        # import from data location
+        """basic data import from file string"""
+
         folder_path = self.folder_path
         file_path = folder_path + file_name
         self.imp = pd.read_csv(file_path, low_memory=False)
 
     def data_filter(self, df, keep_cols):
-        # Process df inplace
+        """initial raw data filtering and formatting"""
+
         col_names = df.columns.tolist()
         for col in keep_cols:
             col_names.remove(col)
@@ -49,22 +73,23 @@ class DataAction:
         self.df = df.set_index("date_time")
 
     def df_split(self, chunk_size):
-        # splits the dataframe into smaller dataframes
+        """fragmentation of import data into smaller dfs"""
+
         for i in range(0, self.df.shape[0], chunk_size):
             self.dfList.append(self.df[i : i + chunk_size])
         print("Number of data frame segments = ", len(self.dfList))
 
     def imp_procc(self, file_name, keep_cols):
-        """All in one helper function """
-        # easy import, data filter and split
+        """all-in-one import processing helper function"""
+
         self.data_imp(file_name)
         self.data_filter(self.imp, keep_cols)
         self.df_split(self.chunk_size)
         print("dfList created successfully.")
 
     def parse_procc(self, df):
-        # parse dates and convert index to time series
-        # take the row difference and drop first NaN
+        """parsing of datetime for minute-wise energy differences"""
+
         df.index = pd.to_datetime(
             df.index,
             exact=True,
@@ -72,18 +97,22 @@ class DataAction:
             format="%Y-%m-%d %H:%M:%S",
             dayfirst=True,
             utc=True,
-        )
-        df = df.tz_convert("Europe/Berlin")
-        ts = df.diff()
+        )  # convert index to datetime
+        df = df.tz_convert("Europe/Berlin")  # match region data
+        ts = df.diff()  # obtain minute-wise energy changes
         ts.dropna(inplace=True)  # drops only the first row, from the diff()
+
         return ts
 
-    def unique_date(self, df):  # helper function
-        # find unique days in the time-series index df
+    def unique_date(self, df):
+        """find unique days in the time-series index df"""
+
         return df.index.map(lambda t: str(t.date())).unique().tolist()
 
     def get_night(self, ts, evening_date):
-        # get the dates for loc slice
+        """return overnight time-delimited df data slice for evening date"""
+
+        # get evening and morning datetime limits
         start = evening_date + " " + self.night_evening_t
         foo = pd.to_datetime(evening_date)
         bar = foo + timedelta(days=1)
@@ -93,7 +122,7 @@ class DataAction:
             second=int(self.night_morning_t[6:8]),
         ).strftime("%Y-%m-%d %H:%M:%S")
 
-        # check for available date
+        # check for available date and return data
         dates = self.unique_date(ts)
         if evening_date in dates:
             return ts.loc[start:end]
@@ -101,7 +130,8 @@ class DataAction:
             print("Error: Evening_date is not part of the selected dataset!")
 
     def time_wind(self, ts, wind_length, parties=1):
-        # select random night time window of length wind_length
+        """select random night time window of length wind_length"""
+
         length = len(ts.index) - wind_length * parties + 1  # due to zero based indexing
         time_0 = np.random.randint(0, length)
         foo = ts.index[time_0]
