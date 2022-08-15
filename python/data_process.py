@@ -200,7 +200,7 @@ class DataAction:
             start, end = self.time_wind(self.night_sgens, self.wind_length)
             self.sgen_write(self.night_sgens, start, end, name, sgen_val)
 
-    def sgen_max(self, sgen_val):
+    def sgen_max(self, sgen_val, name):
         """fill self.night_sgens df at single peak load time for all households"""
 
         # calculate end window time based on max load time
@@ -213,8 +213,15 @@ class DataAction:
         start = bar.strftime("%Y-%m-%d %H:%M:%S")
         end = (bar + timedelta(minutes=self.wind_length)).strftime("%Y-%m-%d %H:%M:%S")
 
-        # fill all columns with same value
-        self.night_sgens.loc[start:end] = sgen_val
+        try:
+            if name == False:
+                # fill all columns with same value
+                self.night_sgens.loc[start:end] = sgen_val
+            else:
+                self.sgen_write(self.night_sgens, start, end, name, sgen_val)
+        except Exception as str_error:
+            print(str_error)
+            print("Woa, not sure about that input there.")
 
 
 class net_calc:
