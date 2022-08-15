@@ -22,7 +22,7 @@ class DataAction:
     This class contains the most common data processing functions specifically for
     working with the Open Power System Household Data sets. The main goal is to process
     raw data using pandas module in preparation for computation with pandapower module.
-    
+
     The cricital data processing steps include:
     - file import
     - initial raw data filtering and formatting
@@ -325,9 +325,9 @@ class net_calc:
 
         return vm_pu
 
-    # def load_graph(self, net, time_step): # helper function
-    #     # update network with step value
-    #     run_timeseries(net, time_steps=(0, time_step))
+    def load_graph(self, net, time_step):  # helper function
+        # update network with step value
+        run_timeseries(net, time_steps=(0, time_step))
 
     def end_vals_step(self, ll, end_vals):  # helper function
         """append max 'll' df values to 'end_val' df"""
@@ -348,4 +348,3 @@ class net_calc:
 
         # append to end_times
         end_times.loc[end_times.shape[0]] = max_time
-
