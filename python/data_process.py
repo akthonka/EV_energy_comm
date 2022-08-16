@@ -187,7 +187,7 @@ class DataAction:
     def sgen_write(self, ts, start, end, col_name, val):  # helper function
         """write sgen value to df on column across a given time window"""
 
-        ts.loc[start:end, col_name] = val  # 'start' & 'end' variables are str
+        ts.loc[start:end, col_name] = -val  # 'start' & 'end' variables are str
 
         return ts
 
@@ -216,7 +216,7 @@ class DataAction:
         try:
             if name == False:
                 # fill all columns with same value
-                self.night_sgens.loc[start:end] = sgen_val
+                self.night_sgens.loc[start:end] = -sgen_val
             else:
                 self.sgen_write(self.night_sgens, start, end, name, sgen_val)
         except Exception as str_error:
@@ -336,22 +336,22 @@ class net_calc:
         # update network with step value
         run_timeseries(net, time_steps=(0, time_step))
 
-    def end_vals_step(self, ll, end_vals):  # helper function
-        """append max 'll' df values to 'end_val' df"""
+    # def end_vals_step(self, ll, end_vals):  # helper function
+    #     """append max 'll' df values to 'end_val' df"""
 
-        # get inputs from df
-        max_val = ll.max()
+    #     # get inputs from df
+    #     max_val = ll.max()
 
-        # append series as last line
-        end_vals.loc[end_vals.shape[0]] = max_val
+    #     # append series as last line
+    #     end_vals.loc[end_vals.shape[0]] = max_val
 
-    def end_times_step(self, ll, end_times):  # helper function
-        """append times of max values in 'll' df to 'end_times' df"""
+    # def end_times_step(self, ll, end_times):  # helper function
+    #     """append times of max values in 'll' df to 'end_times' df"""
 
-        # get inputs
-        max_ind = ll.idxmax()
-        k = self.night_mw.index.values[max_ind.tolist()]
-        max_time = pd.to_datetime(k).strftime("%H:%M:%S").tolist()
+    #     # get inputs
+    #     max_ind = ll.idxmax()
+    #     k = self.night_mw.index.values[max_ind.tolist()]
+    #     max_time = pd.to_datetime(k).strftime("%H:%M:%S").tolist()
 
-        # append to end_times
-        end_times.loc[end_times.shape[0]] = max_time
+    #     # append to end_times
+    #     end_times.loc[end_times.shape[0]] = max_time
