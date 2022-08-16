@@ -4,17 +4,10 @@ import pandas as pd
 import numpy as np
 from datetime import timedelta
 import pandapower as pp
-import pandapower.networks as pn
-import pandapower.plotting as plot
 from pandapower.timeseries import DFData
 from pandapower.timeseries import OutputWriter
 from pandapower.timeseries.run_time_series import run_timeseries
 from pandapower.control import ConstControl
-import matplotlib
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-
-matplotlib.rcParams["timezone"] = "Europe/Berlin"
 
 
 class DataAction:
