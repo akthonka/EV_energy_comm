@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8) (preloaded format=pdflatex 2022.8.21)  21 AUG 2022 17:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8) (preloaded format=pdflatex 2022.8.21)  21 AUG 2022 18:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -723,12 +723,18 @@ Chapter 5.
 ] [6
 
 ] (EV_energy_comm_thesis.aux)
-Package rerunfilecheck Info: File `EV_energy_comm_thesis.out' has not changed.
-(rerunfilecheck)             Checksum: DC811C6279FC3D9A86EB0824AB69D227;981.
+
+Package rerunfilecheck Warning: File `EV_energy_comm_thesis.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `EV_energy_comm_thesis.out':
+(rerunfilecheck)             Before: DC811C6279FC3D9A86EB0824AB69D227;981
+(rerunfilecheck)             After:  07D9EB1C18C913EC05B173C0B2695952;1114.
  ) 
 Here is how much of TeX's memory you used:
- 20080 strings out of 477992
- 387614 string characters out of 2837281
+ 20081 strings out of 477992
+ 387625 string characters out of 2837281
  693685 words of memory out of 3000000
  38591 multiletter control sequences out of 15000+600000
  487436 words of font info for 82 fonts, out of 8000000 for 9000
@@ -742,9 +748,9 @@ pen/ec/dpi600\ecrm1200.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour
 /jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/
 ljfour/jknappen/ec/dpi600\ecrm1728.pk> <C:\Users\panto\AppData\Local\MiKTeX\fon
 ts/pk/ljfour/jknappen/ec/dpi600\ecrm2074.pk>
-Output written on EV_energy_comm_thesis.pdf (9 pages, 81664 bytes).
+Output written on EV_energy_comm_thesis.pdf (9 pages, 84063 bytes).
 PDF statistics:
- 298 PDF objects out of 1000 (max. 8388607)
- 19 named destinations out of 1000 (max. 500000)
+ 305 PDF objects out of 1000 (max. 8388607)
+ 20 named destinations out of 1000 (max. 500000)
  73 words of extra memory for PDF output out of 10000 (max. 10000000)
 
