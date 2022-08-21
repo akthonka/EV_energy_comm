@@ -1,0 +1,105 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage{geometry} % change page margins/layout
+%\usepackage[ngerman]{babel} % document Germanisation
+\usepackage[utf8]{inputenc} % German umlauts
+\usepackage[T1]{fontenc} % accented language characters
+\usepackage{bm} % better bold symbols
+\usepackage{graphicx} % better image handling
+\graphicspath{ {images/} }
+\usepackage{wrapfig} % text wrap around images
+\usepackage{subfig,caption} % subfigures and caption width
+\usepackage[section]{placeins} % float barriers
+\usepackage{booktabs} % better looking tables
+\usepackage{makecell} % multi-rows in table cells
+\usepackage[shortlabels]{enumitem} % better lists
+\usepackage{amsmath,mathtools,amssymb} % math typesetting/symbols
+\usepackage{nicefrac} % in-line looking fractions
+\usepackage[version=4]{mhchem} % chemical elements
+\usepackage[locale = US, 
+			separate-uncertainty,
+			exponent-product = \cdot,
+			output-product = \cdot,
+			per-mode=reciprocal]{siunitx} % easy uncertainties
+\usepackage[hyphens]{url} % allows for URL breaks
+\usepackage[colorlinks=true,linkcolor=black,
+			urlcolor=blue,citecolor=black]{hyperref} % URL links
+\usepackage[english]{cleveref} % better referencing
+\usepackage{titlesec} % title section formatting
+\titleformat{\chapter}{\bfseries\LARGE}{\thechapter~}{0em}{}
+
+% DARK-MODE on PDF reader
+\usepackage{xcolor}
+\pagecolor[HTML]{1f1f1f} % dark color
+\color[HTML]{c7c7c7} % light color
+%------------------------------------------------------------------
+
+
+\begin{document}
+
+
+\title{
+	\vspace{2cm}
+	{\LARGE Electric Vehicles in Energy Communities:}
+	{\Large Investigating the Distribution Grid Hosting Capacity} \\[2cm]
+	{\large Albert Ludwig University of Freiburg}
+}
+\author{
+	\Large Daniil Aktanka
+}
+\date{
+	\normalsize \today
+}
+\maketitle
+\thispagestyle{empty}
+
+
+\pagenumbering{roman}
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+\tableofcontents
+\cleardoublepage
+\pagenumbering{arabic}
+
+
+\chapter{Introduction}
+\chapter{Literature review}
+\chapter{Method}
+General approach here...
+
+\section{Test network}
+First attempt...
+
+\section{European network}
+Second and final attempt...
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Results and Discussion}
+\chapter{Conclusion}
+\chapter*{Appendix}
+\addcontentsline{toc}{chapter}{Appendix}
+
+
+\end{document}
+
+%------------------------------------------------------------------
+
+%\FloatBarrier
+%\begin{figure}[htpb]
+%	\centering
+%	\includegraphics[width=0.9\linewidth]{factor_importance}
+%	\caption{Factor importance \cite{Hoefer2016}}
+%	\label{factor_importance}
+%\end{figure}
+%\FloatBarrier

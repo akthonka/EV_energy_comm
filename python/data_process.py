@@ -111,7 +111,7 @@ class DataAction:
         start = evening_date + " " + self.night_evening_t
         foo = pd.to_datetime(evening_date)
         bar = foo + timedelta(days=1)
-        end = bar.replace(  # replace time section of string
+        end = bar.replace(
             hour=int(self.night_morning_t[0:2]),
             minute=int(self.night_morning_t[3:5]),
             second=int(self.night_morning_t[6:8]),
