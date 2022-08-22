@@ -343,29 +343,33 @@ class net_calc:
 
         return min_min
 
-    def hosting_cap(self, sgen_val, night_loads, night_sgens):
+    def hosting_cap(self, sgen_val):
         """compute hosting capacity"""
 
-        # only reset the sgens! Net and loads stay the same
-        night_sgens.iloc[:] = 0
-        self.net_asym_prep(self.net, night_loads, night_sgens)
+        # reset network sgen values
+        for sgen in self.net.sgen.name.tolist():
+            self.net.sgen.p_mw = 0
 
+        # create random sgen name list to populate loads
         rand_ind = np.arange(len(self.net.sgen.name.tolist()))
         np.random.shuffle(rand_ind)
 
         hosting_cap = 0
         min_vm_pm = 0
-
         for i in rand_ind:
+            # set single sgen value and run power flow
             self.net.sgen.p_mw.at[i] = -sgen_val
             pp.runpp(self.net)
             min_vm_pm = self.net.res_bus.vm_pu.min()
 
-            if min_vm_pm > 0.95:
+            # conditional iteration step
+            if min_vm_pm > 0.95:  # critical min percentage
                 hosting_cap = hosting_cap + 1
             else:
-                print("Max hosting capacity:", hosting_cap)
+                print("Max hosting capacity:", hosting_cap, "out of", len(rand_ind))
                 break
 
-        print("Total EVs supported:", round(hosting_cap / len(rand_ind), 2))
+        print(
+            "Total EVs supported:", round((hosting_cap / len(rand_ind) * 100), 1), "%"
+        )
         x = pf_res_plotly(self.net, climits_volt=(0.95, 1.05))  # x is arbitrary var
