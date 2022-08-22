@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8) (preloaded format=pdflatex 2022.8.21)  22 AUG 2022 12:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8) (preloaded format=pdflatex 2022.8.21)  22 AUG 2022 13:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -737,8 +737,8 @@ Chapter 2.
 
 ]
 Chapter 3.
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 7
-7.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 8
+2.
 (C:\Program Files\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ) [3
@@ -755,19 +755,19 @@ Chapter 5.
 
 ] (EV_energy_comm_thesis.aux)
 Package rerunfilecheck Info: File `EV_energy_comm_thesis.out' has not changed.
-(rerunfilecheck)             Checksum: EE21103B13786F40627D60B5FD19DCA0;1935.
+(rerunfilecheck)             Checksum: EDFA2BB1CC1FC04CF5A6C1DA48636588;2265.
  ) 
 Here is how much of TeX's memory you used:
- 20708 strings out of 477992
- 398385 string characters out of 2837281
- 704250 words of memory out of 3000000
- 39193 multiletter control sequences out of 15000+600000
+ 20712 strings out of 477992
+ 398453 string characters out of 2837281
+ 705253 words of memory out of 3000000
+ 39195 multiletter control sequences out of 15000+600000
  487609 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,7n,79p,1096b,931s stack positions out of 10000i,1000n,20000p,200000b,80000s
- <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx
-1200.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
-0\ectt1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
+ 72i,7n,79p,1098b,931s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt
+1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
+0\ecbx1200.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
 /dpi600\ecbx1440.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
 pen/ec/dpi600\ecbx1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour
 /jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/
@@ -775,9 +775,9 @@ ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fon
 ts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\panto\AppData\Local\MiKT
 eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\panto\AppData\Loca
 l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk>
-Output written on EV_energy_comm_thesis.pdf (10 pages, 115660 bytes).
+Output written on EV_energy_comm_thesis.pdf (10 pages, 123242 bytes).
 PDF statistics:
- 439 PDF objects out of 1000 (max. 8388607)
- 27 named destinations out of 1000 (max. 500000)
- 129 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 464 PDF objects out of 1000 (max. 8388607)
+ 29 named destinations out of 1000 (max. 500000)
+ 145 words of extra memory for PDF output out of 10000 (max. 10000000)
 

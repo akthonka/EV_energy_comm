@@ -12,7 +12,7 @@ from pandapower.control import ConstControl
 
 class DataAction:
     """
-    This class contains the most common data processing functions specifically for
+    This DataAction class contains the most common data processing functions specifically for
     working with the Open Power System Household Data sets. The main goal is to process
     raw data using pandas module in preparation for computation with pandapower module.
 
@@ -124,7 +124,7 @@ class DataAction:
         else:
             print("Error: Evening_date is not part of the selected dataset!")
 
-    def time_wind(self, ts, wind_length):
+    def time_wind(self, ts, wind_length):  # helper function for sgen_rand
         """select random night time window for a single party (household)"""
 
         length = len(ts.index) - wind_length + 1  # +1 due to zero based indexing
@@ -219,7 +219,7 @@ class DataAction:
 
 class net_calc:
     """
-    This class is used in conjunction with the DataAction class. It contains functions for time series
+    This NetworkCalculation class is used in conjunction with the DataAction class. It contains functions for time series
     simulations using the pandapower module. The main goal is to run the time series iteration using
     preset controllers and settings.
 

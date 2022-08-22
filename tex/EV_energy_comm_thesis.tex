@@ -67,18 +67,33 @@
 \chapter{Literature Review}
 \chapter{Goal and Method}
 \section{Goal}
-Gotta get themn simulations on
+First build test network for testing, then apply on real model.
 
-
+use dataset thingy
 
 \section{Data processing}
-Data processing was done entirely in python with a heavy use of the pandas module. For the sake of clarity, most of the code was split between a python class file and jupyter notebooks. The python class file consists of two classes, one for handling data processing and another for operations based on the pandapower module. The following information describes the functionality of the python class file for data processing. This section covers crucial data processing steps and functions tailored to the household dataset. 
+Given the scope of the project, the idea was to create a system flexible enough for iterative data manipulation and ideally one that would support multiple network types. The project was written entirely in python due to language simplicity as well as availability of advanced modules. Data handling was done using the pandas module, whereas the network simulation was performed using the pandapower module.
 
-\paragraph{Data import and segmenting:} The raw dataset is imported as dataframe without additional options. Dropping the rest, we keep only three columns: \texttt{DE\_KN\_residential1\_grid\_import}, \texttt{DE\_KN\_residential2\_grid\_import} and \texttt{utc\_timestamp}. Since we will be performing conditional time-based operations, we set the timestamp column as index for ease of use. While it is possible to front-load a lot of data processing functions at this step---such as parsing datetimes---it is not recommended due to unnecessary computation time. A better approach is to segment the data for piecewise processing and function testing, whereby it would be possible to iterate computations over the entire data set in the future. Therefore, we split the imported dataframe (of a little over a million data points) into a list of smaller dataframes (each 10000 datapoints long, with risidual last dataframe being a bit smaller).
+For the sake of clarity, most of the code was split between a python class file and jupyter notebooks. For early testing and code prototyping, jupyter notebooks are sufficient but they quickly lose readability as the code complexity grows. The general methodology was therefore to write core functions in jupyter to then integrate them into an external python class file. The resultant python class file consists of two classes: one for handling data processing and another for operations based on the pandapower module.
 
-\paragraph{Datetime parsing function:} This function converts a segment of the imported data into a specific, time-indexed dataframe. First, we parse datetime index, specifying the format as \texttt{"Year--Month--Day Hour:Minute:Second"}, after which we convert from UTC to Berlin time---the local time of the recorded dataset. While it is possible to import data with local time column \texttt{cet\_cest\_timestamp} without the need of conversion, it is not recommended for pandas 1.4.3 since that will cause errors in datetime operations based on my experience. Second, we take the difference between consecuitive rows. This is done in order to obtain minute-wise energy changes, since the household dataset only tracks commulative energy values. If we use the \texttt{pandas.diff()} function, we must also drop the resulting first row, since it's a NaN row.
+\subsection{DataAction class}
+The following information describes the functionality of the python class responsible for core data processing. While the general methodology is applicable to any dataset, these functions are tailored specifically to the household dataset and will be described as such. Additionally, the functions mentioned here target the European LV network as our simulation case---the test network case had a separate DataAction class. While similar, it was more limited in scope and application and is therefore not described here in detail.
+
+\paragraph{Data import and segmenting:} The raw dataset is imported as dataframe without additional options. Dropping the rest, we keep only three columns: \texttt{DE\_KN\_residential1\_grid\_import}, \texttt{DE\_KN\_residential2\_grid\_import} and \texttt{utc\_timestamp}. Since we will be performing conditional time-based operations, we set the timestamp column as index for ease of use. While it is possible to front-load a lot of data processing functions at this step---such as parsing datetimes---it is not recommended due to unnecessary computation time. A better approach is to segment the data for piece-wise processing and function testing, whereby it would be possible to iterate computations over the entire data set in the future. Therefore, we split the imported dataframe (of a little over a million data points) into a list of smaller dataframes (each 10000 data points long, with residual last dataframe being a bit smaller).
+
+\paragraph{Datetime parsing function:} This function converts a segment of the imported data into a specific, time-indexed dataframe. First, we parse datetime index, specifying the format as \texttt{"Year--Month--Day Hour:Minute:Second"}, after which we convert from UTC to Berlin time---the local time of the recorded dataset. While it is possible to import data with local time column \texttt{cet\_cest\_timestamp} without the need of conversion, it is not recommended for pandas 1.4.3 since that will cause errors in datetime operations based on my experience. Second, we take the difference between consecutive rows. This is done in order to obtain minute-wise energy changes, since the household dataset only tracks cumulative energy values. If we use the \texttt{pandas.diff()} function, we must also drop the resulting first row, since it's a NaN row.
+
+\paragraph{Night profile function:} 
+
+
+\subsection{NetworkCalculation class}
+The final stage of the ...
+
 
 \section{Network application}
+The final stage of the projet was the network simulation. In combination with the python class file, the jupyter notebooks allow for easy setup, tweaking of variables and visualization of results. 
+
+
 \subsection{Test network}
 First attempt...
 
