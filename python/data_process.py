@@ -1,5 +1,4 @@
 import os
-import random
 import pandas as pd
 import numpy as np
 from datetime import timedelta
@@ -194,29 +193,6 @@ class DataAction:
             start, end = self.time_wind(self.night_sgens, self.wind_length)
             self.sgen_write(self.night_sgens, start, end, name, sgen_val)
 
-    # def sgen_max(self, sgen_val, name):
-    #     """fill self.night_sgens df at single peak load time for all households"""
-
-    #     # calculate end window time based on max load time
-    #     foo = self.night_sgens.index[0]
-    #     bar = foo.replace(  # replace time section of string
-    #         hour=int(self.night_max_t[0:2]),
-    #         minute=int(self.night_max_t[3:5]),
-    #         second=int(self.night_max_t[6:8]),
-    #     )
-    #     start = bar.strftime("%Y-%m-%d %H:%M:%S")
-    #     end = (bar + timedelta(minutes=self.wind_length)).strftime("%Y-%m-%d %H:%M:%S")
-
-    #     try:
-    #         if name == False:
-    #             # fill all columns with same value
-    #             self.night_sgens.loc[start:end] = -sgen_val
-    #         else:
-    #             self.sgen_write(self.night_sgens, start, end, name, sgen_val)
-    #     except Exception as str_error:
-    #         print(str_error)
-    #         print("Woa, not sure about that input there.")
-
 
 class net_calc:
     """
@@ -343,6 +319,9 @@ class net_calc:
 
         return min_min
 
+    def plotly_res(self):  # helper function
+        x = pf_res_plotly(self.net, climits_volt=(0.95, 1.05))  # x is arbitrary var
+
     def hosting_cap(self, sgen_val):
         """compute hosting capacity"""
 
@@ -377,4 +356,4 @@ class net_calc:
             "Total EVs supported:", round((hosting_cap / len(rand_ind) * 100), 1), "%"
         )
         pp.runpp(self.net)
-        x = pf_res_plotly(self.net, climits_volt=(0.95, 1.05))  # x is arbitrary var
+        self.plotly_res()
