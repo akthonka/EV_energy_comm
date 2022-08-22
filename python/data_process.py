@@ -357,19 +357,24 @@ class net_calc:
         hosting_cap = 0
         min_vm_pm = 0
         for i in rand_ind:
-            # set single sgen value and run power flow
-            self.net.sgen.p_mw.at[i] = -sgen_val
+            # compute power flow
             pp.runpp(self.net)
             min_vm_pm = self.net.res_bus.vm_pu.min()
+            max_line_load = self.net.res_line.loading_percent.max()
 
             # conditional iteration step
-            if min_vm_pm > 0.95:  # critical min percentage
+            if min_vm_pm > 0.95 and max_line_load < 90:
+                # set single sgen value and run power flow
+                self.net.sgen.p_mw.at[i] = -sgen_val
                 hosting_cap = hosting_cap + 1
-            else:
+            else:  # since last step exceeded limit, undo it
+                hosting_cap = hosting_cap - 1
+                self.net.sgen.p_mw.at[rand_ind[hosting_cap]] = 0
                 print("Max hosting capacity:", hosting_cap, "out of", len(rand_ind))
                 break
 
         print(
             "Total EVs supported:", round((hosting_cap / len(rand_ind) * 100), 1), "%"
         )
+        pp.runpp(self.net)
         x = pf_res_plotly(self.net, climits_volt=(0.95, 1.05))  # x is arbitrary var
