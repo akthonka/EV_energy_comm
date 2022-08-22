@@ -8,6 +8,7 @@ from pandapower.timeseries import DFData
 from pandapower.timeseries import OutputWriter
 from pandapower.timeseries.run_time_series import run_timeseries
 from pandapower.control import ConstControl
+from pandapower.plotting.plotly import pf_res_plotly
 
 
 class DataAction:
@@ -193,28 +194,28 @@ class DataAction:
             start, end = self.time_wind(self.night_sgens, self.wind_length)
             self.sgen_write(self.night_sgens, start, end, name, sgen_val)
 
-    def sgen_max(self, sgen_val, name):
-        """fill self.night_sgens df at single peak load time for all households"""
+    # def sgen_max(self, sgen_val, name):
+    #     """fill self.night_sgens df at single peak load time for all households"""
 
-        # calculate end window time based on max load time
-        foo = self.night_sgens.index[0]
-        bar = foo.replace(  # replace time section of string
-            hour=int(self.night_max_t[0:2]),
-            minute=int(self.night_max_t[3:5]),
-            second=int(self.night_max_t[6:8]),
-        )
-        start = bar.strftime("%Y-%m-%d %H:%M:%S")
-        end = (bar + timedelta(minutes=self.wind_length)).strftime("%Y-%m-%d %H:%M:%S")
+    #     # calculate end window time based on max load time
+    #     foo = self.night_sgens.index[0]
+    #     bar = foo.replace(  # replace time section of string
+    #         hour=int(self.night_max_t[0:2]),
+    #         minute=int(self.night_max_t[3:5]),
+    #         second=int(self.night_max_t[6:8]),
+    #     )
+    #     start = bar.strftime("%Y-%m-%d %H:%M:%S")
+    #     end = (bar + timedelta(minutes=self.wind_length)).strftime("%Y-%m-%d %H:%M:%S")
 
-        try:
-            if name == False:
-                # fill all columns with same value
-                self.night_sgens.loc[start:end] = -sgen_val
-            else:
-                self.sgen_write(self.night_sgens, start, end, name, sgen_val)
-        except Exception as str_error:
-            print(str_error)
-            print("Woa, not sure about that input there.")
+    #     try:
+    #         if name == False:
+    #             # fill all columns with same value
+    #             self.night_sgens.loc[start:end] = -sgen_val
+    #         else:
+    #             self.sgen_write(self.night_sgens, start, end, name, sgen_val)
+    #     except Exception as str_error:
+    #         print(str_error)
+    #         print("Woa, not sure about that input there.")
 
 
 class net_calc:
@@ -325,26 +326,46 @@ class net_calc:
 
         return vm_pu
 
-    def load_graph(self, net, time_step):  # helper function
+    def load_graph(self, time_step):  # helper function
         # update network with step value
-        run_timeseries(net, time_steps=(0, time_step))
+        run_timeseries(self.net, time_steps=(0, time_step))
 
-    # def end_vals_step(self, ll, end_vals):  # helper function
-    #     """append max 'll' df values to 'end_val' df"""
+    def vm_stats(self, vm_pu):
+        """return key timeseries result values for minima"""
 
-    #     # get inputs from df
-    #     max_val = ll.max()
+        min_min = vm_pu.idxmin().unique()[1:].min()  # first is always zero, from grid
+        min_time = (
+            pd.to_datetime(DataAction().night_evening_t)
+            + timedelta(minutes=int(min_min))
+        ).strftime("%H:%M:%S")
+        print("All-time min-load value across all busses:", round(vm_pu.min().min(), 5))
+        print("All-time min-load time across all busses:", min_min, ",", min_time)
 
-    #     # append series as last line
-    #     end_vals.loc[end_vals.shape[0]] = max_val
+        return min_min
 
-    # def end_times_step(self, ll, end_times):  # helper function
-    #     """append times of max values in 'll' df to 'end_times' df"""
+    def hosting_cap(self, sgen_val, night_loads, night_sgens):
+        """compute hosting capacity"""
 
-    #     # get inputs
-    #     max_ind = ll.idxmax()
-    #     k = self.night_mw.index.values[max_ind.tolist()]
-    #     max_time = pd.to_datetime(k).strftime("%H:%M:%S").tolist()
+        # only reset the sgens! Net and loads stay the same
+        night_sgens.iloc[:] = 0
+        self.net_asym_prep(self.net, night_loads, night_sgens)
 
-    #     # append to end_times
-    #     end_times.loc[end_times.shape[0]] = max_time
+        rand_ind = np.arange(len(self.net.sgen.name.tolist()))
+        np.random.shuffle(rand_ind)
+
+        hosting_cap = 0
+        min_vm_pm = 0
+
+        for i in rand_ind:
+            self.net.sgen.p_mw.at[i] = -sgen_val
+            pp.runpp(self.net)
+            min_vm_pm = self.net.res_bus.vm_pu.min()
+
+            if min_vm_pm > 0.95:
+                hosting_cap = hosting_cap + 1
+            else:
+                print("Max hosting capacity:", hosting_cap)
+                break
+
+        print("Total EVs supported:", round(hosting_cap / len(rand_ind), 2))
+        x = pf_res_plotly(self.net, climits_volt=(0.95, 1.05))  # x is arbitrary var

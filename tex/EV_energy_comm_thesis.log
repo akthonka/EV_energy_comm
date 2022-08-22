@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8) (preloaded format=pdflatex 2022.8.21)  22 AUG 2022 13:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8) (preloaded format=pdflatex 2022.8.21)  22 AUG 2022 16:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -758,10 +758,10 @@ Package rerunfilecheck Info: File `EV_energy_comm_thesis.out' has not changed.
 (rerunfilecheck)             Checksum: EDFA2BB1CC1FC04CF5A6C1DA48636588;2265.
  ) 
 Here is how much of TeX's memory you used:
- 20712 strings out of 477992
- 398453 string characters out of 2837281
- 705253 words of memory out of 3000000
- 39195 multiletter control sequences out of 15000+600000
+ 20714 strings out of 477992
+ 398495 string characters out of 2837281
+ 704253 words of memory out of 3000000
+ 39197 multiletter control sequences out of 15000+600000
  487609 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,7n,79p,1098b,931s stack positions out of 10000i,1000n,20000p,200000b,80000s
@@ -775,7 +775,7 @@ ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fon
 ts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\panto\AppData\Local\MiKT
 eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\panto\AppData\Loca
 l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk>
-Output written on EV_energy_comm_thesis.pdf (10 pages, 123242 bytes).
+Output written on EV_energy_comm_thesis.pdf (10 pages, 123495 bytes).
 PDF statistics:
  464 PDF objects out of 1000 (max. 8388607)
  29 named destinations out of 1000 (max. 500000)

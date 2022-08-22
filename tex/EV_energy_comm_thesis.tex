@@ -67,7 +67,7 @@
 \chapter{Literature Review}
 \chapter{Goal and Method}
 \section{Goal}
-First build test network for testing, then apply on real model.
+To reiterate, the goal of this thesis was to investigate the distribution grid hosting capacity of electric vehicles and the effect the involvement of energy communities can have on it.
 
 use dataset thingy
 
@@ -83,7 +83,7 @@ The following information describes the functionality of the python class respon
 
 \paragraph{Datetime parsing function:} This function converts a segment of the imported data into a specific, time-indexed dataframe. First, we parse datetime index, specifying the format as \texttt{"Year--Month--Day Hour:Minute:Second"}, after which we convert from UTC to Berlin time---the local time of the recorded dataset. While it is possible to import data with local time column \texttt{cet\_cest\_timestamp} without the need of conversion, it is not recommended for pandas 1.4.3 since that will cause errors in datetime operations based on my experience. Second, we take the difference between consecutive rows. This is done in order to obtain minute-wise energy changes, since the household dataset only tracks cumulative energy values. If we use the \texttt{pandas.diff()} function, we must also drop the resulting first row, since it's a NaN row.
 
-\paragraph{Night profile function:} 
+\paragraph{Night profile functions:} The 
 
 
 \subsection{NetworkCalculation class}
@@ -98,7 +98,8 @@ The final stage of the projet was the network simulation. In combination with th
 First attempt...
 
 \subsection{European network}
-Second and final attempt...
+\subsubsection{Critical case scenario}
+\subsubsection{Random time scenario}
 
 
 

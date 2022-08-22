@@ -7,11 +7,13 @@
 \contentsline {subsection}{\numberline {3.2.1}DataAction class}{3}{subsection.3.2.1}%
 \contentsline {paragraph}{Data import and segmenting:}{3}{subsection.3.2.1}%
 \contentsline {paragraph}{Datetime parsing function:}{4}{subsection.3.2.1}%
-\contentsline {paragraph}{Unique date and get night:}{4}{subsection.3.2.1}%
+\contentsline {paragraph}{Night profile functions:}{4}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}NetworkCalculation class}{4}{subsection.3.2.2}%
 \contentsline {section}{\numberline {3.3}Network application}{4}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Test network}{4}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}European network}{4}{subsection.3.3.2}%
+\contentsline {subsubsection}{Critical case scenario}{4}{subsection.3.3.2}%
+\contentsline {subsubsection}{Random time scenario}{4}{subsection.3.3.2}%
 \contentsline {chapter}{\numberline {4}Results and Discussion}{5}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Results}{5}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Test network}{5}{subsection.4.1.1}%
