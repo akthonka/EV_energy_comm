@@ -178,7 +178,8 @@ class DataAction:
         self.night_sgens = night_sgens
 
     def sgen_write(self, ts, start, end, col_name, val):  # helper function
-        """write sgen value to df on column across a given time window"""
+        """write sgen value to df on column across a given time window
+         Note: can't overwrite filled time-slots! Empty those first."""
 
         ts.loc[start:end, col_name] = -val  # 'start' & 'end' variables are str
 
@@ -186,6 +187,9 @@ class DataAction:
 
     def sgen_rand(self, sgen_val):
         """fill self.night_sgens df at random times with select sgen value"""
+
+        # reset existing values (else won't overwrite)
+        self.night_sgens[:] = 0
 
         sgens = self.night_sgens.columns
         for name in sgens:
