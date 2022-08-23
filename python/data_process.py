@@ -8,6 +8,7 @@ from pandapower.timeseries import OutputWriter
 from pandapower.timeseries.run_time_series import run_timeseries
 from pandapower.control import ConstControl
 from pandapower.plotting.plotly import pf_res_plotly
+from itertools import cycle
 
 
 class DataAction:
@@ -46,6 +47,7 @@ class DataAction:
         self.night_morning_t = "06:00:00"
         self.night_max_t = "19:19:00"  # obtained from max_load_times.ipynb
         self.wind_length = 60
+        self.iter_time = None
         self.night_loads = None
         self.night_sgens = None
 
@@ -179,7 +181,7 @@ class DataAction:
 
     def sgen_write(self, ts, start, end, col_name, val):  # helper function
         """write sgen value to df on column across a given time window
-         Note: can't overwrite filled time-slots! Empty those first."""
+        Note: can't overwrite filled time-slots! Empty those first."""
 
         ts.loc[start:end, col_name] = -val  # 'start' & 'end' variables are str
 
@@ -196,6 +198,54 @@ class DataAction:
             # writes directly to night_mw
             start, end = self.time_wind(self.night_sgens, self.wind_length)
             self.sgen_write(self.night_sgens, start, end, name, sgen_val)
+
+    def get_start_times(self, nmbr_sgens):
+        """make list of start times to cycle through based on number of sgens and time window"""
+
+        time_pt = self.night_sgens.index[0]  # starting time point
+
+        # get stop time with date
+        foo = time_pt + timedelta(days=1)
+        bar = foo.replace(
+            hour=int(self.night_morning_t[0:2]),
+            minute=int(self.night_morning_t[3:5]),
+            second=int(self.night_morning_t[6:8]),
+        )
+
+        start_times = [time_pt.strftime("%Y-%m-%d %H:%M:%S")]
+        for hour in range(nmbr_sgens):
+            # perform window time step
+            time_pt = pd.to_datetime(time_pt) + timedelta(minutes=self.wind_length)
+            if time_pt < bar:
+                start_times.append(time_pt.strftime("%Y-%m-%d %H:%M:%S"))
+            else:
+                break
+
+        return start_times
+
+    def sgen_comm(self, start_times, val):
+        # reset existing values (else won't overwrite)
+        self.night_sgens[:] = 0
+
+        # initiate cycle and reset starting point
+        time_cycle = cycle(start_times)
+        self.iter_time = next(time_cycle)
+
+        for col_name in self.night_sgens.columns.tolist():
+
+            # starting time val
+            foo = next(time_cycle)
+
+            # ending time val - 1 minute
+            bar = (pd.to_datetime(foo) - timedelta(minutes=1)).strftime(
+                "%Y-%m-%d %H:%M:%S"
+            )
+
+            # write gen value
+            self.sgen_write(self.night_sgens, self.iter_time, bar, col_name, val)
+
+            # update first time for next iter
+            self.iter_time = foo
 
 
 class net_calc:
@@ -217,6 +267,7 @@ class net_calc:
         self.night_mw = None
         self.n_timesteps = None
         self.time_steps = None
+        self.iter_time = None
         self.ll = None  # line loading results df
 
     def net_asym_prep(self, net, night_loads, night_sgens):
