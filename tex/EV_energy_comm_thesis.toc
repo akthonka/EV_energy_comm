@@ -3,23 +3,24 @@
 \contentsline {chapter}{\numberline {2}Literature Review}{2}{chapter.2}%
 \contentsline {chapter}{\numberline {3}Goal and Method}{3}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Approach}{3}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Data processing}{3}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}DataAction class}{3}{subsection.3.2.1}%
-\contentsline {paragraph}{Data import and segmenting:}{3}{subsection.3.2.1}%
+\contentsline {section}{\numberline {3.2}Data processing}{4}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}DataAction class}{4}{subsection.3.2.1}%
+\contentsline {paragraph}{Data import and segmenting:}{4}{subsection.3.2.1}%
 \contentsline {paragraph}{Datetime parsing function:}{4}{subsection.3.2.1}%
 \contentsline {paragraph}{Night profile functions:}{4}{subsection.3.2.1}%
-\contentsline {paragraph}{Create loads and static generators:}{4}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}NetworkCalculation class}{4}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Network application}{5}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Test network}{5}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}European network}{5}{subsection.3.3.2}%
-\contentsline {subsubsection}{Critical case scenario}{5}{subsection.3.3.2}%
-\contentsline {subsubsection}{Random time scenario}{5}{subsection.3.3.2}%
-\contentsline {subsubsection}{Energy community scenario}{5}{subsection.3.3.2}%
-\contentsline {chapter}{\numberline {4}Results and Discussion}{6}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Results}{6}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Test network}{6}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}European network}{6}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}Suggested improvements}{6}{section.4.2}%
-\contentsline {chapter}{\numberline {5}Conclusion}{7}{chapter.5}%
-\contentsline {chapter}{Appendix}{8}{chapter*.3}%
+\contentsline {paragraph}{Create loads and static generators:}{5}{subsection.3.2.1}%
+\contentsline {paragraph}{Random static generators:}{5}{subsection.3.2.1}%
+\contentsline {paragraph}{Energy community static generators:}{5}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}NetworkCalculation class}{6}{subsection.3.2.2}%
+\contentsline {paragraph}{Network preparation:}{6}{subsection.3.2.2}%
+\contentsline {paragraph}{Time iteration and output:}{6}{subsection.3.2.2}%
+\contentsline {paragraph}{Hosting capacity evaluation:}{6}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Network application}{6}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Critical case scenario}{6}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Random time scenario}{6}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Energy community scenario}{6}{subsection.3.3.3}%
+\contentsline {chapter}{\numberline {4}Results and Discussion}{7}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Results}{7}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Suggested improvements}{7}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Conclusion}{8}{chapter.5}%
+\contentsline {chapter}{Appendix}{9}{chapter*.3}%

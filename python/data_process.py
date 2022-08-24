@@ -199,7 +199,7 @@ class DataAction:
             start, end = self.time_wind(self.night_sgens, self.wind_length)
             self.sgen_write(self.night_sgens, start, end, name, sgen_val)
 
-    def get_start_times(self, nmbr_sgens):
+    def get_start_times(self, nmbr_sgens):  # helper function for sgen_comm()
         """make list of start times to cycle through based on number of sgens and time window"""
 
         time_pt = self.night_sgens.index[0]  # starting time point
@@ -224,6 +224,8 @@ class DataAction:
         return start_times
 
     def sgen_comm(self, start_times, val):
+        """fill self.night_sgens df consequently/cyclically based on start_times"""
+
         # reset existing values (else won't overwrite)
         self.night_sgens[:] = 0
 
