@@ -66,22 +66,35 @@
 \chapter{Introduction}
 \chapter{Literature Review}
 \chapter{Goal and Method}
-\section{Goal}
+\section{Approach}
 To reiterate, the goal of this thesis was to investigate the distribution grid hosting capacity of electric vehicles and the effect the involvement of energy communities can have on it.
 
 \section{Data processing}
 Given the scope of the project, the idea was to create a system flexible enough for iterative data manipulation and ideally one that would support multiple network types. The project was written entirely in python due to language simplicity as well as availability of advanced modules. Data handling was done using the pandas module, whereas the network simulation was performed using the pandapower module.
 
-For the sake of clarity, most of the code was split between a python class file and jupyter notebooks. For early testing and code prototyping, jupyter notebooks are sufficient but they quickly lose readability as the code complexity grows. The general methodology was therefore to write core functions in jupyter to then integrate them into an external python class file. The resultant python class file consists of two classes: one for handling data processing and another for operations based on the pandapower module.
+For the sake of clarity, most of the code was split between a python class file and jupyter notebooks. For early testing and code prototyping, jupyter notebooks are sufficient but they quickly lose readability as the code complexity grows. The general methodology was therefore to write core functions in jupyter to then integrate them into an external python class file. The resultant python class file consists of two classes: one for handling data processing and another for operations based on the pandapower module. Common input settings (for instance, the time window) are saved as class variables, such that only the most top-level functions are called in jupyter.
+
+The next section will describe the custom python classes in more detail.
 
 \subsection{DataAction class}
 The following information describes the functionality of the python class responsible for core data processing. While the general methodology is applicable to any dataset, these functions are tailored specifically to the household dataset and will be described as such. Additionally, the functions mentioned here target the European LV network as our simulation case---the test network case had a separate DataAction class. While similar, it was more limited in scope and application and is therefore not described here in detail.
 
-\paragraph{Data import and segmenting:} The raw dataset is imported as dataframe without additional options. Dropping the rest, we keep only three columns: \texttt{DE\_KN\_residential1\_grid\_import}, \texttt{DE\_KN\_residential2\_grid\_import} and \texttt{utc\_timestamp}. Since we will be performing conditional time-based operations, we set the timestamp column as index for ease of use. While it is possible to front-load a lot of data processing functions at this step---such as parsing datetimes---it is not recommended due to unnecessary computation time. A better approach is to segment the data for piece-wise processing and function testing, whereby it would be possible to iterate computations over the entire data set in the future. Therefore, we split the imported dataframe (of a little over a million data points) into a list of smaller dataframes (each 10000 data points long, with residual last dataframe being a bit smaller).
+The paragraphs serve to summarize the operation of one or more functions based on their application.
+
+\paragraph{Data import and segmenting:} The raw dataset is imported as a dataframe without additional options. Dropping the rest, we keep only three columns: \texttt{DE\_KN\_residential1\_grid\_import}, \texttt{DE\_KN\_residential2\_grid\_import} and \texttt{utc\_timestamp}. Since we will be performing conditional time-based operations, we set the timestamp column as index for ease of use. While it is possible to front-load a lot of data processing functions at this step---such as parsing datetimes---it is not recommended due to unnecessary computation time. A better approach is to segment the data for piece-wise processing and function testing, whereby it would be possible to iterate computations over the entire dataset in the future. Therefore, we split the imported dataframe (of a little over a million data points) into a list of smaller dataframes (each 10000 data points long, with residual last dataframe being a bit smaller).
 
 \paragraph{Datetime parsing function:} This function converts a segment of the imported data into a specific, time-indexed dataframe. First, we parse datetime index, specifying the format as \texttt{"Year--Month--Day Hour:Minute:Second"}, after which we convert from UTC to Berlin time---the local time of the recorded dataset. While it is possible to import data with local time column \texttt{cet\_cest\_timestamp} without the need of conversion, it is not recommended for pandas 1.4.3 since that will cause errors in datetime operations based on my experience. Second, we take the difference between consecutive rows. This is done in order to obtain minute-wise energy changes, since the household dataset only tracks cumulative energy values. If we use the \texttt{pandas.diff()} function, we must also drop the resulting first row, since it's a NaN row.
 
-\paragraph{Night profile functions:} The 
+\paragraph{Night profile functions:} This set of functions is fundamental for the simulation, as they are used to create a load profile for a single household. First, we must select a random dataframe segment with either of the two historical load profiles and parse it for datetime. The segment contains data on several days/nights, the dates of which we must identify. Then, for a random date, we must get the starting and ending datetimes for dataframe slicing. Knowing the starting time of our window---in our case, 18:00:00---we need to create a datetime object for the chosen date, given the starting time. From said datetime (for example, \texttt{2015-08-16 18:00:00}) we add one day to the date and update the time with our morning value (getting \texttt{2015-08-17 06:00:00}). With these two datetimes, we can now slice the selected dataframe to obtain the required single house overnight load profile.
+
+\paragraph{Create loads and static generators:} This function creates the dataframes used for timeseries iteration---from hereon referred to as night dataframes. These hold the inputs for the network values, for both the loads as well as the static generators (sgens). Depending on the timeseries controller, it is important to create the night dataframes in a very specific way: the names and the indices of the network components will dictate the conventions. Unless you are writing your own controller, refer to your documentation for more details.
+
+To create the night dataframes, first get a random night profile. This contains all the necessary time steps in the index, which is what we need; the load values can be set to zero. Then, generate a list of appropriate load names and form a dataframe using the time index. For the case of the European LV network, the resulting night dataframes are 721 rows $\times$ 55 columns (minutes $\times$ number of profiles). Repeat for both loads and sgens night dataframes. It is recommended to save these as class variables, since we will be referencing them throughout the entire simulation, as well as for troubleshooting purposes.
+
+
+
+
+
 
 
 \subsection{NetworkCalculation class}
@@ -98,6 +111,7 @@ First attempt...
 \subsection{European network}
 \subsubsection{Critical case scenario}
 \subsubsection{Random time scenario}
+\subsubsection{Energy community scenario}
 
 
 
