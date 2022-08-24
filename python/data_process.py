@@ -267,8 +267,7 @@ class net_calc:
         self.night_mw = None
         self.n_timesteps = None
         self.time_steps = None
-        self.iter_time = None
-        self.ll = None  # line loading results df
+        self.iter_time = None  # start time cycle helper var
 
     def net_asym_prep(self, net, night_loads, night_sgens):
         """prepare an asymmetric load network for time series iteration"""
@@ -364,15 +363,20 @@ class net_calc:
     def vm_stats(self, vm_pu):
         """return key timeseries result values for minima"""
 
-        min_min = vm_pu.idxmin().unique()[1:].min()  # first is always zero, from grid
+        min_min_ind = (
+            vm_pu.idxmin().unique()[1:].min()
+        )  # first is always zero, from grid
+        min_min_vm = round(vm_pu.min().min(), 5)  # min voltage across all busses
         min_time = (
             pd.to_datetime(DataAction().night_evening_t)
-            + timedelta(minutes=int(min_min))
-        ).strftime("%H:%M:%S")
-        print("All-time min-load value across all busses:", round(vm_pu.min().min(), 5))
-        print("All-time min-load time across all busses:", min_min, ",", min_time)
+            + timedelta(minutes=int(min_min_ind))
+        ).strftime(
+            "%H:%M:%S"
+        )  # time of min_min_ind
+        print("All-time min-load value across all busses:", min_min_vm)
+        print("All-time min-load time across all busses:", min_min_ind, ",", min_time)
 
-        return min_min
+        return min_min_vm, min_min_ind, min_time
 
     def plotly_res(self):  # helper function
         x = pf_res_plotly(self.net, climits_volt=(0.95, 1.05))  # x is arbitrary var
