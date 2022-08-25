@@ -96,7 +96,7 @@ The paragraphs serve to summarize the operation of one or more functions based o
 
 \paragraph{Create loads and static generators:} This function creates the dataframes used for timeseries iteration---from hereon referred to as night dataframes. These hold the inputs for the network values, for both the loads as well as the static generators (sgens). Depending on the timeseries controller, it is important to create the night dataframes in a very specific way: the names and the indices of the network components will dictate the conventions. Unless you are writing your own controller, refer to your documentation for more details.
 
-To create the night dataframes, first get a random night profile. This contains all the necessary time steps in the index, which is what we need; the load values can be set to zero. Then, generate a list of appropriate load names and form a dataframe using the time index. For the case of the European LV network, the resulting night dataframes are 721 rows $\times$ 55 columns (minutes $\times$ number of profiles). Repeat for both loads and sgens night dataframes. It is recommended to save these as class variables, since we will be referencing them throughout the entire simulation, as well as for troubleshooting purposes.
+To create the night dataframes, first get a random night profile. This contains all the necessary time steps in the index, which is what we need; the load values can be set to zero. Then, generate a list of appropriate load names and form a dataframe using the time index. For the case of the European LV network, the resulting night dataframes are 721 rows $\times$ 55 columns (minutes $\times$ number of profiles). Repeat for both loads and sgens night dataframes. It is recommended to save these as class variables, since we will be referencing them throughout the entire simulation, as well as for troubleshooting purposes. Finally, we convert our night loads to MW via a simple conversion factor multiplication.
 
 \paragraph{Random static generators:} These functions fill the night sgen dataframe at random times with a select sgen value. It's recommended to first reset the night dataframe by setting all sgen values to zero, otherwise location slicing may not overwrite the value. Getting a random set of starting and ending datetimes follows the same principle as described for night profile functions. It's important to keep track of zero-based indexing when calling random values from range. Additionally, in case of \texttt{pandapower}, the sgen sign needs to be set as negative in order to act as a separate static load that is an EV charger.
 
@@ -108,7 +108,10 @@ For best practice, set all night sgen values to zero before writing new ones. Th
 \subsection{NetworkCalculation class}
 The following information describes the code of the python class generally responsible for functions related to the \texttt{pandapower} module. In particular, its main purpose is perform time series iteration on a specific network. An additional function to calculate the hosting capacity is also contained here. The NetworkCalculation class is meant to be used directly in conjunction with the DataAction class and contains several direct references to it.
 
-\paragraph{Network preparation:}
+\paragraph{Network preparation:} In order to perform the time series iteration we first need to prepare our network. In the case of our chosen simulation---European LV network---this involves some additional steps (see next section). First, create the network, including the loads and sgens. It's recommended to stick to a consistent naming convention for loads and sgens across the network properties and the external night dataframes, in order to avoid unnecessary problems when configuring the controller in the next step.
+
+
+
 \paragraph{Time iteration and output:}
 \paragraph{Hosting capacity evaluation:}
 
