@@ -1,0 +1,27 @@
+@Misc{OpenPowerSystemData,
+  author = {Open Power System Data},
+  note   = {Open Power System Data is provided by Neon Neue Energieökonomik, Technical University of Berlin and ETH Zürich.},
+  url    = {https://data.open-power-system-data.org/household_data/},
+}
+
+@InProceedings{Nousdilis2017,
+  author    = {Angelos I. Nousdilis and Andreas I. Chrysochos and Grigoris K. Papagiannis and Georgios C. Christoforidis},
+  booktitle = {2017 11th {IEEE} International Conference on Compatibility, Power Electronics and Power Engineering ({CPE}-{POWERENG})},
+  title     = {The impact of Photovoltaic Self-Consumption Rate on voltage levels in {LV} distribution grids},
+  year      = {2017},
+  publisher = {{IEEE}},
+  doi       = {10.1109/cpe.2017.7915249},
+}
+
+@Article{Gruosso2019,
+  author    = {Giambattista Gruosso and Giancarlo Storti Gajani and Zheng Zhang and Luca Daniel and Paolo Maffezzoni},
+  journal   = {{IEEE} Access},
+  title     = {Uncertainty-Aware Computational Tools for Power Distribution Networks Including Electrical Vehicle Charging and Load Profiles},
+  year      = {2019},
+  pages     = {9357--9367},
+  volume    = {7},
+  doi       = {10.1109/access.2019.2891699},
+  publisher = {Institute of Electrical and Electronics Engineers ({IEEE})},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}

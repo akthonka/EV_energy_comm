@@ -3,24 +3,24 @@
 \contentsline {chapter}{\numberline {2}Literature Review}{2}{chapter.2}%
 \contentsline {chapter}{\numberline {3}Goal and Method}{3}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Approach}{3}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Data processing}{4}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}DataAction class}{4}{subsection.3.2.1}%
-\contentsline {paragraph}{Data import and segmenting:}{4}{subsection.3.2.1}%
-\contentsline {paragraph}{Datetime parsing function:}{4}{subsection.3.2.1}%
-\contentsline {paragraph}{Night profile functions:}{4}{subsection.3.2.1}%
-\contentsline {paragraph}{Create loads and static generators:}{5}{subsection.3.2.1}%
-\contentsline {paragraph}{Random static generators:}{5}{subsection.3.2.1}%
-\contentsline {paragraph}{Energy community static generators:}{5}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}NetworkCalculation class}{6}{subsection.3.2.2}%
-\contentsline {paragraph}{Network preparation and controllers:}{6}{subsection.3.2.2}%
-\contentsline {paragraph}{Time iteration and output:}{7}{figure.caption.4}%
-\contentsline {paragraph}{Hosting capacity evaluation:}{7}{figure.caption.4}%
-\contentsline {section}{\numberline {3.3}Network application}{7}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Critical case scenario}{8}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Random time scenario}{8}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Energy community scenario}{8}{subsection.3.3.3}%
-\contentsline {chapter}{\numberline {4}Results and Discussion}{9}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Results}{9}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Suggested improvements}{11}{section.4.2}%
-\contentsline {chapter}{\numberline {5}Conclusion}{12}{chapter.5}%
-\contentsline {chapter}{Appendix}{13}{chapter*.7}%
+\contentsline {section}{\numberline {3.2}Data processing}{5}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}DataAction class}{5}{subsection.3.2.1}%
+\contentsline {paragraph}{Data import and segmenting:}{5}{subsection.3.2.1}%
+\contentsline {paragraph}{Datetime parsing function:}{5}{subsection.3.2.1}%
+\contentsline {paragraph}{Night profile functions:}{5}{subsection.3.2.1}%
+\contentsline {paragraph}{Create loads and static generators:}{6}{subsection.3.2.1}%
+\contentsline {paragraph}{Random static generators:}{6}{subsection.3.2.1}%
+\contentsline {paragraph}{Energy community static generators:}{6}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}NetworkCalculation class}{7}{subsection.3.2.2}%
+\contentsline {paragraph}{Network preparation and controllers:}{7}{subsection.3.2.2}%
+\contentsline {paragraph}{Time iteration and output:}{8}{figure.caption.5}%
+\contentsline {paragraph}{Hosting capacity evaluation:}{8}{figure.caption.5}%
+\contentsline {section}{\numberline {3.3}Network application}{8}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Critical case scenario}{9}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Random time scenario}{9}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Energy community scenario}{9}{subsection.3.3.3}%
+\contentsline {chapter}{\numberline {4}Results and Discussion}{10}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Results}{10}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Suggested improvements}{12}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Conclusion}{13}{chapter.5}%
+\contentsline {chapter}{Appendix}{15}{chapter*.9}%

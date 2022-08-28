@@ -68,6 +68,10 @@
 
 \chapter{Introduction}
 \chapter{Literature Review}
+Good intro into EV situation and market: \cite{Das2020}
+
+Really good method, but I can't math: \cite{Gruosso2019}
+
 \chapter{Goal and Method}
 \section{Approach}\label{section_approach}
 To reiterate, the goal of this thesis was to investigate the distribution grid hosting capacity of electric vehicles and the effect the involvement of energy communities can have on it. Over the span of roughly two months, the method presented in this paper went through many iterations in terms of functionality as well as network application. The original testing models were performed on a simple test network with generic coordinates and arbitrary values (see \cref{test_network}). These tests were done in order to get a feel for the chosen software tools and to better understand the potential real world application and its scope of work.
@@ -75,15 +79,29 @@ To reiterate, the goal of this thesis was to investigate the distribution grid h
 \FloatBarrier
 \begin{figure}[htpb]
 		\centering
-		\includegraphics[width=0.5\linewidth]{test_network}
+		\includegraphics[width=0.46\linewidth]{test_network}
 		\caption{An example test power flow calculation plot with line loading results. Here, one static generator is active out of four.}
 		\label{test_network}
 	\end{figure}
 \FloatBarrier
 
+Early on, it was decided to incorporate real-world data as a basis of the simulation. Arguably the best (at the time of writing) data platform for this application is Open Power System Data---more specifically, the contributed household data package. It contains measured time series data for various households and businesses relevant for low-voltage power system modeling. In terms of geographical scope, it incorporates data from 11 households in Konstanz, southern Germany, as part of the CoSSMic project for the optimization of energy systems in smart cities. The gathered data is quite expansive, spanning a time range of over 4 years with a resolution of up to 1 minute measurements, even tracking single-device consumption. Cumulative energy measurements accounted for data gaps in communication problems and "all data gaps are either interpolated linearly, or filled with data of prior days" \cite{OpenPowerSystemData}, though no further detail is provided in this regard. Overall, this was the perfect fit for my simulation aimed at a standard European low-voltage grid.
 
+Using and incorporating the Open Power System Data household dataset proved to be quite a challenge on its own. Details regarding final data analysis are described in \cref{section_data_processing}. Once the data was processed and loaded into the network for further computations, the question became how to formulate and subsequently evaluate simulation scenarios. Hereby, the number of variables to take into account can practically be expanded far beyond the scope of the paper. For instance, an alternative tool considered for the simulation data was the LoadProfileGenerator (LPG), which is a highly-customizable tool for modeling residential energy consumption. LPG performs complete behavior simulation of a household residents in order to generate load curves. To that extent, it would have been possible to take said curves and implement them into our network case, while investigating individual households' behaviors across a community of like-minded, cooperative individuals. However, this was deemed far too comprehensive given the time constraints, but also not as potentially insightful.
 
-\vspace{1cm}
+Additionally, in order to make best use of the historical data, it was decided to perform time series iteration power flows. In a sense, this provides a similar advantage to LPG functionality by mimicking random human behavior over time, only with no unneeded explanations behind it. The main idea became to sample a random historical load profile per household and to consider when/how an EV charger could optimally function in time. While this may be a relatively simple question to answer for a single household---given the residents' preferences and habits, it's merely a load optimization problem---the main issue lies with multiple parties involved. In turn, those parties are connected on a network in different ways, bringing topology into account. Thus, time and space both dictate the conditions for a given network.
+
+Eventually, the rather abstract test network got superseded by the benchmark European Low Voltage Test Feeder (see \cref{EU_LV_test_feeder}). Three scenarios were chosen for evaluation: critical case, random charging, semi-coordinated charging. The critical case is used for hosting capacity evaluation of our simulation for a single time point, whereas the two other scenarios demonstrate time-dependent charging behavior models. Detailed explanation for this approach is given in \cref{section_network_application}.
+
+\FloatBarrier
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{EU_LV_test_feeder}
+	\caption{European Low Voltage Test Feeder network illustration. The blue dots are the active busses, representing households \cite{Nousdilis2017}.}
+	\label{EU_LV_test_feeder}
+\end{figure}
+\FloatBarrier
+
 The next section will describe the functionality of custom python classes. For more details, consult the source code on GitHub at: \url{https://github.com/akthonka/EV_energy_comm} .
 
 \newpage
@@ -151,9 +169,17 @@ Adjusting the historical load magnitude\\
 
 
 \subsection{Critical case scenario}
-\subsection{Random time scenario}
-\subsection{Energy community scenario}
+single point in time at peak load\\
+compute max number of sgens active, random location\\
 
+\subsection{Random time scenario}
+night time window\\
+random sgen locations\\
+
+\subsection{Energy community scenario}
+night time window\\
+semi-ordered sgen locations\\
+semi-coordinated charging\\
 
 
 \chapter{Results and Discussion}
@@ -183,6 +209,9 @@ Adjusting the historical load magnitude\\
 
 
 \chapter{Conclusion}
+\bibliographystyle{IEEEtran} %displays URLs
+\bibliography{bib_library}
+
 \chapter*{Appendix}
 \addcontentsline{toc}{chapter}{Appendix}
 
