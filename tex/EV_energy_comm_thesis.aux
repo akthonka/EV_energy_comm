@@ -2,13 +2,10 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
-\global\let\oldcontentsline\contentsline
-\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
-\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -29,7 +26,13 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3.1}Approach}{3}{section.3.1}\protected@file@percent }
 \newlabel{section_approach}{{3.1}{3}{Approach}{section.3.1}{}}
 \newlabel{section_approach@cref}{{[section][1][3]3.1}{[1][3][]3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces An example test power flow calculation plot with line loading results. Here, one static generator is active out of four.\relax }}{3}{figure.caption.3}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{test_network}{{3.1}{3}{An example test power flow calculation plot with line loading results. Here, one static generator is active out of four.\relax }{figure.caption.3}{}}
+\newlabel{test_network@cref}{{[figure][1][3]3.1}{[1][3][]3}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}Data processing}{4}{section.3.2}\protected@file@percent }
+\newlabel{section_data_processing}{{3.2}{4}{Data processing}{section.3.2}{}}
+\newlabel{section_data_processing@cref}{{[section][2][3]3.2}{[1][4][]4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}DataAction class}{4}{subsection.3.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Data import and segmenting:}{4}{subsection.3.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Datetime parsing function:}{4}{subsection.3.2.1}\protected@file@percent }
@@ -38,21 +41,31 @@
 \@writefile{toc}{\contentsline {paragraph}{Random static generators:}{5}{subsection.3.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Energy community static generators:}{5}{subsection.3.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}NetworkCalculation class}{6}{subsection.3.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Network preparation:}{6}{subsection.3.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Time iteration and output:}{6}{subsection.3.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Hosting capacity evaluation:}{6}{subsection.3.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Network application}{6}{section.3.3}\protected@file@percent }
-\newlabel{section_network_application}{{3.3}{6}{Network application}{section.3.3}{}}
-\newlabel{section_network_application@cref}{{[section][3][3]3.3}{[1][6][]6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Critical case scenario}{6}{subsection.3.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Random time scenario}{6}{subsection.3.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Energy community scenario}{6}{subsection.3.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Results and Discussion}{7}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Network preparation and controllers:}{6}{subsection.3.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces The diagram shows the time series loop of the time series module. The basic functionality is compute the power flow for each time step using the given values---such as sgens or loads. Step-wise convergence will depend on several factors, such as the network parameters (i.e. load magnitudes) as well as the algorithm used for solving the power flow problem. For more module details, see the \texttt  {pandapower} \href  {https://pandapower.readthedocs.io/en/v2.10.1/timeseries/timeseries_loop.html}{wiki}.\relax }}{6}{figure.caption.4}\protected@file@percent }
+\newlabel{timeseries_module_diag}{{3.2}{6}{The diagram shows the time series loop of the time series module. The basic functionality is compute the power flow for each time step using the given values---such as sgens or loads. Step-wise convergence will depend on several factors, such as the network parameters (i.e. load magnitudes) as well as the algorithm used for solving the power flow problem. For more module details, see the \texttt {pandapower} \href {https://pandapower.readthedocs.io/en/v2.10.1/timeseries/timeseries_loop.html}{wiki}.\relax }{figure.caption.4}{}}
+\newlabel{timeseries_module_diag@cref}{{[figure][2][3]3.2}{[1][6][]6}}
+\@writefile{toc}{\contentsline {paragraph}{Time iteration and output:}{7}{figure.caption.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Hosting capacity evaluation:}{7}{figure.caption.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Network application}{7}{section.3.3}\protected@file@percent }
+\newlabel{section_network_application}{{3.3}{7}{Network application}{section.3.3}{}}
+\newlabel{section_network_application@cref}{{[section][3][3]3.3}{[1][7][]7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Critical case scenario}{8}{subsection.3.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Random time scenario}{8}{subsection.3.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Energy community scenario}{8}{subsection.3.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Results and Discussion}{9}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Results}{7}{section.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Suggested improvements}{7}{section.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusion}{8}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Results}{9}{section.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces blahblah\relax }}{9}{figure.caption.5}\protected@file@percent }
+\newlabel{EU_LV_host_critical}{{4.1}{9}{blahblah\relax }{figure.caption.5}{}}
+\newlabel{EU_LV_host_critical@cref}{{[figure][1][4]4.1}{[1][9][]9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces blahblah\relax }}{10}{figure.caption.6}\protected@file@percent }
+\newlabel{EU_LV_host_capacity}{{4.2}{10}{blahblah\relax }{figure.caption.6}{}}
+\newlabel{EU_LV_host_capacity@cref}{{[figure][2][4]4.2}{[1][9][]10}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Suggested improvements}{11}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusion}{12}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{Appendix}{9}{chapter*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Appendix}{13}{chapter*.7}\protected@file@percent }
+\gdef \@abspage@last{16}

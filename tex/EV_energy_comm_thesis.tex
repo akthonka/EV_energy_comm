@@ -70,15 +70,24 @@
 \chapter{Literature Review}
 \chapter{Goal and Method}
 \section{Approach}\label{section_approach}
-To reiterate, the goal of this thesis was to investigate the distribution grid hosting capacity of electric vehicles and the effect the involvement of energy communities can have on it.
+To reiterate, the goal of this thesis was to investigate the distribution grid hosting capacity of electric vehicles and the effect the involvement of energy communities can have on it. Over the span of roughly two months, the method presented in this paper went through many iterations in terms of functionality as well as network application. The original testing models were performed on a simple test network with generic coordinates and arbitrary values (see \cref{test_network}). These tests were done in order to get a feel for the chosen software tools and to better understand the potential real world application and its scope of work.
 
-testing network then big boi network
+\FloatBarrier
+\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.5\linewidth]{test_network}
+		\caption{An example test power flow calculation plot with line loading results. Here, one static generator is active out of four.}
+		\label{test_network}
+	\end{figure}
+\FloatBarrier
+
+
 
 \vspace{1cm}
 The next section will describe the functionality of custom python classes. For more details, consult the source code on GitHub at: \url{https://github.com/akthonka/EV_energy_comm} .
 
 \newpage
-\section{Data processing}
+\section{Data processing}\label{section_data_processing}
 Given the scope of the project, the idea was to create a system flexible enough for iterative data manipulation and ideally one that would support multiple network types. The project was written entirely in python due to language simplicity as well as availability of advanced modules. Data handling was done using the \texttt{pandas} module, whereas the network simulation was performed using the \texttt{pandapower} module.
 
 For the sake of clarity, most of the code was split between a python class file and jupyter notebooks. For early testing and code prototyping, jupyter notebooks are sufficient but they quickly lose readability as the code complexity grows. The general methodology was therefore to write core functions in jupyter to then integrate them into an external python class file. The resultant python class file consists of two classes: one for handling data processing and another for operations based on the \texttt{pandapower} module. Common input settings (for instance, the time window) are saved as class variables, such that only the most top-level functions are called in jupyter.
@@ -106,33 +115,37 @@ For best practice, set all night sgen values to zero before writing new ones. Th
 
 
 \subsection{NetworkCalculation class}
-The following information describes the code of the python class generally responsible for functions related to the \texttt{pandapower} module. In particular, its main purpose is perform time series iteration on a specific network. An additional function to calculate the hosting capacity is also contained here. The NetworkCalculation class is meant to be used directly in conjunction with the DataAction class and contains several direct references to it.
+The following information describes the code of the python class generally responsible for functions related to the \texttt{pandapower} module. In particular, its main purpose is perform timeseries iteration on a specific network. An additional function to calculate the hosting capacity is also contained here. The NetworkCalculation class is meant to be used directly in conjunction with the DataAction class and contains several direct references to it.
 
-\paragraph{Network preparation:} In order to perform the time series iteration we first need to prepare our network. In the case of our chosen simulation---European LV network---this involves some additional steps (see next section). First, create the network, including the loads and sgens. It's recommended to stick to a consistent naming convention for loads and sgens across the network properties and the external night dataframes, in order to avoid unnecessary problems when configuring the controller in the next step.
+\paragraph{Network preparation and controllers:} In order to perform the timeseries iteration we first need to prepare our network. In the case of our chosen simulation---European LV network---this involves some additional steps (see next section). First, create the network, including the loads and sgens. It's recommended to stick to a consistent naming convention for loads and sgens across the network properties and the external night dataframes, in order to avoid unnecessary problems when configuring the controller in the next step.
 
+The controller is a function whose purpose is to update the network values iteratively from a look-up table. The methodology will depend on your software of choice, but in our case we will be using the \texttt{pandapower} controllers made specifically for timeseries module. \Cref{timeseries_module_diag} shows a general overview of the built-in module.
 
+\FloatBarrier
+\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.35\linewidth]{timeseries_module_diag.pdf}
+		\caption{The diagram shows the time series loop of the time series module. The basic functionality is compute the power flow for each time step using the given values---such as sgens or loads. Step-wise convergence will depend on several factors, such as the network parameters (i.e. load magnitudes) as well as the algorithm used for solving the power flow problem. For more module details, see the \texttt{pandapower}  \href{https://pandapower.readthedocs.io/en/v2.10.1/timeseries/timeseries_loop.html}{wiki}.}
+		\label{timeseries_module_diag}
+	\end{figure}
+\FloatBarrier
 
-\paragraph{Time iteration and output:}
-\paragraph{Hosting capacity evaluation:}
+For our simulation, we will need 2 constant controllers for loads and sgens. Hereby, the correspondent data sources are the night dataframes that were defined in the DataAction class. Lastly, the timeseries iteration needs to be given a defined number of time steps, which in our case will be given by the index length of (either) night dataframe. With this information, the power flow can be computed iteratively based on tabular variable inputs. However, this will yield no useful results on its own, which is why we need to additionally define an output writer.
 
+\paragraph{Time iteration and output:} An output writer is a function with a simple job of recording computed information, in an desired format, for each timeseries step. In our case, we will again be using the output writer function supplied with the \texttt{pandapower} timeseries module and outputting into an Excel file for the sake of convenience and troubleshooting. However, we aim to continue data processing in \texttt{pandas}, so we define another import function for said Excel results file. The imported dataframe can now provide relevant statistics and metrics. For our evaluation, the one of the key computations is the all-time minimum load value across all busses (see \cref{section_network_application} for more details).
 
+\paragraph{Hosting capacity evaluation:} Hosting capacity was computed iteratively for a network in a single point in time. All pre-loaded network settings (even from the timeseries iteration) stay the same, except for the sgen columns---those need to be set to zero at first. Do not confuse the night sgen dataframe with the network sgen column; for a single point in time, only the network-defined sgens are taken into the calculation.
 
-
-
-
-
-
-
-
-
-
-
-
+Iteration was performed over the list of sgen indices using a \texttt{for} loop. The list is scrambled prior iteration in order to mimic uncoordinated charging patterns. An additional variable for storing the hosting capacity count is created. For each cycle of the loop, the following metric variables are computed by running a power flow calculation: minimum bus voltage magnitude (per unit) and maximum line loading percent. The next step is conditional. If the metric variables don't exceed preset limits, add an sgen value and increase the hosting capacity count by one. The loop proceeds onto the next cycle and computes the new power flow state of the network. Checking the metric variables again, if (at some point) the preset limits are exceeded, then we need to undo the effects of the last cycle. As such, the hosting capacity count is reduced by one and the last filled sgen is reset to zero. This breaks the loop. The function then computes one final power flow computation to obtain for an output plot and prints the maximum hosting capacity result.
 
 \section{Network application}\label{section_network_application}
+This section builds upon the fundamental operating principles of the two classes introduced in \cref{section_data_processing}. It aims to explain the usage of the python class file in order to obtain the three scenarios for the European Low Voltage Test Feeder.
+
+Assumptions:\\
 Treating three-phase network as single phase\\
 Network asymmetric loads set to zero\\
 Adjusting the historical load magnitude\\
+1 hr window because...\\
 
 
 
@@ -145,6 +158,25 @@ Adjusting the historical load magnitude\\
 
 \chapter{Results and Discussion}
 \section{Results}
+
+\FloatBarrier
+\begin{figure}[htpb]
+		\centering
+		\includegraphics[width=0.9\linewidth]{EU_LV_host_critical}
+		\caption{blahblah}
+		\label{EU_LV_host_critical}
+	\end{figure}
+\FloatBarrier
+
+\FloatBarrier
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.9\linewidth]{EU_LV_host_capacity}
+	\caption{blahblah}
+	\label{EU_LV_host_capacity}
+\end{figure}
+\FloatBarrier
+
 
 
 \section{Suggested improvements}
@@ -162,8 +194,8 @@ Adjusting the historical load magnitude\\
 %\FloatBarrier
 %\begin{figure}[htpb]
 %	\centering
-%	\includegraphics[width=0.9\linewidth]{factor_importance}
-%	\caption{Factor importance \cite{Hoefer2016}}
-%	\label{factor_importance}
+%	\includegraphics[width=0.9\linewidth]{blah}
+%	\caption{blah}
+%	\label{blah}
 %\end{figure}
 %\FloatBarrier

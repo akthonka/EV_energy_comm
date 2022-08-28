@@ -45,7 +45,7 @@ class DataAction:
         self.conv_fac = 1000 * 60  # convert from MW/min to W (1 min avg)
         self.night_evening_t = "18:00:00"
         self.night_morning_t = "06:00:00"
-        self.night_max_t = "19:19:00"  # obtained from max_load_times.ipynb
+        # self.night_max_t = "19:19:00"  # obtained from max_load_times.ipynb
         self.wind_length = 60
         self.iter_time = None
         self.night_loads = None
@@ -395,7 +395,6 @@ class net_calc:
         np.random.shuffle(rand_ind)
 
         hosting_cap = 0
-        min_vm_pm = 0
         for i in rand_ind:
             # compute power flow
             pp.runpp(self.net)
@@ -403,7 +402,7 @@ class net_calc:
             max_line_load = self.net.res_line.loading_percent.max()
 
             # conditional iteration step
-            if min_vm_pm > 0.95 and max_line_load < 90:
+            if min_vm_pm > 0.95 and max_line_load < 100:
                 # set single sgen value and run power flow
                 self.net.sgen.p_mw.at[i] = -sgen_val
                 hosting_cap = hosting_cap + 1
