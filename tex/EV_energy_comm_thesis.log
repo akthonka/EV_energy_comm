@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  28 AUG 2022 20:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  29 AUG 2022 11:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -764,23 +764,18 @@ File: images//timeseries_module_diag.pdf Graphic file (type pdf)
 Package pdftex.def Info: images//timeseries_module_diag.pdf  used on input line
  145.
 (pdftex.def)             Requested size: 146.39133pt x 243.03795pt.
- [7 <./images//timeseries_module_diag.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 162--167
+ [7 <./images//timeseries_module_diag.pdf>] [8]
+Underfull \hbox (badness 10000) in paragraph at lines 177--179
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 172--174
-
- []
-
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 176--178
+Underfull \hbox (badness 10000) in paragraph at lines 181--183
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 180--183
+Underfull \hbox (badness 10000) in paragraph at lines 185--188
 
  []
 
@@ -790,13 +785,13 @@ Chapter 4.
 File: images//EU_LV_host_critical.png Graphic file (type png)
 <use images//EU_LV_host_critical.png>
 Package pdftex.def Info: images//EU_LV_host_critical.png  used on input line 19
-1.
+6.
 (pdftex.def)             Requested size: 376.42575pt x 366.21394pt.
 <images//EU_LV_host_capacity.png, id=203, 702.625pt x 683.55376pt>
 File: images//EU_LV_host_capacity.png Graphic file (type png)
 <use images//EU_LV_host_capacity.png>
 Package pdftex.def Info: images//EU_LV_host_capacity.png  used on input line 20
-0.
+5.
 (pdftex.def)             Requested size: 376.42575pt x 366.21394pt.
 [10
 
@@ -816,7 +811,7 @@ Package rerunfilecheck Info: File `EV_energy_comm_thesis.out' has not changed.
 Here is how much of TeX's memory you used:
  21047 strings out of 477843
  408881 string characters out of 2833414
- 715074 words of memory out of 3000000
+ 716074 words of memory out of 3000000
  39654 multiletter control sequences out of 15000+600000
  488295 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -833,9 +828,9 @@ eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\panto\AppData\Loca
 l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\panto\AppDat
 a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk><C:/Program Files
 /MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on EV_energy_comm_thesis.pdf (18 pages, 394436 bytes).
+Output written on EV_energy_comm_thesis.pdf (18 pages, 397101 bytes).
 PDF statistics:
- 651 PDF objects out of 1000 (max. 8388607)
+ 654 PDF objects out of 1000 (max. 8388607)
  46 named destinations out of 1000 (max. 500000)
  162 words of extra memory for PDF output out of 10000 (max. 10000000)
 
