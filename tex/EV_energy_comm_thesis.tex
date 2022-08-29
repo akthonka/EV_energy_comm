@@ -154,7 +154,7 @@ For our simulation, we will need 2 constant controllers for loads and sgens. Her
 
 \paragraph{Hosting capacity evaluation:} Hosting capacity was computed iteratively for a network in a single point in time. All pre-loaded network settings (even from the timeseries iteration) stay the same, except for the sgen columns---those need to be set to zero at first. Do not confuse the night sgen dataframe with the network sgen column; for a single point in time, only the network-defined sgens are taken into the calculation.
 
-Iteration was performed over the list of sgen indices using a \texttt{for} loop. The list is scrambled prior iteration in order to mimic uncoordinated charging patterns. An additional variable for storing the hosting capacity count is created. For each cycle of the loop, the following metric variables are computed by running a power flow calculation: minimum bus voltage magnitude (per unit) and maximum line loading percent. The next step is conditional. If the metric variables don't exceed preset limits, add an sgen value and increase the hosting capacity count by one. The loop proceeds onto the next cycle and computes the new power flow state of the network. Checking the metric variables again, if (at some point) the preset limits are exceeded, then we need to undo the effects of the last cycle. As such, the hosting capacity count is reduced by one and the last filled sgen is reset to zero. This breaks the loop. The function then computes one final power flow computation to obtain for an output plot and prints the maximum hosting capacity result.
+Iteration was performed over the list of sgen indices using a \texttt{for} loop. The list is scrambled prior iteration in order to mimic uncoordinated charging patterns. An additional variable for storing the hosting capacity count is created. For each cycle of the loop, the following metric variables are computed by running a power flow calculation: minimum bus voltage magnitude per unit (vm p.u.) and maximum line loading percent. The next step is conditional. If the metric variables don't exceed preset limits, add an sgen value and increase the hosting capacity count by one. The loop proceeds onto the next cycle and computes the new power flow state of the network. Checking the metric variables again, if (at some point) the preset limits are exceeded, then we need to undo the effects of the last cycle. As such, the hosting capacity count is reduced by one and the last filled sgen is reset to zero. This breaks the loop. The function then computes one final power flow computation to obtain for an output plot and prints the maximum hosting capacity result.
 
 \section{Network application}\label{section_network_application}
 This section builds upon the fundamental operating principles of the two classes introduced in \cref{section_data_processing}. It aims to explain the usage of the python class file in order to obtain the three scenarios for the test feeder.
@@ -167,13 +167,27 @@ This section builds upon the fundamental operating principles of the two classes
 
 The network used in the simulation is an alteration of the standard test feeder. The original network itself is 3-phase, which would require a different power flow model---in case of \texttt{pandapower}, that would be handled by \texttt{pandapower.pf.runpp\_3ph.runpp\_3ph()}. However, given the right circumstances, it is possible to treat a 3-phase network as single-phase; namely, if we assume that all network loads are balanced. This assumption is plausible and corresponds to most real-world households, to the extent that some power modeling software (such as BLANK) don't even include a separate 3-phase computation option for this reason. With this assumption, all loads and sgens were defined and handled as single-phase in our simulation.
 
-Furthermore, the standard test feeder was (in most cases) not able to support direct application of the household load profiles. During timeseries iteration, the console encounters a singular-matrix error, indicating that the Jacobian cannot be solved for this power flow. In practical terms, this meant that the network was overloading at some point in time. Indeed this point in time was almost certainly converging to the average evening peak load time for this dataset. From past applications of data analysis, with data spanning over 500 days, the average maximum load time (across both households 1 and 2) was calculated to be \texttt{19:19:00} (in a time bracket of \texttt{18:00:00--06:00:00}). The solution was to scale the historical load curves. The resultant network busses, with no sgens active, fall in an acceptable voltage magnitude per unit range between 1.03 and 1.05. FOR WHATEVER REASON, GOTTA EXPLAIN
+Furthermore, the standard test feeder was (in most cases) not able to support direct application of the household load profiles. During timeseries iteration, the console encounters a singular-matrix error, indicating that the Jacobian cannot be solved for this power flow. In practical terms, this meant that the network was overloading at some point in time. Indeed this point in time was almost certainly converging to the average evening peak load time for this dataset. From past applications of data analysis, with data spanning over 500 days, the average maximum load time (across both households 1 and 2) was calculated to be \texttt{19:19:00} (in a time bracket of \texttt{18:00:00--06:00:00}). The solution was to scale the historical load curves. The resultant network busses, with no sgens active, fall in an acceptable voltage magnitude per unit range between 0.95 and 1.05 for any random simulation.
 
 Another assumption that was made concerns the charging times---these were meant to stay constant in length. MOST CHARGERS ON THE MARKET... MOST AVERAGE EVS... BLAH BLAH, 1 HOUR CHARGING TIME GOTTA EXPLAIN
 
 With these assumptions and adjustments to the test feeder, the following 3 case scenarios were identified and analyzed.
 
 \subsection{Critical case scenario}
+This case scenario aims to address the hosting capacity of our test feeder given the most unfavorable circumstances. The evaluation process outline was as follows:
+\begin{enumerate}
+	\item Load and prepare dataset
+	\item Create loads and sgens night dataframes
+	\item Load and prepare test feeder network
+	\item Define output writer and run the timeseries
+	\item Import the voltage magnitude timeseries results
+	\item Evaluate the all-time minimum load time point
+	\item Load the network configuration for that time point
+	\item Calculate hosting capacity at the critical time point
+\end{enumerate}
+
+
+
 single point in time at peak load\\
 compute max number of sgens active, random location\\
 
@@ -190,14 +204,24 @@ semi-coordinated charging\\
 \chapter{Results and Discussion}
 \section{Results}
 
-\FloatBarrier
-\begin{figure}[htpb]
-		\centering
-		\includegraphics[width=0.9\linewidth]{EU_LV_host_critical}
-		\caption{blahblah}
-		\label{EU_LV_host_critical}
-	\end{figure}
-\FloatBarrier
+\begin{table}
+	\centering
+	\begin{tabular}{lrrrlrrr}
+		\toprule
+		& bus\_0 & bus\_1 & bus\_2 & \dots & bus\_904 & bus\_905 & bus\_906 \\
+		\midrule
+		count & 721.000 & 721.000 & 721.000 & \dots & 721.000 & 721.000 & 721.000 \\
+		mean & 1.050 & 1.050 & 1.050 & \dots & 1.046 & 1.046 & 1.046 \\
+		std & 0.000 & 0.000 & 0.000 & \dots & 0.001 & 0.001 & 0.001 \\
+		min & 1.050 & 1.050 & 1.050 & \dots & 1.040 & 1.040 & 1.040 \\
+		25\% & 1.050 & 1.050 & 1.050 & \dots & 1.045 & 1.045 & 1.045 \\
+		50\% & 1.050 & 1.050 & 1.050 & \dots & 1.047 & 1.047 & 1.046 \\
+		75\% & 1.050 & 1.050 & 1.050 & \dots & 1.047 & 1.047 & 1.047 \\
+		max & 1.050 & 1.050 & 1.050 & \dots & 1.048 & 1.048 & 1.048 \\
+		\bottomrule
+	\end{tabular}
+	\caption{blah}
+\end{table}
 
 \FloatBarrier
 \begin{figure}[htpb]
