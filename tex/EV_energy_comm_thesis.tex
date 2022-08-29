@@ -186,25 +186,50 @@ This case scenario aims to address the hosting capacity of our test feeder given
 	\item Calculate hosting capacity at the critical time point
 \end{enumerate}
 
+Hereby the sgens are placed in a random network location for a single point (minute) in time. Timeseries iteration is used to locate that point in time, but it does not compute over any sgen values. Based on test simulations, the evaluated hosting capacity never reaches 100\% for peak load time, unlike the other two scenarios.
 
-
-single point in time at peak load\\
-compute max number of sgens active, random location\\
-
+\newpage
 \subsection{Random time scenario}
-night time window\\
-random sgen locations\\
+This case scenario aims to represent completely uncoordinated charging pattern over the night time window period. It's used as a control comparison for the energy community scenario. The evaluation process is similar to the critical case scenario:
+\begin{enumerate}
+	\item Load and prepare dataset
+	\item Create loads and sgens night dataframes
+	\item Place sgens at random locations in the network
+	\item Load and prepare test feeder network
+	\item Define output writer and run the timeseries
+	\item Import the voltage magnitude timeseries results
+	\item Evaluate the all-time minimum load time point
+	\item[Optional:] Load network configuration for all-time minimum vm p.u. time point
+\end{enumerate}
+
+The main difference from the critical case scenario is that we load sgens in our network before we run the timeseries iteration. Since the sgens charging times are spread across the night window, all sgens can be active at one point or another. This only becomes problematic should multiple sgens (i.e. more than 10--15) happen to be charging at once. At the same time, the household load profiles may offset a potential network overload if the charging convergence happens late a night when the loads are lowest---since most people are asleep and little to no household appliances are running.
+
 
 \subsection{Energy community scenario}
+This case scenario aims to propose the concept of semi-coordinated charging.
+
 night time window\\
 semi-ordered sgen locations\\
 semi-coordinated charging\\
+
+\newpage
+Consider the following theoretical network depicted in \cref{comm_topology}, not dissimilar from the original test case network.
+\FloatBarrier
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.7\linewidth]{comm_topology}
+	\caption{Pictured is a theoretical network scenario for linearly placed single households. The simplest coordination possible is depicted here, with household pairs $\{1,\,2\}$ and $\{3,\,4\}$ in coordination. The pattern is repeated up to $n$ households, whereby $n$ is either even or odd.}
+	\label{comm_topology}
+\end{figure}
+\FloatBarrier
+
+Coordination between pairs $\{1,\,2\}$ and $\{3,\,4\}$ will have the same effect on network loads as coordination between pairs $\{1,3\}$ and $\{2,4\}$. Line loading is generally expected to be around 1\% per household line. For $n$ odd number of households, the remainder household will simply be treated as in pair to itself, or in other words, uncoordinating.
 
 
 \chapter{Results and Discussion}
 \section{Results}
 
-\begin{table}
+\begin{table}[htpb]
 	\centering
 	\begin{tabular}{lrrrlrrr}
 		\toprule
@@ -220,7 +245,7 @@ semi-coordinated charging\\
 		max & 1.050 & 1.050 & 1.050 & \dots & 1.048 & 1.048 & 1.048 \\
 		\bottomrule
 	\end{tabular}
-	\caption{blah}
+	\caption{Example simulation timeseries results.}
 \end{table}
 
 \FloatBarrier
@@ -232,6 +257,7 @@ semi-coordinated charging\\
 \end{figure}
 \FloatBarrier
 
+Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu fails)
 
 
 \section{Suggested improvements}

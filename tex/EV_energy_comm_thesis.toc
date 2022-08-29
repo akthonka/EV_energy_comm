@@ -17,10 +17,10 @@
 \contentsline {paragraph}{Hosting capacity evaluation:}{8}{figure.caption.5}%
 \contentsline {section}{\numberline {3.3}Network application}{8}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Critical case scenario}{9}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Random time scenario}{9}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Energy community scenario}{9}{subsection.3.3.3}%
-\contentsline {chapter}{\numberline {4}Results and Discussion}{10}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Results}{10}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Suggested improvements}{11}{section.4.2}%
-\contentsline {chapter}{\numberline {5}Conclusion}{12}{chapter.5}%
-\contentsline {chapter}{Appendix}{14}{chapter*.9}%
+\contentsline {subsection}{\numberline {3.3.2}Random time scenario}{10}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Energy community scenario}{10}{subsection.3.3.3}%
+\contentsline {chapter}{\numberline {4}Results and Discussion}{12}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Results}{12}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Suggested improvements}{14}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Conclusion}{15}{chapter.5}%
+\contentsline {chapter}{Appendix}{17}{chapter*.10}%
