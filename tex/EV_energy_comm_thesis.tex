@@ -212,18 +212,20 @@ night time window\\
 semi-ordered sgen locations\\
 semi-coordinated charging\\
 
+Coordination here is defined as charging one after another.\\
+
 \newpage
 Consider the following theoretical network depicted in \cref{comm_topology}, not dissimilar from the original test case network.
 \FloatBarrier
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.7\linewidth]{comm_topology}
-	\caption{Pictured is a theoretical network scenario for linearly placed single households. The simplest coordination possible is depicted here, with household pairs $\{1,\,2\}$ and $\{3,\,4\}$ in coordination. The pattern is repeated up to $n$ households, whereby $n$ is either even or odd.}
+	\caption{Pictured is a theoretical network scenario for linearly placed single-line households. The simplest coordination possible is depicted here, with household pairs $\{1,\,2\}$ and $\{3,\,4\}$ in coordination. The pattern is repeated up to $n$ households, whereby $n$ is either even or odd.}
 	\label{comm_topology}
 \end{figure}
 \FloatBarrier
 
-Coordination between pairs $\{1,\,2\}$ and $\{3,\,4\}$ will have the same effect on network loads as coordination between pairs $\{1,3\}$ and $\{2,4\}$. Line loading is generally expected to be around 1\% per household line. For $n$ odd number of households, the remainder household will simply be treated as in pair to itself, or in other words, uncoordinating.
+Coordination between pairs $\{1,\,2\}$ and $\{3,\,4\}$ will have the same effect on network loads as coordination between pairs $\{1,3\}$ and $\{2,4\}$. In case of 2 households per line---a common layout for the test feeder---the overall network load effect is again practically the same, aside from local line load. Line loading is generally expected to be around 1\% per household line (and was shown not to be the limiting factor for hosting capacity calculation). For $n$ odd number of households, the remainder household will simply be treated as in pair to itself, or in other words, uncoordinating.
 
 
 \chapter{Results and Discussion}
