@@ -13,12 +13,14 @@
 \contentsline {paragraph}{Energy community static generators:}{6}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}NetworkCalculation class}{7}{subsection.3.2.2}%
 \contentsline {paragraph}{Network preparation and controllers:}{7}{subsection.3.2.2}%
-\contentsline {paragraph}{Time iteration and output:}{8}{figure.caption.5}%
-\contentsline {paragraph}{Hosting capacity evaluation:}{8}{figure.caption.5}%
+\contentsline {paragraph}{Time iteration and output:}{7}{subsection.3.2.2}%
+\contentsline {paragraph}{Hosting capacity evaluation:}{7}{subsection.3.2.2}%
 \contentsline {section}{\numberline {3.3}Network application}{8}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Critical case scenario}{9}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Random time scenario}{10}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Energy community scenario}{10}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Critical case scenario}{8}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Random time scenario}{9}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Energy community scenario}{9}{subsection.3.3.3}%
+\contentsline {subsubsection}{Theoretical considerations}{10}{section*.5}%
+\contentsline {subsubsection}{Test feeder application}{11}{figure.caption.6}%
 \contentsline {chapter}{\numberline {4}Results and Discussion}{12}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Results}{12}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Suggested improvements}{14}{section.4.2}%

@@ -67,7 +67,7 @@
 
 
 \chapter{Introduction}
-\chapter{Literature Review}
+\chapter{Literature Review}\label{section_literature_review}
 Good intro into EV situation and market: \cite{Das2020}
 
 Really good method, but I can't math: \cite{Gruosso2019}
@@ -129,7 +129,7 @@ To create the night dataframes, first get a random night profile. This contains 
 
 \paragraph{Energy community static generators:} These functions fill the night sgen dataframe consequently and cyclically (see \cref{section_network_application} for motivation). This method consists of two parts. In the first part, the starting times for sgens are determined. The allowed time values are bound by the time window, and are dependent on the time step (charging time). To compute the list of starting charging times, begin with the evening time value and add the time step iteratively for the number of sgens present. In our case, we have 55 sgens and a time window of 12 hours; for a charging time of 1 hour, that would result in 12 starting charging times. If we only had 7 sgens in the same time conditions, we would have 7 starting charging times, etc. The next part concerns the starting time sgen cycle.
 
-For best practice, set all night sgen values to zero before writing new ones. The following step was done using \texttt{cycle} function from the \texttt{itertools} module in python. Beginning with the evening start time, write the sgen charging value for the first generator, for the entire charging duration minus the last minute. The next minute, when the first generator is no longer active, fill the charging time window for the second generator, minus the last minute. Repeat the process until the last unique starting charging time is reached, after which the next starting charging time will loop back to the beginning of the list. Repeat this process for all given sgens. The looping time values can be handled with an extra class placeholder-variable for starting times instead of an entire additional look-up table.
+For best practice, set all night sgen values to zero before writing new ones. The following step was done using \texttt{cycle} function from the \texttt{itertools} module in python. Beginning with the evening start time, write the sgen charging value for the first generator, for the entire charging duration minus the last minute. The next minute, when the first generator is no longer active, fill the charging time window for the second generator, minus the last minute. Repeat the process until the last unique starting charging time is reached, after which the next starting charging time will loop back to the beginning of the list. (You may need to include a conditional statement for the beginning charging time, otherwise the loop will subtract one minute and cause a set of sgen columns to remain unfilled. Similarly, you may need to include a conditional statement for the last minute in the time series index, since that too will remain unfilled otherwise.) Repeat this process for all given sgens. The looping time values can be handled with an extra class placeholder-variable for starting times instead of an entire additional look-up table.
 
 
 \subsection{NetworkCalculation class}
@@ -137,17 +137,7 @@ The following information describes the code of the python class generally respo
 
 \paragraph{Network preparation and controllers:} In order to perform the timeseries iteration we first need to prepare our network. In the case of our chosen simulation---test feeder network---this involves some additional steps (see next section). First, create the network, including the loads and sgens. It's recommended to stick to a consistent naming convention for loads and sgens across the network properties and the external night dataframes, in order to avoid unnecessary problems when configuring the controller in the next step.
 
-The controller is a function whose purpose is to update the network values iteratively from a look-up table. The methodology will depend on your software of choice, but in our case we will be using the \texttt{pandapower} controllers made specifically for timeseries module. \Cref{timeseries_module_diag} shows a general overview of the built-in module.
-
-\FloatBarrier
-\begin{figure}[htpb]
-		\centering
-		\includegraphics[width=0.35\linewidth]{timeseries_module_diag.pdf}
-		\caption{The diagram shows the time series loop of the time series module. The basic functionality is compute the power flow for each time step using the given values---such as sgens or loads. Step-wise convergence will depend on several factors, such as the network parameters (i.e. load magnitudes) as well as the algorithm used for solving the power flow problem. For more module details, see the \texttt{pandapower}  \href{https://pandapower.readthedocs.io/en/v2.10.1/timeseries/timeseries_loop.html}{wiki}.}
-		\label{timeseries_module_diag}
-	\end{figure}
-\FloatBarrier
-
+The controller is a function whose purpose is to update the network values iteratively from a look-up table. The methodology will depend on your software of choice, but in our case we will be using the \texttt{pandapower} controllers made specifically for timeseries module. \Cref{timeseries_module_diag} in \cref{chapter_appendix} shows a general overview of the built-in module.
 For our simulation, we will need 2 constant controllers for loads and sgens. Hereby, the correspondent data sources are the night dataframes that were defined in the DataAction class. Lastly, the timeseries iteration needs to be given a defined number of time steps, which in our case will be given by the index length of (either) night dataframe. With this information, the power flow can be computed iteratively based on tabular variable inputs. However, this will yield no useful results on its own, which is why we need to additionally define an output writer.
 
 \paragraph{Time iteration and output:} An output writer is a function with a simple job of recording computed information, in an desired format, for each timeseries step. In our case, we will again be using the output writer function supplied with the \texttt{pandapower} timeseries module and outputting into an Excel file for the sake of convenience and troubleshooting. However, we aim to continue data processing in \texttt{pandas}, so we define another import function for said Excel results file. The imported dataframe can now provide relevant statistics and metrics. For our evaluation, the one of the key computations is the all-time minimum load value across all busses (see \cref{section_network_application} for more details).
@@ -188,7 +178,6 @@ This case scenario aims to address the hosting capacity of our test feeder given
 
 Hereby, at step 8, the sgens are placed in a random network locations for a single point (minute) in time. Timeseries iteration in step 4 is used to locate that point in time, but it does not compute over any sgen values. Based on test simulations, the evaluated hosting capacity never reaches 100\% for peak load time, unlike the other two scenarios.
 
-\newpage
 \subsection{Random time scenario}
 This case scenario aims to represent completely uncoordinated charging patterns over the night time window period. It's used as a control comparison for the energy community scenario. The evaluation process is similar to the critical case scenario:
 \begin{enumerate}
@@ -199,33 +188,39 @@ This case scenario aims to represent completely uncoordinated charging patterns 
 	\item Define output writer and run the timeseries
 	\item Import the voltage magnitude timeseries results
 	\item Evaluate the all-time minimum load time point
-	\item[Optional:] Load network configuration for all-time minimum vm p.u. time point
+	\item[Opt:] Load network configuration for all-time minimum vm p.u. time point
 \end{enumerate}
 
 The main difference from the critical case scenario is that we load sgens in our network before we run the timeseries iteration. Since the sgens charging times are spread across the night window, all sgens can be active at one point or another. This only becomes problematic should multiple sgens (i.e. more than 10--15) happen to be charging at once. At the same time, the household load profiles may offset a potential network overload if the charging convergence happens late a night when the loads are lowest---since most people are asleep and little to no household appliances are running.
 
 
 \subsection{Energy community scenario}
-This case scenario aims to propose the concept of semi-coordinated charging.
+This case scenario aims to propose the concept of semi-coordinated charging, whose main idea is that of simplicity with minimum requirements. As mentioned in  \cref{section_literature_review}, there is no shortage of highly optimized models proposed. Both centralized charging management algorithms and decentralized/distributed charging mechanisms should undoubtedly serve as the goal of EV technology and its future implementation. That being said, these models remain mostly conceptual in nature, owing to their intricacy of operation as well as high upfront resource demands.
 
-night time window\\
-semi-ordered sgen locations\\
-semi-coordinated charging\\
+Indeed, while there have been tremendous advancements made in making individual grid elements and devices smarter, there's yet to exist a truly unified system at scale. The internet of things (IoT) offers a glimpse into a fully synchronized smart-device architecture but this concept does not transfer to vehicles as readily, due to their mobile nature and dependence on existing infrastructure. Arguably the minimum precondition for large-scale smart EV charging mechanisms is the existence of installed smart meters in residential homes. The spread of smart meter technology has proven to be highly incentivised by progressive energy tariffs and some success has been found in countries across Europe, such as Spain adopting a Real-Time-Pricing (RTP) tariff in 2015. Unfortunately, many countries are still lagging behind the practically-feasible due to their complex governmental policies---Germany in particular has been struggling in their smart meter roll out, despite its ambitious push towards embracing renewables. Needless to say, there still remain plenty of obstacles in the way of widespread, advanced EV charging systems.
 
-Coordination here is defined as charging one after another.\\
+With these considerations in mind, this paper proposes the most basic, simplistic way to improve grid stability through altered charging patterns. This method in fact does not rely on the existence of smart meters or intelligent controllers and can therefore be implemented in any local network (section) in a form of a rudimentary energy community. In the scope of this paper, the concept of energy community is also simplified to its most basic premise---coordinated energy use.
 
-\newpage
+\subsubsection{Theoretical considerations}
+
 Consider the following theoretical network depicted in \cref{comm_topology}, not dissimilar from the original test case network.
 \FloatBarrier
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.7\linewidth]{comm_topology}
-	\caption{Pictured is a theoretical network scenario for linearly placed single-line households. The simplest coordination possible is depicted here, with household pairs $\{1,\,2\}$ and $\{3,\,4\}$ in coordination. The pattern is repeated up to $n$ households, whereby $n$ is either even or odd.}
+	\caption{Pictured is a theoretical network scenario for linearly placed single-line households. The simplest coordination possible is depicted here, with household pairs $\{1,\,2\}$ and $\{3,\,4\}$ in coordination. The pattern is repeated up to $n$ households, whereby $n$ is either odd or even.}
 	\label{comm_topology}
 \end{figure}
 \FloatBarrier
 
+The linear topology of the theoretical network is reminiscent of the test feeder. Known as radial operation, this is the most widespread design in both MV and LV networks. Hereby, the North American system differs from the European in transformer placement and is not discussed further, as the application of the developed model is aimed at the European LV grid, although the results can in some extent be transferable. Furthermore, spot networks (commonly found in business and industry districts) as well as grid networks (typical for downtowns of large cities) are omitted in this theoretical scenario.
+
+The theoretical radial network demonstrates a relatively straightforward load pattern. Every consecutively added household down the line increases the overall network load; the last household demonstrates the network minimum in voltage magnitude.
+
 Coordination between pairs $\{1,\,2\}$ and $\{3,\,4\}$ will have the same effect on network loads as coordination between pairs $\{1,3\}$ and $\{2,4\}$. In case of 2 households per line---a common layout for the test feeder---the overall network load effect is again practically the same, aside from local line load. Line loading is generally expected to be around 1\% per household line (and was shown not to be the limiting factor for hosting capacity calculation). For $n$ odd number of households, the remainder household will simply be treated as in pair to itself, or in other words, uncoordinating.
+
+\subsubsection{Test feeder application}
+on avg there will be 55 sgens / 12 hours = 4.583 sgens per given hour in the night frame
 
 \begin{table}[htpb]
 	\centering
@@ -233,18 +228,18 @@ Coordination between pairs $\{1,\,2\}$ and $\{3,\,4\}$ will have the same effect
 		\toprule
 		start time & end time & sgens active \\
 		\midrule
-		\texttt{18:00:00} & \texttt{18:59:00} & \\
-		\texttt{19:00:00} & \texttt{19:59:00} & \\
-		\texttt{20:00:00} & \texttt{20:59:00} & \\
-		\texttt{21:00:00} & \texttt{21:59:00} & \\
-		\texttt{22:00:00} & \texttt{22:59:00} & \\
-		\texttt{23:00:00} & \texttt{23:59:00} & \\
-		\texttt{00:00:00} & \texttt{00:59:00} & \\
-		\texttt{01:00:00} & \texttt{01:59:00} & \\
-		\texttt{02:00:00} & \texttt{02:59:00} & \\
-		\texttt{03:00:00} & \texttt{03:59:00} & \\
-		\texttt{04:00:00} & \texttt{04:59:00} & \\
-		\texttt{05:00:00} & \texttt{05:59:00} & \\
+		\texttt{18:00:00} & \texttt{18:59:00} & 5\\
+		\texttt{19:00:00} & \texttt{19:59:00} & 5\\
+		\texttt{20:00:00} & \texttt{20:59:00} & 5\\
+		\texttt{21:00:00} & \texttt{21:59:00} & 5\\
+		\texttt{22:00:00} & \texttt{22:59:00} & 5\\
+		\texttt{23:00:00} & \texttt{23:59:00} & 5\\
+		\texttt{00:00:00} & \texttt{00:59:00} & 5\\
+		\texttt{01:00:00} & \texttt{01:59:00} & 4\\
+		\texttt{02:00:00} & \texttt{02:59:00} & 4\\
+		\texttt{03:00:00} & \texttt{03:59:00} & 4\\
+		\texttt{04:00:00} & \texttt{04:59:00} & 4\\
+		\texttt{05:00:00} & \texttt{05:59:00} & 4\\
 		\bottomrule
 	\end{tabular}
 	\caption{Energy community charging times in detail.}
@@ -292,8 +287,17 @@ Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu 
 \bibliographystyle{IEEEtran} %displays URLs
 \bibliography{bib_library}
 
-\chapter*{Appendix}
+\chapter*{Appendix}\label{chapter_appendix}
 \addcontentsline{toc}{chapter}{Appendix}
+
+\FloatBarrier
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.45\linewidth]{timeseries_module_diag.pdf}
+	\caption{The diagram shows the time series loop of the time series module. The basic functionality is compute the power flow for each time step using the given values---such as sgens or loads. Step-wise convergence will depend on several factors, such as the network parameters (i.e. load magnitudes) as well as the algorithm used for solving the power flow problem. For more module details, see the \texttt{pandapower}  \href{https://pandapower.readthedocs.io/en/v2.10.1/timeseries/timeseries_loop.html}{wiki}.}
+	\label{timeseries_module_diag}
+\end{figure}
+\FloatBarrier
 
 
 \end{document}
