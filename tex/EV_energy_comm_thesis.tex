@@ -186,11 +186,11 @@ This case scenario aims to address the hosting capacity of our test feeder given
 	\item Calculate hosting capacity at the critical time point
 \end{enumerate}
 
-Hereby the sgens are placed in a random network location for a single point (minute) in time. Timeseries iteration is used to locate that point in time, but it does not compute over any sgen values. Based on test simulations, the evaluated hosting capacity never reaches 100\% for peak load time, unlike the other two scenarios.
+Hereby, at step 8, the sgens are placed in a random network locations for a single point (minute) in time. Timeseries iteration in step 4 is used to locate that point in time, but it does not compute over any sgen values. Based on test simulations, the evaluated hosting capacity never reaches 100\% for peak load time, unlike the other two scenarios.
 
 \newpage
 \subsection{Random time scenario}
-This case scenario aims to represent completely uncoordinated charging pattern over the night time window period. It's used as a control comparison for the energy community scenario. The evaluation process is similar to the critical case scenario:
+This case scenario aims to represent completely uncoordinated charging patterns over the night time window period. It's used as a control comparison for the energy community scenario. The evaluation process is similar to the critical case scenario:
 \begin{enumerate}
 	\item Load and prepare dataset
 	\item Create loads and sgens night dataframes
@@ -226,6 +226,29 @@ Consider the following theoretical network depicted in \cref{comm_topology}, not
 \FloatBarrier
 
 Coordination between pairs $\{1,\,2\}$ and $\{3,\,4\}$ will have the same effect on network loads as coordination between pairs $\{1,3\}$ and $\{2,4\}$. In case of 2 households per line---a common layout for the test feeder---the overall network load effect is again practically the same, aside from local line load. Line loading is generally expected to be around 1\% per household line (and was shown not to be the limiting factor for hosting capacity calculation). For $n$ odd number of households, the remainder household will simply be treated as in pair to itself, or in other words, uncoordinating.
+
+\begin{table}[htpb]
+	\centering
+	\begin{tabular}{c c c}
+		\toprule
+		start time & end time & sgens active \\
+		\midrule
+		\texttt{18:00:00} & \texttt{18:59:00} & \\
+		\texttt{19:00:00} & \texttt{19:59:00} & \\
+		\texttt{20:00:00} & \texttt{20:59:00} & \\
+		\texttt{21:00:00} & \texttt{21:59:00} & \\
+		\texttt{22:00:00} & \texttt{22:59:00} & \\
+		\texttt{23:00:00} & \texttt{23:59:00} & \\
+		\texttt{00:00:00} & \texttt{00:59:00} & \\
+		\texttt{01:00:00} & \texttt{01:59:00} & \\
+		\texttt{02:00:00} & \texttt{02:59:00} & \\
+		\texttt{03:00:00} & \texttt{03:59:00} & \\
+		\texttt{04:00:00} & \texttt{04:59:00} & \\
+		\texttt{05:00:00} & \texttt{05:59:00} & \\
+		\bottomrule
+	\end{tabular}
+	\caption{Energy community charging times in detail.}
+\end{table}
 
 
 \chapter{Results and Discussion}

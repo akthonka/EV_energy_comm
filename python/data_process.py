@@ -46,7 +46,7 @@ class DataAction:
         self.night_evening_t = "18:00:00"
         self.night_morning_t = "06:00:00"
         # self.night_max_t = "19:19:00"  # obtained from max_load_times.ipynb
-        self.wind_length = 60
+        self.wind_length = 60 # in minutes
         self.iter_time = None
         self.night_loads = None
         self.night_sgens = None
@@ -211,12 +211,13 @@ class DataAction:
             minute=int(self.night_morning_t[3:5]),
             second=int(self.night_morning_t[6:8]),
         )
+        stop_time = bar + timedelta(minutes=self.wind_length) # because of loop -1 min
 
         start_times = [time_pt.strftime("%Y-%m-%d %H:%M:%S")]
         for hour in range(nmbr_sgens):
             # perform window time step
             time_pt = pd.to_datetime(time_pt) + timedelta(minutes=self.wind_length)
-            if time_pt < bar:
+            if time_pt < stop_time:
                 start_times.append(time_pt.strftime("%Y-%m-%d %H:%M:%S"))
             else:
                 break
@@ -237,14 +238,30 @@ class DataAction:
 
             # starting time val
             foo = next(time_cycle)
+            foo_dt = pd.to_datetime(foo)
 
-            # ending time val - 1 minute
-            bar = (pd.to_datetime(foo) - timedelta(minutes=1)).strftime(
-                "%Y-%m-%d %H:%M:%S"
-            )
-
-            # write gen value
-            self.sgen_write(self.night_sgens, self.iter_time, bar, col_name, val)
+            if foo_dt.strftime("%H:%M:%S") == self.night_evening_t:
+                # special case: first interval
+                start = foo_dt.strftime("%Y-%m-%d %H:%M:%S")
+                # ending time val - 1 minute
+                bar = (foo_dt
+                    + timedelta(minutes=self.wind_length)- timedelta(minutes=1)).strftime(
+                    "%Y-%m-%d %H:%M:%S"
+                )
+                # write gen value
+                self.sgen_write(self.night_sgens, start, bar, col_name, val)
+                foo = next(time_cycle)
+            else:
+                if foo_dt.strftime("%H:%M:%S") == self.night_morning_t:
+                    # last minute is filled
+                    bar = foo_dt.strftime("%Y-%m-%d %H:%M:%S")
+                else:
+                    # ending time val - 1 minute
+                    bar = (foo_dt - timedelta(minutes=1)).strftime(
+                        "%Y-%m-%d %H:%M:%S"
+                    )
+                # write gen value
+                self.sgen_write(self.night_sgens, self.iter_time, bar, col_name, val)
 
             # update first time for next iter
             self.iter_time = foo
