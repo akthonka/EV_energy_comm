@@ -224,55 +224,6 @@ class DataAction:
 
         return start_times
 
-    # def get_start_times_advanced(self, nmbr_sgens):
-    #     """overly complex function for including morning times"""
-
-    #     # starting point
-    #     start = self.night_sgens.index[0]  # get selfte from index
-    #     time_max = start.replace(
-    #         hour=int(self.night_max_t[0:2]),
-    #         minute=int(self.night_max_t[3:5]),
-    #         second=int(self.night_max_t[6:8]),
-    #     ).replace(tzinfo=None)
-
-    #     # get stop time with selfte
-    #     foo = time_max + timedelta(days=1)
-    #     bar = foo.replace(
-    #         hour=int(self.night_morning_t[0:2]),
-    #         minute=int(self.night_morning_t[3:5]),
-    #         second=int(self.night_morning_t[6:8]),
-    #     )
-    #     stop_time = bar + timedelta(minutes=self.wind_length)  # because of loop -1 min
-
-    #     start_times = []
-    #     gen_loop = 0
-    #     time_pt = pd.to_datetime(time_max)
-    #     for hour in range(nmbr_sgens):
-    #         # perform window time step
-    #         if time_pt < stop_time:
-    #             start_times.append(time_pt.strftime("%Y-%m-%d %H:%M:%S"))
-    #             time_pt = time_pt + timedelta(minutes=self.wind_length)
-    #             gen_loop = gen_loop + 1
-    #         else:
-    #             break
-
-    #     time_pt = time_pt
-    #     time_pt = time_pt.replace(
-    #         hour=int(self.night_evening_t[0:2]),
-    #         minute=int(self.night_evening_t[3:5]),
-    #         second=int(self.night_evening_t[6:8]),
-    #     )
-    #     time_pt
-
-    #     for hour in range(nmbr_sgens - gen_loop):
-    #         if time_pt < time_max + timedelta(days=1):
-    #             start_times.append(time_pt.strftime("%Y-%m-%d %H:%M:%S"))
-    #             time_pt = time_pt + timedelta(minutes=self.wind_length)
-    #         else:
-    #             break
-
-    #     return start_times
-
     def sgen_comm(self, start_times, val):
         """fill self.night_sgens df consequently/cyclically based on start_times"""
 

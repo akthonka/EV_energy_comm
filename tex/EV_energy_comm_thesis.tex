@@ -219,17 +219,12 @@ The theoretical radial network demonstrates a relatively straightforward load pa
 
 Coordination of energy use, in the context of our energy communities, is begins with coordinating pairs. In the most primitive sense, this can be as simple as an agreement between two neighbors to not charge their EVs at the same time of day. Assuming they both come home from work around the same time and want to immediately plug in their EVs to charge, one neighbor can agree to start charging after the other one is done. This alone will have an obvious beneficial effect on grid stability but would still imply most households charging around peak grid hours in the evening. The more coordinating pairs, the better. Eventually, we can extend this idea to the entire neighborhood, thus forming an energy community. The community decides to agree on dedicated charging times for individual households based on the philosophy described above.
 
-Referring back to \cref{comm_topology}, the energy community decides to allocate charging times iteratively, starting from the household closest to the substation. The first household will take the charging time closest to peak grid hours in the evening, the second will take the next available time slot after the first and so on.
-
-
-
-This remark is also an approximation however, and only applies for sufficiently large $n$. For example, in case of $n$ being an odd number of households, the remainder household will simply be treated as in pair to itself, or in other words, uncoordinating.
+Referring back to \cref{comm_topology}, the energy community decides to allocate charging times iteratively, starting from the household closest to the substation. The first household will take the charging time closest to peak grid hours in the evening, the second will take the next available time slot after the first and so on. Once all the available charging time slots per night have been filled, the time slots will cycle.
 
 
 
 \subsubsection{Test feeder application}
-Line loading is generally expected to be around 1\% per household line (and was shown not to be the limiting factor for hosting capacity calculation).\\
-on avg there will be 55 sgens / 12 hours = 4.583 sgens per given hour in the night frame
+In the case of the test feeder, the allocated sgen charging times and cycles can be seen in \cref{sgen_comm_times}. On average we can expect $55\, \text{sgens} / 12\, \text{hours} \approx 4.583$ sgens per given hour in the night frame, which correlates with our results.
 
 \begin{table}[htpb]
 	\centering
@@ -251,8 +246,11 @@ on avg there will be 55 sgens / 12 hours = 4.583 sgens per given hour in the nig
 		\texttt{05:00:00} & \texttt{05:59:00} & 4\\
 		\bottomrule
 	\end{tabular}
-	\caption{Energy community charging times in detail.}
+	\caption{Energy community charging times for test feeder network.}
+	\label{sgen_comm_times}
 \end{table}
+
+For spacial allocation, the sequence of predefined sgen locations in \texttt{pandapower} test feeder network was used. Additionally, line loading is generally expected to be around 1\% per household line and was shown not to be the limiting factor for hosting capacity calculation.
 
 
 \chapter{Results and Discussion}
@@ -290,7 +288,12 @@ Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu 
 
 
 \section{Suggested improvements}
+The energy community spatio-temporal algorithm is in no way optimal and is an extreme over-simplification of the problem. Its main purpose is to serve as a starting point when there is none, and to serve as a demonstration for what said minimum effort can achieve in the context of grid stability.\\
+
 Energy community function doesn't start at the peak hours perfectly because jezzus christe, that's a lot of code to rewrite for no real benefit
+
+\paragraph{Bugs:} occasional index length mismatch
+
 
 
 \chapter{Conclusion}
