@@ -91,7 +91,7 @@ Using and incorporating the Open Power System Data household dataset proved to b
 
 Additionally, in order to make best use of the historical data, it was decided to perform time series iteration power flows. In a sense, this provides a similar advantage to LPG functionality by mimicking random human behavior over time, only with no unnecessary explanations behind it. The main idea became to sample a random historical load profile per household and to consider when/how an EV charger could optimally function in time. While this may be a relatively simple question to answer for a single household---given the residents' preferences and habits, it's merely a load optimization problem---the main issue lies with multiple parties involved. In turn, those parties are connected on a network in different ways, bringing topology into account. Thus, time and space both dictate the conditions for a given network.
 
-Eventually, the rather abstract test network got superseded by the benchmark European Low Voltage Test Feeder (from hereon: test feeder) (see \cref{EU_LV_test_feeder}). Three scenarios were chosen for evaluation: critical case, random charging, semi-coordinated charging. The critical case is used for hosting capacity evaluation of our simulation for a single time point, whereas the two other scenarios demonstrate time-dependent charging behavior models. Detailed explanation for this approach is given in \cref{section_network_application}.
+Eventually, the rather abstract test network got superseded by the benchmark European Low Voltage Test Feeder (from hereon: test feeder) (see \cref{EU_LV_test_feeder}). Three scenarios were chosen for evaluation: critical case, random charging, semi-coordinated charging. The critical case is used for hosting capacity evaluation of our simulation for a single time point, whereas the two other scenarios demonstrate time-dependent charging behavior models. Detailed explanation for this approach is given in \cref{section_network_application}. From hereon, EV home charging stations will be referred to as static generators in the context of power modeling.
 
 \FloatBarrier
 \begin{figure}[htpb]
@@ -197,7 +197,7 @@ The main difference from the critical case scenario is that we load sgens in our
 \subsection{Energy community scenario}
 This case scenario aims to propose the concept of semi-coordinated charging, whose main idea is that of simplicity with minimum requirements. As mentioned in  \cref{section_literature_review}, there is no shortage of highly optimized models proposed. Both centralized charging management algorithms and decentralized/distributed charging mechanisms should undoubtedly serve as the goal of EV technology and its future implementation. That being said, these models remain mostly conceptual in nature, owing to their intricacy of operation as well as high upfront resource demands.
 
-Indeed, while there have been tremendous advancements made in making individual grid elements and devices smarter, there's yet to exist a truly unified system at scale. The internet of things (IoT) offers a glimpse into a fully synchronized smart-device architecture but this concept does not transfer to vehicles as readily, due to their mobile nature and dependence on existing infrastructure. Arguably the minimum precondition for large-scale smart EV charging mechanisms is the existence of installed smart meters in residential homes. The spread of smart meter technology has proven to be highly incentivised by progressive energy tariffs and some success has been found in countries across Europe, such as Spain adopting a Real-Time-Pricing (RTP) tariff in 2015. Unfortunately, many countries are still lagging behind the practically-feasible due to their complex governmental policies---Germany in particular has been struggling in their smart meter roll out, despite its ambitious push towards embracing renewables. Needless to say, there still remain plenty of obstacles in the way of widespread, advanced EV charging systems.
+Indeed, while there have been tremendous advancements made in making individual grid elements and devices smarter, there's yet to exist a truly unified system at scale. The internet of things (IoT) offers a glimpse into a fully synchronized smart-device architecture but this concept does not transfer to vehicles as readily, due to their mobile nature and dependence on existing infrastructure. Arguably the minimum precondition for large-scale smart EV charging mechanisms is the existence of installed smart meters in residential homes. The spread of smart meter technology has proven to be highly incentivised by progressive energy tariffs and some success has been found in countries across Europe, such as Spain adopting a Real-Time-Pricing (RTP) tariff in 2015. Unfortunately, many countries are still lagging behind the practically-feasible due to their complex governmental policies---Germany in particular has been struggling with residential smart meter roll out, despite its ambitious push towards embracing renewables. Needless to say, there still remain plenty of obstacles in the way of widespread, advanced EV charging systems.
 
 With these considerations in mind, this paper proposes the most basic, simplistic way to improve grid stability through altered charging patterns. This method in fact does not rely on the existence of smart meters or intelligent controllers and can therefore be implemented in any local network (section) in a form of a rudimentary energy community. In the scope of this paper, the concept of energy community is also simplified to its most basic premise---coordinated energy use.
 
@@ -208,18 +208,27 @@ Consider the following theoretical network depicted in \cref{comm_topology}, not
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.7\linewidth]{comm_topology}
-	\caption{Pictured is a theoretical network scenario for linearly placed single-line households. The simplest coordination possible is depicted here, with household pairs $\{1,\,2\}$ and $\{3,\,4\}$ in coordination. The pattern is repeated up to $n$ households, whereby $n$ is either odd or even.}
+	\caption{Pictured is a theoretical network scenario for linearly placed single-line households. The energy community aims to include every new household member.}
 	\label{comm_topology}
 \end{figure}
 \FloatBarrier
 
 The linear topology of the theoretical network is reminiscent of the test feeder. Known as radial operation, this is the most widespread design in both MV and LV networks. Hereby, the North American system differs from the European in transformer placement and is not discussed further, as the application of the developed model is aimed at the European LV grid, although the results can in some extent be transferable. Furthermore, spot networks (commonly found in business and industry districts) as well as grid networks (typical for downtowns of large cities) are omitted in this theoretical scenario.
 
-The theoretical radial network demonstrates a relatively straightforward load pattern. Every consecutively added household down the line increases the overall network load; the last household demonstrates the network minimum in voltage magnitude.
+The theoretical radial network demonstrates a relatively straightforward load pattern. Every consecutively added household down the line from the substation increases the overall network load; the last household $n$ acquires the network minimum in voltage magnitude in case of constant household load profiles. The goal is then to avoid the critical case scenario of network overload, which is most likely to happen at, or close to, the $n$'th household bus. Under these spacial considerations, we must distribute the sgen loads temporally so as to minimize the network load. This amounts to two conditions. First, avoid multiple sgens charging at the same time as much as possible---this is the deciding factor between the two conditions. The best case scenario is then an even distribution of sgens in time. Second, should there be a in crossover charging times, the beginning of the network line should be prioritized, since its local voltage magnitudes will be (albeit slightly) lower than those at the end of the transmission line. The crossover of charging times is guaranteed to occur for a sufficiently large $n$ and depends on charging time, which we assume is constant across all households. Next, consider the concept of coordination.
 
-Coordination between pairs $\{1,\,2\}$ and $\{3,\,4\}$ will have the same effect on network loads as coordination between pairs $\{1,3\}$ and $\{2,4\}$. In case of 2 households per line---a common layout for the test feeder---the overall network load effect is again practically the same, aside from local line load. Line loading is generally expected to be around 1\% per household line (and was shown not to be the limiting factor for hosting capacity calculation). For $n$ odd number of households, the remainder household will simply be treated as in pair to itself, or in other words, uncoordinating.
+Coordination of energy use, in the context of our energy communities, is begins with coordinating pairs. In the most primitive sense, this can be as simple as an agreement between two neighbors to not charge their EVs at the same time of day. Assuming they both come home from work around the same time and want to immediately plug in their EVs to charge, one neighbor can agree to start charging after the other one is done. This alone will have an obvious beneficial effect on grid stability but would still imply most households charging around peak grid hours in the evening. The more coordinating pairs, the better. Eventually, we can extend this idea to the entire neighborhood, thus forming an energy community. The community decides to agree on dedicated charging times for individual households based on the philosophy described above.
+
+Referring back to \cref{comm_topology}, the energy community decides to allocate charging times iteratively, starting from the household closest to the substation. The first household will take the charging time closest to peak grid hours in the evening, the second will take the next available time slot after the first and so on.
+
+
+
+This remark is also an approximation however, and only applies for sufficiently large $n$. For example, in case of $n$ being an odd number of households, the remainder household will simply be treated as in pair to itself, or in other words, uncoordinating.
+
+
 
 \subsubsection{Test feeder application}
+Line loading is generally expected to be around 1\% per household line (and was shown not to be the limiting factor for hosting capacity calculation).\\
 on avg there will be 55 sgens / 12 hours = 4.583 sgens per given hour in the night frame
 
 \begin{table}[htpb]
@@ -281,6 +290,7 @@ Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu 
 
 
 \section{Suggested improvements}
+Energy community function doesn't start at the peak hours perfectly because jezzus christe, that's a lot of code to rewrite for no real benefit
 
 
 \chapter{Conclusion}
