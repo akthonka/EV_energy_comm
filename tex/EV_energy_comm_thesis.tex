@@ -157,7 +157,9 @@ This section builds upon the fundamental operating principles of the two classes
 
 The network used in the simulation is an alteration of the standard test feeder. The original network itself is 3-phase, which would require a different power flow model---in case of \texttt{pandapower}, that would be handled by \texttt{pandapower.pf.runpp\_3ph.runpp\_3ph()}. However, given the right circumstances, it is possible to treat a 3-phase network as single-phase; namely, if we assume that all network loads are balanced. This assumption is plausible and corresponds to most real-world households, to the extent that some power modeling software (such as BLANK) don't even include a separate 3-phase computation option for this reason. With this assumption, all loads and sgens were defined and handled as single-phase in our simulation.
 
-Furthermore, the standard test feeder was (in most cases) not able to support direct application of the household load profiles. During timeseries iteration, the console encounters a singular-matrix error, indicating that the Jacobian cannot be solved for this power flow. In practical terms, this meant that the network was overloading at some point in time. Indeed this point in time was almost certainly converging to the average evening peak load time for this dataset. From past applications of data analysis, with data spanning over 500 days, the average maximum load time (across both households 1 and 2) was calculated to be \texttt{19:19:00} (in a time bracket of \texttt{18:00:00--06:00:00}). The solution was to scale the historical load curves. The resultant network busses, with no sgens active, fall in an acceptable voltage magnitude per unit range between 0.95 and 1.05 for any random simulation.
+Furthermore, the standard test feeder was (in most cases) not able to support direct application of the household load profiles. During timeseries iteration, the console encounters a exactly-singular matrix error, indicating that the Jacobian cannot be solved for this power flow. In practical terms, this meant that the network was overloading at some point in time. Indeed this point in time was almost certainly converging to the average evening peak load time for this dataset. From past applications of data analysis, with data spanning over 500 days, the average maximum load time (across both households 1 and 2) was calculated to be \texttt{19:19:00} in the night-time bracket. The solution was to scale the historical load curves. The resultant network busses, with no sgens active, fall in an acceptable voltage magnitude per unit range between 0.95 and 1.05 for any random simulation.
+
+The night-time bracket was chosen as \texttt{18:00:00--06:00:00}. This is based around the common Western world business day hours, such as the standard office hours of 9 a.m. to 5 p.m. in USA. The time bracket is adjusted to account for often earlier starting hours in Europe as well as travel time. The chosen hours are commonly referred to as night time hours in this paper and code, whereby the phrasing is applied somewhat generously.
 
 Another assumption that was made concerns the charging times---these were meant to stay constant in length. MOST CHARGERS ON THE MARKET... MOST AVERAGE EVS... BLAH BLAH, 1 HOUR CHARGING TIME GOTTA EXPLAIN
 
@@ -255,6 +257,7 @@ For spacial allocation, the sequence of predefined sgen locations in \texttt{pan
 
 \chapter{Results and Discussion}
 \section{Results}
+\subsection{Hosting capacity}
 
 \begin{table}[htpb]
 	\centering
@@ -285,6 +288,27 @@ For spacial allocation, the sequence of predefined sgen locations in \texttt{pan
 \FloatBarrier
 
 Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu fails)
+
+\begin{table}[htpb]
+	\centering
+	\begin{tabular}{lccc}
+		\toprule
+		Scenario & Random & Community & Control \\
+		\midrule
+		simulations count & 10 & 10 & 10 \\
+		avg voltage [vm p.u.] & 1.012 & 1.025 & 1.041 \\
+		bracket deviation [\%] & 37.8 & 25.3 & 9.2 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Energy community charging times for test feeder network.}
+	\label{random_vs_comm}
+\end{table}
+
+Load bracket deviation percent is measured:
+
+\begin{equation}
+	\text{Deviation} = \frac{\text{Upper bracket} - \text{Average voltage}}{\text{Upper bracket}-\text{Lower bracket}}times 100
+\end{equation}
 
 
 \section{Suggested improvements}

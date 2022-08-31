@@ -32,7 +32,6 @@ def initiate():
         net.asymmetric_load.q_b_mvar = 0
         net.asymmetric_load.q_c_mvar = 0
 
-    print("Min vm_pu bus val with no loads or sgens:", net.res_bus.vm_pu.min())
     return net
 
 
@@ -44,7 +43,7 @@ def iterate(net):
     nmbr_loads = net.asymmetric_load.shape[0]
 
     da.load_sgen_make(nmbr_loads)
-    da.sgen_rand(sgen_val)  # alternative to sgen_max(0.005 , name=False)
+    da.sgen_rand(sgen_val)  # set val as zero for control scenario
     nc.net_asym_prep(net, da.night_loads * scaling_fac, da.night_sgens)
     nc.output_writer("res_bus", "vm_pu")
     nc.ts_run()
@@ -85,6 +84,7 @@ res = simulate(cycles)
 # export results to excel
 path = "..\\results\\"
 name = "random_scenario_sim.xlsx"
+# name = "control_scenario_sim.xlsx"
 full = path + name
 res.to_excel(full)
 print("All done now, check Excel file.")

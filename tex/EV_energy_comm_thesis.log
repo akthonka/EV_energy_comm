@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  31 AUG 2022 16:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  31 AUG 2022 18:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -739,7 +739,7 @@ Chapter 2.
 
 ]
 Chapter 3.
-<images//test_network.png, id=130, 550.055pt x 431.6125pt>
+<images//test_network.png, id=135, 550.055pt x 431.6125pt>
 File: images//test_network.png Graphic file (type png)
 <use images//test_network.png>
 Package pdftex.def Info: images//test_network.png  used on input line 82.
@@ -747,7 +747,7 @@ Package pdftex.def Info: images//test_network.png  used on input line 82.
 [3
 
  <./images//test_network.png>]
-<images//EU_LV_test_feeder.png, id=144, 696.6025pt x 420.57124pt>
+<images//EU_LV_test_feeder.png, id=149, 696.6025pt x 420.57124pt>
 File: images//EU_LV_test_feeder.png Graphic file (type png)
 <use images//EU_LV_test_feeder.png>
 Package pdftex.def Info: images//EU_LV_test_feeder.png  used on input line 99.
@@ -760,56 +760,56 @@ File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ) [4 <./images//EU_LV_test_feeder.png>] [5] [6] [7] [8] [9]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 204.
+(hyperref)                be the same. Added a new anchor on input line 206.
 
 
 
 pdfTeX warning: pdflatex (file ./images//comm_topology.pdf): PDF inclusion: fou
 nd PDF version <1.7>, but at most version <1.5> allowed
-<images//comm_topology.pdf, id=201, 690.74057pt x 322.07326pt>
+<images//comm_topology.pdf, id=206, 690.74057pt x 322.07326pt>
 File: images//comm_topology.pdf Graphic file (type pdf)
 <use images//comm_topology.pdf>
-Package pdftex.def Info: images//comm_topology.pdf  used on input line 210.
+Package pdftex.def Info: images//comm_topology.pdf  used on input line 212.
 (pdftex.def)             Requested size: 292.77629pt x 136.51318pt.
-[10 <./images//comm_topology.pdf>] [11]
+[10 <./images//comm_topology.pdf>] [11] [12]
 Chapter 4.
-<images//EU_LV_host_capacity.png, id=263, 702.625pt x 683.55376pt>
+<images//EU_LV_host_capacity.png, id=272, 702.625pt x 683.55376pt>
 File: images//EU_LV_host_capacity.png Graphic file (type png)
 <use images//EU_LV_host_capacity.png>
 Package pdftex.def Info: images//EU_LV_host_capacity.png  used on input line 28
-1.
+4.
 (pdftex.def)             Requested size: 376.42575pt x 366.21394pt.
-[12
+[13
 
-] [13 <./images//EU_LV_host_capacity.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 291--292
+] [14 <./images//EU_LV_host_capacity.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 315--316
 
  []
 
-[14]
+[15]
 Chapter 5.
-(EV_energy_comm_thesis.bbl [15
+(EV_energy_comm_thesis.bbl [16
 
-]) [16
+]) [17
 
 ]
-<images//timeseries_module_diag.pdf, id=292, 387.85046pt x 643.9107pt>
+<images//timeseries_module_diag.pdf, id=303, 387.85046pt x 643.9107pt>
 File: images//timeseries_module_diag.pdf Graphic file (type pdf)
 <use images//timeseries_module_diag.pdf>
 Package pdftex.def Info: images//timeseries_module_diag.pdf  used on input line
- 306.
+ 333.
 (pdftex.def)             Requested size: 188.21288pt x 312.47316pt.
- [17
+ [18
 
  <./images//timeseries_module_diag.pdf>] (EV_energy_comm_thesis.aux)
 Package rerunfilecheck Info: File `EV_energy_comm_thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 978619AAE8AAE925D5BFF35CBE35AA31;2667.
+(rerunfilecheck)             Checksum: 708DF58D9B58D1A8DD5B12948EF0428C;2812.
  ) 
 Here is how much of TeX's memory you used:
- 21084 strings out of 477843
- 409282 string characters out of 2833414
- 716482 words of memory out of 3000000
- 39669 multiletter control sequences out of 15000+600000
+ 21091 strings out of 477843
+ 409390 string characters out of 2833414
+ 716608 words of memory out of 3000000
+ 39672 multiletter control sequences out of 15000+600000
  489829 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,8n,87p,1294b,1075s stack positions out of 10000i,1000n,20000p,200000b,80000s
@@ -827,9 +827,9 @@ a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk><C:/Program Files
 /MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/font
 s/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/publi
 c/amsfonts/cm/cmsy10.pfb>
-Output written on EV_energy_comm_thesis.pdf (20 pages, 598739 bytes).
+Output written on EV_energy_comm_thesis.pdf (21 pages, 603216 bytes).
 PDF statistics:
- 755 PDF objects out of 1000 (max. 8388607)
- 66 named destinations out of 1000 (max. 500000)
- 178 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 772 PDF objects out of 1000 (max. 8388607)
+ 70 named destinations out of 1000 (max. 500000)
+ 186 words of extra memory for PDF output out of 10000 (max. 10000000)
 

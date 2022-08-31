@@ -32,7 +32,6 @@ def initiate():
         net.asymmetric_load.q_b_mvar = 0
         net.asymmetric_load.q_c_mvar = 0
 
-    print("Min vm_pu bus val with no loads or sgens:", net.res_bus.vm_pu.min())
     return net
 
 
