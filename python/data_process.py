@@ -75,7 +75,6 @@ class DataAction:
 
         for i in range(0, self.df.shape[0], chunk_size):
             self.dfList.append(self.df[i : i + chunk_size])
-        print("Number of data frame segments = ", len(self.dfList))
 
     def imp_procc(self, file_name, keep_cols):
         """all-in-one import processing helper function"""
@@ -270,11 +269,11 @@ class DataAction:
 
 class net_calc:
     """
-    This NetworkCalculation class is used in conjunction with the DataAction class. It contains functions for time series
-    simulations using the pandapower module. The main goal is to run the time series iteration using
-    preset controllers and settings.
+    This NetworkCalculation class is used in conjunction with the DataAction class. It contains
+    functions for time series simulations using the pandapower module. The main goal is to run the
+    time series iteration using preset controllers and settings.
 
-    Further data analysis and results can be found in external python files.
+    Further data analysis and results can be found in external jupyter notebook files.
 
     Written by Daniil Akthonka for his Bachelor thesis:
     'Electric Vehicles in Energy Communities: Investigating the Distribution Grid Hosting Capacity'
