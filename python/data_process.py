@@ -50,6 +50,7 @@ class DataAction:
         self.iter_time = None
         self.night_loads = None
         self.night_sgens = None
+        self.sgen_val = 0.007
 
     def data_imp(self, file_name):
         """basic data import from file string"""
@@ -78,6 +79,7 @@ class DataAction:
 
     def imp_procc(self, file_name, keep_cols):
         """all-in-one import processing helper function"""
+        self.dfList = []
 
         self.data_imp(file_name)
         self.data_filter(self.imp, keep_cols)
@@ -142,7 +144,7 @@ class DataAction:
         """create a random night load profile"""
 
         # choose random df identifying list number from fragemented import set
-        df_rand = np.random.choice(len(self.dfList[:-1]))  # incomplete list excluded
+        df_rand = np.random.choice(len(self.dfList[1:-2]))  # incomplete lists excluded
 
         # choose random load profile (between two) and parse selected data
         rand_col = np.random.randint(0, 2)
@@ -391,10 +393,21 @@ class net_calc:
         ).strftime(
             "%H:%M:%S"
         )  # time of min_min_ind
-        print("All-time min-load value across all busses:", min_min_vm)
-        print("All-time min-load time across all busses:", min_min_ind, ",", min_time)
 
-        return min_min_vm, min_min_ind, min_time
+        max_max_ind = (
+            vm_pu.idxmax().unique()[1:].max()
+        )  # first is always zero, from grid
+        max_max_vm = round(vm_pu.max().max(), 5)  # min voltage across all busses
+        max_time = (
+            pd.to_datetime(DataAction().night_evening_t)
+            + timedelta(minutes=int(max_max_ind))
+        ).strftime(
+            "%H:%M:%S"
+        )  # time of max_max_ind
+        print("All-time min and max:", min_min_vm, ";", max_max_vm)
+        # print("All-time min-load time across all busses:", min_min_ind, ",", min_time)
+
+        return (min_min_vm, min_min_ind, min_time), (max_max_vm, max_max_ind, max_time)
 
     def plotly_res(self):  # helper function
         x = pf_res_plotly(self.net, climits_volt=(0.95, 1.05))  # x is arbitrary var

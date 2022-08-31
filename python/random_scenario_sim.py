@@ -1,12 +1,18 @@
 import pandas as pd
 import pandapower.networks as pn
-from pandapower.plotting.plotly import pf_res_plotly
 import data_process
 import importlib
+import numpy as np
+import warnings
+
+warnings.filterwarnings("error")
 
 importlib.reload(data_process)
 da = data_process.DataAction()
 nc = data_process.net_calc()
+
+# singular matrix jacobian error count tracker
+whoops_count = 0
 
 
 def initiate():
@@ -22,6 +28,7 @@ def initiate():
 
     # prepare network
     net = pn.ieee_european_lv_asymmetric("off_peak_1440")
+    net.bus.vn_kv = net.bus.vn_kv / np.sqrt(3)
 
     # set asymmetric loads to zero
     for asy_load in net.asymmetric_load.name.tolist():
@@ -35,21 +42,34 @@ def initiate():
     return net
 
 
-def iterate(net):
+def iterate(net, type):
     """common run"""
 
     sgen_val = 0.010
-    scaling_fac = 0.7  # without it, the network underloads
+    scaling_fac = 1  # without it, the network overloads?
     nmbr_loads = net.asymmetric_load.shape[0]
 
     da.load_sgen_make(nmbr_loads)
-    da.sgen_rand(sgen_val)  # set val as zero for control scenario
+
+    if type == "random":
+        print("Going random!")
+        da.sgen_rand(sgen_val)  # set val as zero for control scenario
+    elif type == "community":
+        print("Going community!")
+        start_times = da.get_start_times(nmbr_loads)
+        da.sgen_comm(start_times, sgen_val)
+    elif type == "control":
+        print("Going control!")
+        pass
+    else:
+        print("I'm confused by your input.")
+
     nc.net_asym_prep(net, da.night_loads * scaling_fac, da.night_sgens)
     nc.output_writer("res_bus", "vm_pu")
     nc.ts_run()
 
 
-def simulate(cycles):
+def simulate(cycles, scenario):
     """main loop function"""
 
     min_vm_list = []
@@ -58,11 +78,11 @@ def simulate(cycles):
         while True:
             try:
                 net = initiate()
-                iterate(net)
+                iterate(net, scenario)
                 break
-            except Exception as e:
-                print(e)  # sometimes the run goes whoops
+            except:
                 print("whoops...")
+                whoops_count = whoops_count + 1
 
         vm_pu = nc.read_output()
         min_min_vm, min_min_ind, min_time = nc.vm_stats(vm_pu)
@@ -79,12 +99,27 @@ def simulate(cycles):
 
 # run simulation
 cycles = 10
-res = simulate(cycles)
 
-# export results to excel
+res3 = simulate(cycles, "control")
+path = "..\\results\\"
+name = "control_scenario_sim.xlsx"
+full = path + name
+res3.to_excel(full)
+print("All done with control stuff.")
+
+res2 = simulate(cycles, "community")
+path = "..\\results\\"
+name = "ener_comm_sim.xlsx"
+full = path + name
+res2.to_excel(full)
+print("All done with community stuff.")
+
+res1 = simulate(cycles, "random")
 path = "..\\results\\"
 name = "random_scenario_sim.xlsx"
-# name = "control_scenario_sim.xlsx"
 full = path + name
-res.to_excel(full)
-print("All done now, check Excel file.")
+res1.to_excel(full)
+print("All done with random stuff.")
+
+print("Simulations complete!")
+print("We had some issues:", whoops_count)

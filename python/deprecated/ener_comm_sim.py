@@ -2,6 +2,7 @@ import pandas as pd
 import pandapower.networks as pn
 from pandapower.plotting.plotly import pf_res_plotly
 import data_process
+import numpy as np
 import importlib
 
 importlib.reload(data_process)
