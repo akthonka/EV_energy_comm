@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  1 SEP 2022 14:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  1 SEP 2022 18:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -726,7 +726,7 @@ Chapter 2.
 
 ]
 Chapter 3.
-<images//test_network.png, id=150, 550.055pt x 431.6125pt>
+<images//test_network.png, id=145, 550.055pt x 431.6125pt>
 File: images//test_network.png Graphic file (type png)
 <use images//test_network.png>
 Package pdftex.def Info: images//test_network.png  used on input line 81.
@@ -734,85 +734,80 @@ Package pdftex.def Info: images//test_network.png  used on input line 81.
 [3
 
  <./images//test_network.png>]
-<images//EU_LV_test_feeder.png, id=164, 696.6025pt x 420.57124pt>
+<images//EU_LV_test_feeder.png, id=159, 696.6025pt x 420.57124pt>
 File: images//EU_LV_test_feeder.png Graphic file (type png)
 <use images//EU_LV_test_feeder.png>
 Package pdftex.def Info: images//EU_LV_test_feeder.png  used on input line 96.
-(pdftex.def)             Requested size: 292.77629pt x 176.76065pt.
+(pdftex.def)             Requested size: 250.95476pt x 151.50821pt.
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
 01.
 
 (C:\Program Files\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-) [4 <./images//EU_LV_test_feeder.png>] [5] [6] [7] [8] [9]
-
-Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 202.
-
-
+) [4 <./images//EU_LV_test_feeder.png>] [5] [6] [7] [8] [9] [10]
 
 pdfTeX warning: pdflatex (file ./images//comm_topology.pdf): PDF inclusion: fou
 nd PDF version <1.7>, but at most version <1.5> allowed
-<images//comm_topology.pdf, id=221, 690.74057pt x 322.07326pt>
+<images//comm_topology.pdf, id=226, 690.74057pt x 322.07326pt>
 File: images//comm_topology.pdf Graphic file (type pdf)
 <use images//comm_topology.pdf>
-Package pdftex.def Info: images//comm_topology.pdf  used on input line 208.
+Package pdftex.def Info: images//comm_topology.pdf  used on input line 214.
 (pdftex.def)             Requested size: 292.77629pt x 136.51318pt.
-[10 <./images//comm_topology.pdf>] [11] [12]
+[11 <./images//comm_topology.pdf>] [12]
 Chapter 4.
 [13
 
 ]
-<images//hosting_cap_min_empty.png, id=292, 702.625pt x 683.55376pt>
+<images//hosting_cap_min_empty.png, id=293, 702.625pt x 683.55376pt>
 File: images//hosting_cap_min_empty.png Graphic file (type png)
 <use images//hosting_cap_min_empty.png>
 Package pdftex.def Info: images//hosting_cap_min_empty.png  used on input line 
-284.
+290.
 (pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
-<images//hosting_cap_min_full.png, id=293, 702.625pt x 683.55376pt>
+<images//hosting_cap_min_full.png, id=294, 702.625pt x 683.55376pt>
 File: images//hosting_cap_min_full.png Graphic file (type png)
 <use images//hosting_cap_min_full.png>
 Package pdftex.def Info: images//hosting_cap_min_full.png  used on input line 2
-92.
+98.
 (pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
-<images//hosting_cap_max_empty.png, id=294, 702.625pt x 683.55376pt>
+<images//hosting_cap_max_empty.png, id=295, 702.625pt x 683.55376pt>
 File: images//hosting_cap_max_empty.png Graphic file (type png)
 <use images//hosting_cap_max_empty.png>
 Package pdftex.def Info: images//hosting_cap_max_empty.png  used on input line 
-300.
+306.
 (pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
-<images//hosting_cap_max_full.png, id=295, 702.625pt x 683.55376pt>
+<images//hosting_cap_max_full.png, id=296, 702.625pt x 683.55376pt>
 File: images//hosting_cap_max_full.png Graphic file (type png)
 <use images//hosting_cap_max_full.png>
 Package pdftex.def Info: images//hosting_cap_max_full.png  used on input line 3
-08.
+14.
 (pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
  [14] [15 <./images//hosting_cap_min_empty.png> <./images//hosting_cap_min_full
 .png> <./images//hosting_cap_max_empty.png> <./images//hosting_cap_max_full.png
 >]
-<images//random_loads_min_full.png, id=311, 702.625pt x 683.55376pt>
+<images//random_loads_min_full.png, id=312, 702.625pt x 683.55376pt>
 File: images//random_loads_min_full.png Graphic file (type png)
 <use images//random_loads_min_full.png>
 Package pdftex.def Info: images//random_loads_min_full.png  used on input line 
-343.
+349.
 (pdftex.def)             Requested size: 188.21288pt x 183.10176pt.
-<images//en_comm_min_full.png, id=312, 702.625pt x 683.55376pt>
+<images//en_comm_min_full.png, id=313, 702.625pt x 683.55376pt>
 File: images//en_comm_min_full.png Graphic file (type png)
 <use images//en_comm_min_full.png>
-Package pdftex.def Info: images//en_comm_min_full.png  used on input line 345.
+Package pdftex.def Info: images//en_comm_min_full.png  used on input line 351.
 (pdftex.def)             Requested size: 188.21288pt x 183.10176pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 376--377
+Underfull \hbox (badness 10000) in paragraph at lines 382--383
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 378--379
+Underfull \hbox (badness 10000) in paragraph at lines 384--385
 
  []
 
 [16 <./images//random_loads_min_full.png> <./images//en_comm_min_full.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 384--387
+Underfull \hbox (badness 10000) in paragraph at lines 390--393
 
  []
 
@@ -823,23 +818,23 @@ Chapter 5.
 ]) [19
 
 ]
-<images//timeseries_module_diag.pdf, id=339, 387.85046pt x 643.9107pt>
+<images//timeseries_module_diag.pdf, id=340, 387.85046pt x 643.9107pt>
 File: images//timeseries_module_diag.pdf Graphic file (type pdf)
 <use images//timeseries_module_diag.pdf>
 Package pdftex.def Info: images//timeseries_module_diag.pdf  used on input line
- 399.
+ 405.
 (pdftex.def)             Requested size: 188.21288pt x 312.47316pt.
  [20
 
  <./images//timeseries_module_diag.pdf>] (EV_energy_comm_thesis.aux)
 Package rerunfilecheck Info: File `EV_energy_comm_thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 48BB15B44800A2373E4CD779D7AE5B94;3261.
+(rerunfilecheck)             Checksum: 5D1423453315AC82BF11AFD47C7BB1C6;3024.
  ) 
 Here is how much of TeX's memory you used:
- 21126 strings out of 477843
- 411369 string characters out of 2833414
- 714174 words of memory out of 3000000
- 39701 multiletter control sequences out of 15000+600000
+ 21131 strings out of 477843
+ 411511 string characters out of 2833414
+ 714551 words of memory out of 3000000
+ 39706 multiletter control sequences out of 15000+600000
  490594 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,9n,87p,1294b,1075s stack positions out of 10000i,1000n,20000p,200000b,80000s
@@ -858,9 +853,9 @@ AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk><C:/Program
  Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTe
 X/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1
 /public/amsfonts/cm/cmsy10.pfb>
-Output written on EV_energy_comm_thesis.pdf (23 pages, 932392 bytes).
+Output written on EV_energy_comm_thesis.pdf (23 pages, 936055 bytes).
 PDF statistics:
- 844 PDF objects out of 1000 (max. 8388607)
+ 847 PDF objects out of 1000 (max. 8388607)
  77 named destinations out of 1000 (max. 500000)
- 235 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 227 words of extra memory for PDF output out of 10000 (max. 10000000)
 
