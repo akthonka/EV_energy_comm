@@ -441,8 +441,9 @@ class net_calc:
                 print("Max hosting capacity:", hosting_cap, "out of", len(rand_ind))
                 break
 
-        print(
-            "Total EVs supported:", round((hosting_cap / len(rand_ind) * 100), 1), "%"
-        )
+        host_pct = round((hosting_cap / len(rand_ind) * 100), 1)
+
         pp.runpp(self.net)
         self.plotly_res()
+
+        return hosting_cap, host_pct

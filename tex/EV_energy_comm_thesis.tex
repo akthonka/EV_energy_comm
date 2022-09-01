@@ -149,19 +149,11 @@ In addition to the formally described python class file and jupyter data process
 
 \newpage
 \section{Network application}\label{section_network_application}
-This section builds upon the fundamental operating principles of the two classes introduced in \cref{section_data_processing}. It aims to explain the usage of the python class file in order to obtain the three scenarios for the test feeder.
+This section builds upon the fundamental operating principles of the two classes introduced in \cref{section_data_processing}. It aims to explain the usage of the python class file in order to obtain the three scenarios for the test feeder. First, consider the following assumptions.
 
-%Assumptions:\\
-%Treating three-phase network as single phase\\
-%Network asymmetric loads set to zero\\
-%Adjusting the historical load magnitude\\
-%1 hr window because...\\
+The network used in the simulation is an alteration of the standard test feeder. The original network itself is 3-phase, which would require a different power flow model---in case of \texttt{pandapower}, that would be handled by \texttt{pandapower.pf.runpp\_3ph.runpp\_3ph()}. However, given the right circumstances, it is possible to treat a 3-phase network as single-phase; namely, if we assume that all network loads are balanced. This assumption is plausible and corresponds to most real-world households, to the extent that some power modeling software (such as BLANK) don't even include a separate 3-phase computation option for this reason. With this assumption, all loads and sgens were defined and handled as single-phase in our simulation. The network was furthermore scaled down from 3-phase by dividing all the bus voltages by $\sqrt{3}$ to arrive at its single-phase equivalent.
 
-The network used in the simulation is an alteration of the standard test feeder. The original network itself is 3-phase, which would require a different power flow model---in case of \texttt{pandapower}, that would be handled by \texttt{pandapower.pf.runpp\_3ph.runpp\_3ph()}. However, given the right circumstances, it is possible to treat a 3-phase network as single-phase; namely, if we assume that all network loads are balanced. This assumption is plausible and corresponds to most real-world households, to the extent that some power modeling software (such as BLANK) don't even include a separate 3-phase computation option for this reason. With this assumption, all loads and sgens were defined and handled as single-phase in our simulation.
-
-Furthermore, the standard test feeder was (in most cases) not able to support direct application of the household load profiles. During timeseries iteration, the console encounters a exactly-singular matrix error, indicating that the Jacobian cannot be solved for this power flow. In practical terms, this meant that the network was overloading at some point in time. Indeed this point in time was almost certainly converging to the average evening peak load time for this dataset. From past applications of data analysis, with data spanning over 500 days, the average maximum load time (across both households 1 and 2) was calculated to be \texttt{19:19:00} in the night-time bracket. The solution was to scale the historical load curves. The resultant network busses, with no sgens active, fall in an acceptable voltage magnitude per unit range between 0.95 and 1.05 for any random simulation.
-
-The night-time bracket was chosen as \texttt{18:00:00--06:00:00}. This is based around the common Western world business day hours, such as the standard office hours of 9 a.m. to 5 p.m. in USA. The time bracket is adjusted to account for often earlier starting hours in Europe as well as travel time. The chosen hours are commonly referred to as night time hours in this paper and code, whereby the phrasing is applied somewhat generously.
+The night-time bracket was chosen as \texttt{18:00:00--06:00:00} and serves as the allowed time frame for EV charging during the night. This night time is based around the common Western world business day hours, such as the standard office hours of 9 a.m. to 5 p.m. in USA; the time bracket is adjusted to account for often earlier starting hours in Europe. Hereby the EVs are assumed to be used for transportation to and from work, where charging is assumed to not be available. The chosen hours are commonly referred to as night time hours in this paper and code, even if the phrasing is applied somewhat generously.
 
 Another assumption that was made concerns the charging times---these were meant to stay constant in length. MOST CHARGERS ON THE MARKET... MOST AVERAGE EVS... BLAH BLAH, 1 HOUR CHARGING TIME GOTTA EXPLAIN
 
@@ -289,7 +281,7 @@ text here
 		\centering
 		\includegraphics[width=\textwidth]{hosting_cap_min_empty}
 		\caption[]%
-		{{\small No sgens at min}}    
+		{{\small No sgens at min bus voltage}}    
 		\label{fig:mean and std of net14}
 	\end{subfigure}
 	\hfill
@@ -297,7 +289,7 @@ text here
 		\centering 
 		\includegraphics[width=\textwidth]{hosting_cap_min_full}
 		\caption[]%
-		{{\small Filled sgens at min}}    
+		{{\small Filled sgens at min bus voltage}}    
 		\label{fig:mean and std of net24}
 	\end{subfigure}
 	\vskip\baselineskip
@@ -305,7 +297,7 @@ text here
 		\centering 
 		\includegraphics[width=\textwidth]{hosting_cap_max_empty}
 		\caption[]%
-		{{\small No sgens at max}}    
+		{{\small No sgens at max bus voltage}}    
 		\label{fig:mean and std of net34}
 	\end{subfigure}
 	\hfill
@@ -313,13 +305,26 @@ text here
 		\centering 
 		\includegraphics[width=\textwidth]{hosting_cap_max_full}
 		\caption[]%
-		{{\small Filled sgens at max}}    
+		{{\small Filled sgens at max bus voltage}}    
 		\label{fig:mean and std of net44}
 	\end{subfigure}
 	\caption[Comparison of hosting capacities for time extremes]
 	{\small Comparison between hosting capacity during minimum and maximum load times with and without sgens.} 
 	\label{fig:mean and std of nets}
 \end{figure*}
+
+\begin{table}[htpb]
+	\centering
+	\begin{tabular}{lcc}
+		\toprule
+		& Minimum bus voltage & Maximum bus voltage \\
+		\midrule
+		number of sgens & 7 & 15 \\
+		total capacity [\%] & 12.7 & 27.3 \\
+		\bottomrule
+	\end{tabular}
+	\label{hosting_cap_stats}
+\end{table}
 
 Summary
 \begin{table}[htpb]
