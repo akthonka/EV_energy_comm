@@ -95,6 +95,7 @@ def simulate(cycles, scenario):
 
 
 # run simulation
+print("Beginnig simualation...")
 cycles = 10
 path = "..\\results\\"
 

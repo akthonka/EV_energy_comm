@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  1 SEP 2022 12:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  1 SEP 2022 14:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -95,8 +95,8 @@ File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 \WF@everypar=\toks20
 Package: wrapfig 2003/01/31  v 3.6
 )
-(C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/subfig\subfig.sty
-Package: subfig 2005/06/28 ver: 1.3 subfig package
+(C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/caption\subcaption.sty
+Package: subcaption 2022/01/07 v1.5 Sub-captions (AR)
 
 (C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/caption\caption.sty
 Package: caption 2022/03/01 v3.6b Customizing captions (AR)
@@ -117,72 +117,61 @@ Package caption Info: Standard document class detected.
 \c@continuedfloat=\count199
 Package caption Info: wrapfig package is loaded.
 )
-\c@KVtest=\count266
-\sf@farskip=\skip49
-\sf@captopadj=\dimen159
-\sf@capskip=\skip50
-\sf@nearskip=\skip51
-\c@subfigure=\count267
-\c@subfigure@save=\count268
-\c@lofdepth=\count269
-\c@subtable=\count270
-\c@subtable@save=\count271
-\c@lotdepth=\count272
-\sf@top=\skip52
-\sf@bottom=\skip53
+\c@subfigure=\count266
+\c@subtable=\count267
 )
 (C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/placeins\placeins.sty
 Package: placeins 2005/04/18  v 2.2
 )
 (C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/booktabs\booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen160
-\lightrulewidth=\dimen161
-\cmidrulewidth=\dimen162
-\belowrulesep=\dimen163
-\belowbottomsep=\dimen164
-\aboverulesep=\dimen165
-\abovetopsep=\dimen166
-\cmidrulesep=\dimen167
-\cmidrulekern=\dimen168
-\defaultaddspace=\dimen169
-\@cmidla=\count273
-\@cmidlb=\count274
-\@aboverulesep=\dimen170
-\@belowrulesep=\dimen171
-\@thisruleclass=\count275
-\@lastruleclass=\count276
-\@thisrulewidth=\dimen172
+\heavyrulewidth=\dimen159
+\lightrulewidth=\dimen160
+\cmidrulewidth=\dimen161
+\belowrulesep=\dimen162
+\belowbottomsep=\dimen163
+\aboverulesep=\dimen164
+\abovetopsep=\dimen165
+\cmidrulesep=\dimen166
+\cmidrulekern=\dimen167
+\defaultaddspace=\dimen168
+\@cmidla=\count268
+\@cmidlb=\count269
+\@aboverulesep=\dimen169
+\@belowrulesep=\dimen170
+\@thisruleclass=\count270
+\@lastruleclass=\count271
+\@thisrulewidth=\dimen171
 )
 (C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/makecell\makecell.sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 
 (C:\Program Files\MiKTeX\tex/latex/tools\array.sty
 Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
-\col@sep=\dimen173
+\col@sep=\dimen172
 \ar@mcellbox=\box52
-\extrarowheight=\dimen174
+\extrarowheight=\dimen173
 \NC@list=\toks21
-\extratabsurround=\skip54
-\backup@length=\skip55
+\extratabsurround=\skip49
+\backup@length=\skip50
 \ar@cellbox=\box53
 )
-\rotheadsize=\dimen175
-\c@nlinenum=\count277
+\rotheadsize=\dimen174
+\c@nlinenum=\count272
 \TeXr@lab=\toks22
 )
 (C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/enumitem\enumitem.sty
 Package: enumitem 2019/06/20 v3.9 Customized lists
-\labelindent=\skip56
-\enit@outerparindent=\dimen176
+\labelindent=\skip51
+\enit@outerparindent=\dimen175
 \enit@toks=\toks23
 \enit@inbox=\box54
-\enit@count@id=\count278
-\enitdp@description=\count279
+\enit@count@id=\count273
+\enitdp@description=\count274
 )
 (C:\Program Files\MiKTeX\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2022/04/08 v2.17n AMS math features
-\@mathmargin=\skip57
+\@mathmargin=\skip52
 
 For additional information on amsmath, use the `?' option.
 (C:\Program Files\MiKTeX\tex/latex/amsmath\amstext.sty
@@ -191,24 +180,24 @@ Package: amstext 2021/08/26 v2.01 AMS text
 (C:\Program Files\MiKTeX\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks24
-\ex@=\dimen177
+\ex@=\dimen176
 ))
 (C:\Program Files\MiKTeX\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 LaTeX Info: Redefining \boldsymbol on input line 28.
-\pmbraise@=\dimen178
+\pmbraise@=\dimen177
 )
 (C:\Program Files\MiKTeX\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count280
+\inf@bad=\count275
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count281
-\leftroot@=\count282
+\uproot@=\count276
+\leftroot@=\count277
 LaTeX Info: Redefining \overline on input line 399.
 LaTeX Info: Redefining \colon on input line 410.
-\classnum@=\count283
-\DOTSCASE@=\count284
+\classnum@=\count278
+\DOTSCASE@=\count279
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
@@ -218,33 +207,33 @@ LaTeX Info: Redefining \big on input line 722.
 LaTeX Info: Redefining \Big on input line 723.
 LaTeX Info: Redefining \bigg on input line 724.
 LaTeX Info: Redefining \Bigg on input line 725.
-\big@size=\dimen179
+\big@size=\dimen178
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count285
+\macc@depth=\count280
 LaTeX Info: Redefining \bmod on input line 905.
 LaTeX Info: Redefining \pmod on input line 910.
 LaTeX Info: Redefining \smash on input line 940.
 LaTeX Info: Redefining \relbar on input line 970.
 LaTeX Info: Redefining \Relbar on input line 971.
-\c@MaxMatrixCols=\count286
+\c@MaxMatrixCols=\count281
 \dotsspace@=\muskip16
-\c@parentequation=\count287
-\dspbrk@lvl=\count288
+\c@parentequation=\count282
+\dspbrk@lvl=\count283
 \tag@help=\toks25
-\row@=\count289
-\column@=\count290
-\maxfields@=\count291
+\row@=\count284
+\column@=\count285
+\maxfields@=\count286
 \andhelp@=\toks26
-\eqnshift@=\dimen180
-\alignsep@=\dimen181
-\tagshift@=\dimen182
-\tagwidth@=\dimen183
-\totwidth@=\dimen184
-\lineht@=\dimen185
+\eqnshift@=\dimen179
+\alignsep@=\dimen180
+\tagshift@=\dimen181
+\tagwidth@=\dimen182
+\totwidth@=\dimen183
+\lineht@=\dimen184
 \@envbody=\toks27
-\multlinegap=\skip58
-\multlinetaggap=\skip59
+\multlinegap=\skip53
+\multlinetaggap=\skip54
 \mathdisplay@stack=\toks28
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
@@ -254,31 +243,31 @@ Package: mathtools 2022/06/29 v1.29 mathematical typesetting tools
 
 (C:\Program Files\MiKTeX\tex/latex/tools\calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count292
-\calc@Bcount=\count293
-\calc@Adimen=\dimen186
-\calc@Bdimen=\dimen187
-\calc@Askip=\skip60
-\calc@Bskip=\skip61
+\calc@Acount=\count287
+\calc@Bcount=\count288
+\calc@Adimen=\dimen185
+\calc@Bdimen=\dimen186
+\calc@Askip=\skip55
+\calc@Bskip=\skip56
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count294
-\calc@Cskip=\skip62
+\calc@Ccount=\count289
+\calc@Cskip=\skip57
 )
 (C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/mathtools\mhsetup.sty
 Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 )
-\g_MT_multlinerow_int=\count295
-\l_MT_multwidth_dim=\dimen188
-\origjot=\skip63
-\l_MT_shortvdotswithinadjustabove_dim=\dimen189
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen190
-\l_MT_above_intertext_sep=\dimen191
-\l_MT_below_intertext_sep=\dimen192
-\l_MT_above_shortintertext_sep=\dimen193
-\l_MT_below_shortintertext_sep=\dimen194
+\g_MT_multlinerow_int=\count290
+\l_MT_multwidth_dim=\dimen187
+\origjot=\skip58
+\l_MT_shortvdotswithinadjustabove_dim=\dimen188
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen189
+\l_MT_above_intertext_sep=\dimen190
+\l_MT_below_intertext_sep=\dimen191
+\l_MT_above_shortintertext_sep=\dimen192
+\l_MT_below_shortintertext_sep=\dimen193
 \xmathstrut@box=\box57
-\xmathstrut@dim=\dimen195
+\xmathstrut@dim=\dimen194
 )
 (C:\Program Files\MiKTeX\tex/latex/amsfonts\amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
@@ -293,9 +282,9 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 ))
 (C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/units\nicefrac.sty
 Package: nicefrac 1998/08/04 v0.9b Nice fractions
-\L@UnitsRaiseDisplaystyle=\skip64
-\L@UnitsRaiseTextstyle=\skip65
-\L@UnitsRaiseScriptstyle=\skip66
+\L@UnitsRaiseDisplaystyle=\skip59
+\L@UnitsRaiseTextstyle=\skip60
+\L@UnitsRaiseScriptstyle=\skip61
 
 (C:\Program Files\MiKTeX\tex/latex/base\ifthen.sty
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
@@ -308,7 +297,7 @@ Package: expl3 2022-08-23 L3 programming layer (loader)
 
 (C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-08-23 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count296
+\l__color_backend_stack_int=\count291
 \l__pdf_internal_box=\box58
 ))
 (C:\Program Files\MiKTeX\tex/latex/l3packages/l3keys2e\l3keys2e.sty
@@ -320,32 +309,32 @@ Package: xparse 2022-06-22 L3 Experimental document command parser
 )
 Package: chemgreek 2020/01/16 v1.1a interface for upright Greek letters for use
  in chemistry (CN)
-\l__chemgreek_tmpa_int=\count297
-\g__chemgreek_tmpa_int=\count298
+\l__chemgreek_tmpa_int=\count292
+\g__chemgreek_tmpa_int=\count293
 )
-\l__mhchem_ce_distanceFromLastComma_int=\count299
-\__mhchem_arrow_extPgfLength_skip=\skip67
-\mhchem@minispace@tmp=\skip68
-\mhchem@minibackspace@tmp=\skip69
-\mhchem@bondwidth=\skip70
-\mhchem@bondheight=\skip71
-\mhchem@smallbondwidth@tmpA=\skip72
-\mhchem@smallbondwidth@tmpB=\skip73
-\mhchem@smallbondwidth=\skip74
-\mhchem@bondtmp@minussidebearingleft=\skip75
-\mhchem@bondtmp@minussidebearingright=\skip76
-\l__mhchem_option_version_int=\count300
-\mhchem@option@minusmathsidebearingleft=\dimen196
-\mhchem@option@minusmathsidebearingright=\dimen197
-\mhchem@option@minustextsidebearingleft=\dimen198
-\mhchem@option@minustextsidebearingright=\dimen199
+\l__mhchem_ce_distanceFromLastComma_int=\count294
+\__mhchem_arrow_extPgfLength_skip=\skip62
+\mhchem@minispace@tmp=\skip63
+\mhchem@minibackspace@tmp=\skip64
+\mhchem@bondwidth=\skip65
+\mhchem@bondheight=\skip66
+\mhchem@smallbondwidth@tmpA=\skip67
+\mhchem@smallbondwidth@tmpB=\skip68
+\mhchem@smallbondwidth=\skip69
+\mhchem@bondtmp@minussidebearingleft=\skip70
+\mhchem@bondtmp@minussidebearingright=\skip71
+\l__mhchem_option_version_int=\count295
+\mhchem@option@minusmathsidebearingleft=\dimen195
+\mhchem@option@minusmathsidebearingright=\dimen196
+\mhchem@option@minustextsidebearingleft=\dimen197
+\mhchem@option@minustextsidebearingright=\dimen198
 )
 (C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/siunitx\siunitx.sty
 Package: siunitx 2022-08-08 v3.1.6 A comprehensive (SI) units package
-\l__siunitx_angle_tmp_dim=\dimen256
+\l__siunitx_angle_tmp_dim=\dimen199
 \l__siunitx_angle_marker_box=\box59
 \l__siunitx_angle_unit_box=\box60
-\l__siunitx_compound_count_int=\count301
+\l__siunitx_compound_count_int=\count296
 
 (C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/translations\translations.sty
 Package: translations 2022/02/05 v1.12 internationalization of LaTeX2e packages
@@ -353,7 +342,7 @@ Package: translations 2022/02/05 v1.12 internationalization of LaTeX2e packages
 
 (C:\Program Files\MiKTeX\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count302
+\etb@tempcnta=\count297
 )
 (C:\Program Files\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty
 Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
@@ -369,25 +358,25 @@ Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 ))
-\l__siunitx_number_exponent_fixed_int=\count303
-\l__siunitx_number_min_decimal_int=\count304
-\l__siunitx_number_min_integer_int=\count305
-\l__siunitx_number_round_precision_int=\count306
-\l__siunitx_number_group_first_int=\count307
-\l__siunitx_number_group_size_int=\count308
-\l__siunitx_number_group_minimum_int=\count309
+\l__siunitx_number_exponent_fixed_int=\count298
+\l__siunitx_number_min_decimal_int=\count299
+\l__siunitx_number_min_integer_int=\count300
+\l__siunitx_number_round_precision_int=\count301
+\l__siunitx_number_group_first_int=\count302
+\l__siunitx_number_group_size_int=\count303
+\l__siunitx_number_group_minimum_int=\count304
 \l__siunitx_table_tmp_box=\box61
-\l__siunitx_table_tmp_dim=\dimen257
-\l__siunitx_table_column_width_dim=\dimen258
+\l__siunitx_table_tmp_dim=\dimen256
+\l__siunitx_table_column_width_dim=\dimen257
 \l__siunitx_table_integer_box=\box62
 \l__siunitx_table_decimal_box=\box63
 \l__siunitx_table_before_box=\box64
 \l__siunitx_table_after_box=\box65
-\l__siunitx_table_before_dim=\dimen259
-\l__siunitx_table_carry_dim=\dimen260
-\l__siunitx_unit_tmp_int=\count310
-\l__siunitx_unit_position_int=\count311
-\l__siunitx_unit_total_int=\count312
+\l__siunitx_table_before_dim=\dimen258
+\l__siunitx_table_carry_dim=\dimen259
+\l__siunitx_unit_tmp_int=\count305
+\l__siunitx_unit_position_int=\count306
+\l__siunitx_unit_total_int=\count307
 
 Package siunitx Info: Option "separate-uncertainty" has been deprecated in
 (siunitx)             this release.
@@ -442,11 +431,11 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
  (C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count313
+\c@section@level=\count308
 )
-\@linkdim=\dimen261
-\Hy@linkcounter=\count314
-\Hy@pagecounter=\count315
+\@linkdim=\dimen260
+\Hy@linkcounter=\count309
+\Hy@pagecounter=\count310
  (C:\Program Files\MiKTeX\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2022-06-20 v7.00s Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -458,7 +447,7 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 (C:\Users\panto\AppData\Roaming\MiKTeX\tex/generic/etexcmds\etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count316
+\Hy@SavedSpaceFactor=\count311
 
 (C:\Program Files\MiKTeX\tex/latex/hyperref\puenc.def
 File: puenc.def 2022-06-20 v7.00s Hyperref: PDF Unicode definition (HO)
@@ -473,9 +462,9 @@ Package hyperref Info: Plain pages OFF on input line 4177.
 Package hyperref Info: Backreferencing OFF on input line 4182.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4408.
-\c@Hy@tempcnt=\count317
+\c@Hy@tempcnt=\count312
 LaTeX Info: Redefining \url on input line 4746.
-\XeTeXLinkMargin=\dimen262
+\XeTeXLinkMargin=\dimen261
 
 (C:\Users\panto\AppData\Roaming\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -484,9 +473,9 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count318
-\Field@Width=\dimen263
-\Fld@charsize=\dimen264
+\Fld@menulength=\count313
+\Field@Width=\dimen262
+\Fld@charsize=\dimen263
 Package hyperref Info: Hyper figures OFF on input line 6024.
 Package hyperref Info: Link nesting OFF on input line 6029.
 Package hyperref Info: Hyper index ON on input line 6032.
@@ -499,9 +488,9 @@ Package hyperref Info: PDF/A mode OFF on input line 6054.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count319
-\c@Item=\count320
-\c@Hfootnote=\count321
+\Hy@abspage=\count314
+\c@Item=\count315
+\c@Hfootnote=\count316
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
@@ -513,8 +502,8 @@ Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
 kage
 with kernel methods
 )
-\Fld@listcount=\count322
-\c@bookmark@seq@number=\count323
+\Fld@listcount=\count317
+\c@bookmark@seq@number=\count318
 
 (C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.
 sty
@@ -527,7 +516,7 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 85.
 )
-\Hy@SectionHShift=\skip77
+\Hy@SectionHShift=\skip72
 ) (C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/cleveref\cleveref.sty
 Package: cleveref 2018/03/27 v0.21.4 Intelligent cross-referencing
 Package cleveref Info: `hyperref' support loaded on input line 2370.
@@ -541,28 +530,27 @@ LaTeX Info: Redefining \cpagerefrange on input line 2370.
 LaTeX Info: Redefining \Cpagerefrange on input line 2370.
 LaTeX Info: Redefining \labelcref on input line 2370.
 LaTeX Info: Redefining \labelcpageref on input line 2370.
-Package cleveref Info: `subfig' support loaded on input line 3164.
 )
 (C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/titlesec\titlesec.sty
 Package: titlesec 2021/07/05 v2.14 Sectioning titles
 \ttl@box=\box66
-\beforetitleunit=\skip78
-\aftertitleunit=\skip79
-\ttl@plus=\dimen265
-\ttl@minus=\dimen266
+\beforetitleunit=\skip73
+\aftertitleunit=\skip74
+\ttl@plus=\dimen264
+\ttl@minus=\dimen265
 \ttl@toksa=\toks29
-\titlewidth=\dimen267
-\titlewidthlast=\dimen268
-\titlewidthfirst=\dimen269
+\titlewidth=\dimen266
+\titlewidthlast=\dimen267
+\titlewidthfirst=\dimen268
 )
 (C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/csquotes\csquotes.sty
 Package: csquotes 2021-02-22 v5.2l context-sensitive quotations (JAW)
-\csq@reset=\count324
-\csq@gtype=\count325
-\csq@glevel=\count326
-\csq@qlevel=\count327
-\csq@maxlvl=\count328
-\csq@tshold=\count329
+\csq@reset=\count319
+\csq@gtype=\count320
+\csq@glevel=\count321
+\csq@qlevel=\count322
+\csq@maxlvl=\count323
+\csq@tshold=\count324
 \csq@ltx@everypar=\toks30
 
 (C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/csquotes\csquotes.def
@@ -662,16 +650,16 @@ LaTeX Font Info:    ... okay on input line 40.
 
 (C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count330
-\scratchdimen=\dimen270
+\scratchcounter=\count325
+\scratchdimen=\dimen269
 \scratchbox=\box67
-\nofMPsegments=\count331
-\nofMParguments=\count332
+\nofMPsegments=\count326
+\nofMParguments=\count327
 \everyMPshowfont=\toks31
-\MPscratchCnt=\count333
-\MPscratchDim=\dimen271
-\MPnumerator=\count334
-\makeMPintoPDFobject=\count335
+\MPscratchCnt=\count328
+\MPscratchDim=\dimen270
+\MPnumerator=\count329
+\makeMPintoPDFobject=\count330
 \everyMPtoPDFconversion=\toks32
 ) (C:\Program Files\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -682,7 +670,6 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package caption Info: Begin \AtBeginDocument code.
-Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
 
@@ -739,112 +726,141 @@ Chapter 2.
 
 ]
 Chapter 3.
-<images//test_network.png, id=145, 550.055pt x 431.6125pt>
+<images//test_network.png, id=150, 550.055pt x 431.6125pt>
 File: images//test_network.png Graphic file (type png)
 <use images//test_network.png>
-Package pdftex.def Info: images//test_network.png  used on input line 82.
+Package pdftex.def Info: images//test_network.png  used on input line 81.
 (pdftex.def)             Requested size: 192.39949pt x 150.96783pt.
 [3
 
  <./images//test_network.png>]
-<images//EU_LV_test_feeder.png, id=159, 696.6025pt x 420.57124pt>
+<images//EU_LV_test_feeder.png, id=164, 696.6025pt x 420.57124pt>
 File: images//EU_LV_test_feeder.png Graphic file (type png)
 <use images//EU_LV_test_feeder.png>
-Package pdftex.def Info: images//EU_LV_test_feeder.png  used on input line 99.
+Package pdftex.def Info: images//EU_LV_test_feeder.png  used on input line 96.
 (pdftex.def)             Requested size: 292.77629pt x 176.76065pt.
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
-05.
+01.
 
 (C:\Program Files\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ) [4 <./images//EU_LV_test_feeder.png>] [5] [6] [7] [8] [9]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 206.
+(hyperref)                be the same. Added a new anchor on input line 202.
 
 
 
 pdfTeX warning: pdflatex (file ./images//comm_topology.pdf): PDF inclusion: fou
 nd PDF version <1.7>, but at most version <1.5> allowed
-<images//comm_topology.pdf, id=216, 690.74057pt x 322.07326pt>
+<images//comm_topology.pdf, id=221, 690.74057pt x 322.07326pt>
 File: images//comm_topology.pdf Graphic file (type pdf)
 <use images//comm_topology.pdf>
-Package pdftex.def Info: images//comm_topology.pdf  used on input line 212.
+Package pdftex.def Info: images//comm_topology.pdf  used on input line 208.
 (pdftex.def)             Requested size: 292.77629pt x 136.51318pt.
 [10 <./images//comm_topology.pdf>] [11] [12]
 Chapter 4.
-<images//EU_LV_host_capacity.png, id=282, 702.625pt x 683.55376pt>
-File: images//EU_LV_host_capacity.png Graphic file (type png)
-<use images//EU_LV_host_capacity.png>
-Package pdftex.def Info: images//EU_LV_host_capacity.png  used on input line 28
-4.
-(pdftex.def)             Requested size: 376.42575pt x 366.21394pt.
 [13
 
-] [14 <./images//EU_LV_host_capacity.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 318--319
+]
+<images//hosting_cap_min_empty.png, id=292, 702.625pt x 683.55376pt>
+File: images//hosting_cap_min_empty.png Graphic file (type png)
+<use images//hosting_cap_min_empty.png>
+Package pdftex.def Info: images//hosting_cap_min_empty.png  used on input line 
+284.
+(pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
+<images//hosting_cap_min_full.png, id=293, 702.625pt x 683.55376pt>
+File: images//hosting_cap_min_full.png Graphic file (type png)
+<use images//hosting_cap_min_full.png>
+Package pdftex.def Info: images//hosting_cap_min_full.png  used on input line 2
+92.
+(pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
+<images//hosting_cap_max_empty.png, id=294, 702.625pt x 683.55376pt>
+File: images//hosting_cap_max_empty.png Graphic file (type png)
+<use images//hosting_cap_max_empty.png>
+Package pdftex.def Info: images//hosting_cap_max_empty.png  used on input line 
+300.
+(pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
+<images//hosting_cap_max_full.png, id=295, 702.625pt x 683.55376pt>
+File: images//hosting_cap_max_full.png Graphic file (type png)
+<use images//hosting_cap_max_full.png>
+Package pdftex.def Info: images//hosting_cap_max_full.png  used on input line 3
+08.
+(pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
+ [14] [15 <./images//hosting_cap_min_empty.png> <./images//hosting_cap_min_full
+.png> <./images//hosting_cap_max_empty.png> <./images//hosting_cap_max_full.png
+>]
+<images//random_loads_min_full.png, id=311, 702.625pt x 683.55376pt>
+File: images//random_loads_min_full.png Graphic file (type png)
+<use images//random_loads_min_full.png>
+Package pdftex.def Info: images//random_loads_min_full.png  used on input line 
+343.
+(pdftex.def)             Requested size: 188.21288pt x 183.10176pt.
+<images//en_comm_min_full.png, id=312, 702.625pt x 683.55376pt>
+File: images//en_comm_min_full.png Graphic file (type png)
+<use images//en_comm_min_full.png>
+Package pdftex.def Info: images//en_comm_min_full.png  used on input line 345.
+(pdftex.def)             Requested size: 188.21288pt x 183.10176pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 376--377
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 320--322
+Underfull \hbox (badness 10000) in paragraph at lines 378--379
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 323--324
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 328--331
+[16 <./images//random_loads_min_full.png> <./images//en_comm_min_full.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 384--387
 
  []
 
-[15]
+[17]
 Chapter 5.
-(EV_energy_comm_thesis.bbl [16
+(EV_energy_comm_thesis.bbl [18
 
-]) [17
+]) [19
 
 ]
-<images//timeseries_module_diag.pdf, id=313, 387.85046pt x 643.9107pt>
+<images//timeseries_module_diag.pdf, id=339, 387.85046pt x 643.9107pt>
 File: images//timeseries_module_diag.pdf Graphic file (type pdf)
 <use images//timeseries_module_diag.pdf>
 Package pdftex.def Info: images//timeseries_module_diag.pdf  used on input line
- 344.
+ 399.
 (pdftex.def)             Requested size: 188.21288pt x 312.47316pt.
- [18
+ [20
 
  <./images//timeseries_module_diag.pdf>] (EV_energy_comm_thesis.aux)
 Package rerunfilecheck Info: File `EV_energy_comm_thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 4124B8F5F312DFEB9EDCA00473CA38DE;2986.
+(rerunfilecheck)             Checksum: 48BB15B44800A2373E4CD779D7AE5B94;3261.
  ) 
 Here is how much of TeX's memory you used:
- 21095 strings out of 477843
- 409458 string characters out of 2833414
- 716613 words of memory out of 3000000
- 39674 multiletter control sequences out of 15000+600000
- 489829 words of font info for 84 fonts, out of 8000000 for 9000
+ 21126 strings out of 477843
+ 411369 string characters out of 2833414
+ 714174 words of memory out of 3000000
+ 39701 multiletter control sequences out of 15000+600000
+ 490594 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,8n,87p,1294b,1075s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 72i,9n,87p,1294b,1075s stack positions out of 10000i,1000n,20000p,200000b,80000s
  <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti
 1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
-0\ecbx1200.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
-/dpi600\ectt1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
-pen/ec/dpi600\ecbx1440.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour
-/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/
-ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\panto\AppData\Local\MiKTeX\fon
-ts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\panto\AppData\Local\MiKT
-eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\panto\AppData\Loca
-l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\panto\AppDat
-a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk><C:/Program Files
-/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/font
-s/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/publi
-c/amsfonts/cm/cmsy10.pfb>
-Output written on EV_energy_comm_thesis.pdf (21 pages, 604978 bytes).
+0\ecrm0900.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
+/dpi600\ecbx1200.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
+pen/ec/dpi600\ectt1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour
+/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/
+ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fon
+ts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\panto\AppData\Local\MiKT
+eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\panto\AppData\Loca
+l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\panto\AppDat
+a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\panto\
+AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk><C:/Program
+ Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1
+/public/amsfonts/cm/cmsy10.pfb>
+Output written on EV_energy_comm_thesis.pdf (23 pages, 932392 bytes).
 PDF statistics:
- 783 PDF objects out of 1000 (max. 8388607)
- 72 named destinations out of 1000 (max. 500000)
- 202 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 844 PDF objects out of 1000 (max. 8388607)
+ 77 named destinations out of 1000 (max. 500000)
+ 235 words of extra memory for PDF output out of 10000 (max. 10000000)
 
