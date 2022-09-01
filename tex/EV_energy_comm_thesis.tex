@@ -289,6 +289,7 @@ For spacial allocation, the sequence of predefined sgen locations in \texttt{pan
 
 Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu fails)
 
+
 \begin{table}[htpb]
 	\centering
 	\begin{tabular}{lccc}
@@ -296,29 +297,37 @@ Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu 
 		Scenario & Random & Community & Control \\
 		\midrule
 		simulations count & 10 & 10 & 10 \\
-		avg voltage [vm p.u.] & 1.012 & 1.025 & 1.041 \\
-		bracket deviation [\%] & 37.8 & 25.3 & 9.2 \\
+		avg voltage [vm p.u.] & 0.949 & 0.974 & 1.010 \\
+		bracket deviation [\%] & 100.8 & 75.9 & 39.5 \\
 		\bottomrule
 	\end{tabular}
-	\caption{Energy community charging times for test feeder network.}
-	\label{random_vs_comm}
+\label{random_vs_comm}
 \end{table}
+
+Community is approximately 24.9\% more effective than random case.
 
 Load bracket deviation percent is measured:
 
 \begin{equation}
-	\text{Deviation} = \frac{\text{Upper bracket} - \text{Average voltage}}{\text{Upper bracket}-\text{Lower bracket}}times 100
+	\text{Deviation [\%]} = \frac{\text{upper bracket} - \text{average voltage}}{\text{upper bracket}-\text{lower bracket}}\times 100
 \end{equation}
 
 
 \section{Suggested improvements}
+\subsection{Method}
 The energy community spatio-temporal algorithm is in no way optimal and is an extreme over-simplification of the problem. Its main purpose is to serve as a starting point when there is none, and to serve as a demonstration for what said minimum effort can achieve in the context of grid stability.\\
 
-Energy community function doesn't start at the peak hours perfectly because jezzus christe, that's a lot of code to rewrite for no real benefit
+Spacial:\\
+relies on correct ordering of busses for iteration and does not account for significant deviation or branching from linear topology\\
+
+Temporal:\\
+
+
 
 \subsection{Code}
-splitting function could waste less data\\
-energy comm func could start the cycle at peak time\\
+splitting function could waste less data (first day, last two days in list)\\
+energy comm func could start the cycle at peak time (requires nested conditional for loop for both times and community function)\\
+the matrix is exactly singular---jacobian could not be solved: no clue\\
 
 
 

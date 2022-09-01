@@ -45,7 +45,8 @@ class DataAction:
         self.conv_fac = 1000 * 60  # convert from MW/min to W (1 min avg)
         self.night_evening_t = "18:00:00"
         self.night_morning_t = "06:00:00"
-        self.night_max_t = "19:19:00"  # obtained from max_load_times.ipynb
+        self.night_max_t = "19:23:00"  # obtained from max_load_times.ipynb
+        self.night_min_t = "02:26:00"  # obtained from max_load_times.ipynb
         self.wind_length = 60  # in minutes
         self.iter_time = None
         self.night_loads = None
@@ -143,7 +144,7 @@ class DataAction:
         """create a random night load profile"""
 
         # choose random df identifying list number from fragemented import set
-        df_rand = np.random.choice(len(self.dfList[1:-2]))  # incomplete lists excluded
+        df_rand = np.random.choice(len(self.dfList[1:-1]))  # incomplete lists excluded
 
         # choose random load profile (between two) and parse selected data
         rand_col = np.random.randint(0, 2)
