@@ -51,7 +51,7 @@ class DataAction:
         self.iter_time = None
         self.night_loads = None
         self.night_sgens = None
-        self.sgen_val = 0.007
+        self.sgen_val = 0.0077  # Level 2 7.7kW AC charger
 
     def data_imp(self, file_name):
         """basic data import from file string"""

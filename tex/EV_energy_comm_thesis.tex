@@ -155,8 +155,8 @@ The network used in the simulation is an alteration of the standard test feeder.
 
 The night-time bracket was chosen as \texttt{18:00:00--06:00:00} and serves as the allowed time frame for EV charging during the night. This night time is based around the common Western world business day hours, such as the standard office hours of 9 a.m. to 5 p.m. in USA; the time bracket is adjusted to account for often earlier starting hours in Europe. Hereby the EVs are assumed to be used for transportation to and from work, where charging is assumed to not be available. The chosen hours are commonly referred to as night time hours in this paper and code, even if the phrasing is applied somewhat generously.
 
-Another assumption that was made concerns the charging times---these were meant to stay constant in length. MOST CHARGERS ON THE MARKET... MOST AVERAGE EVS... BLAH BLAH, 1 HOUR CHARGING TIME GOTTA EXPLAIN
-
+\dots Level 2 charging = 7.7kW. "In terms of the voltage levels, AC charging can be divided into Levels 1, 2 and 3 charging, where level 3 has the highest charging voltage. The Levels 1 and 2 charging facilities can be installed in a private location while setting up of Level 3 charging facilities, involving separate wiring and transformer, requires permission from utility providers and are usually built in public charging stations." \cite{Das2020} \\
+\dots\\
 With these assumptions and adjustments to the test feeder, the following 3 case scenarios were identified and analyzed.
 
 \subsection{Critical case scenario}
@@ -319,10 +319,11 @@ Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu 
 		\toprule
 		& Minimum bus voltage & Maximum bus voltage \\
 		\midrule
-		number of sgens & 7 & 15 \\
-		total capacity [\%] & 12.7 & 27.3 \\
+		number of sgens & 6 & 12 \\
+		total capacity [\%] & 10.9 & 21.8 \\
 		\bottomrule
 	\end{tabular}
+	\caption{Hosting capacity results.}
 	\label{hosting_cap_stats}
 \end{table}
 
@@ -333,16 +334,16 @@ Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu 
 		& Min bus empty & Min bus full & Max bus empty & Max bus full \\
 		\midrule
 		count & 907.000 & 907.000 & 907.000 & 907.000 \\
-		mean & 1.019 & 0.980 & 1.044 & 0.983 \\
-		std & 0.010 & 0.020 & 0.002 & 0.019 \\
-		min & 1.007 & 0.957 & 1.041 & 0.955 \\
-		25\% & 1.012 & 0.965 & 1.042 & 0.972 \\
-		50\% & 1.017 & 0.974 & 1.043 & 0.978 \\
-		75\% & 1.025 & 0.991 & 1.045 & 0.992 \\
+		mean & 1.020 & 0.980 & 1.042 & 0.976 \\
+		std & 0.009 & 0.022 & 0.002 & 0.021 \\
+		min & 1.005 & 0.953 & 1.039 & 0.950 \\
+		25\% & 1.014 & 0.963 & 1.040 & 0.963 \\
+		50\% & 1.018 & 0.975 & 1.041 & 0.970 \\
+		75\% & 1.025 & 0.994 & 1.043 & 0.987 \\
 		max & 1.050 & 1.050 & 1.050 & 1.050 \\
 		\bottomrule
 	\end{tabular}
-	\caption{Summary thing}
+	\caption{Hosting capacity voltage magnitudes in detail.}
 	\label{extremes_summary}
 \end{table}
 
@@ -366,14 +367,14 @@ Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu 
 		Scenario & Random & Community & Control \\
 		\midrule
 		simulations count & 10 & 10 & 10 \\
-		avg voltage [vm p.u.] & 0.949 & 0.974 & 1.010 \\
+		avg min voltage mag [p.u.] & 0.949 & 0.974 & 1.010 \\
 		bracket deviation [\%] & 100.8 & 75.9 & 39.5 \\
 		\bottomrule
 	\end{tabular}
 \label{random_vs_comm}
 \end{table}
 
-Load bracket deviation percent is measured:
+Load bracket is defined as the acceptable range of bus voltage magnitude per unit. Following common network guidelines, it's taken as the open interval $(0.95\,, 1.05)$. Load bracket deviation percent is defined as:
 
 \begin{equation}
 	\text{Deviation [\%]} = \frac{\text{upper bracket} - \text{average voltage}}{\text{upper bracket}-\text{lower bracket}}\times 100
@@ -382,12 +383,21 @@ Load bracket deviation percent is measured:
 Community is approximately 24.9\% more effective than random case.
 
 \section{Suggested improvements}\label{section_improvements}
+\subsection{Assumptions}
+Charging time window of 1hr: how much driving is typically done? Time in traffic? Car energy efficiency?\\
+Batteries will improve - hard to predict\\
+Price considerations, cheaper chargers may be more popular\\
+Not all grids will be able to support three-phase Level 3 charging\\
+
+
 \subsection{Method}
 The energy community spatio-temporal algorithm is in no way optimal and is an extreme over-simplification of the problem. Its main purpose is to serve as a starting point when there is none, and to serve as a demonstration for what said minimum effort can achieve in the context of grid stability.\\
 
 \paragraph{Spacial:} relies on correct ordering of busses for iteration and does not account for significant deviation or branching from linear topology\\
 
 \paragraph{Temporal:} Most sgens should be shifted towards night time for lowest loads. Code computed it as \texttt{20:26:30} but that doesn't make sense, need to examine larger trends.
+
+
 
 
 \subsection{Code}
