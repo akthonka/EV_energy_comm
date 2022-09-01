@@ -187,7 +187,7 @@ This case scenario aims to represent completely uncoordinated charging patterns 
 	\item[Opt:] Load network configuration for all-time minimum vm p.u. time point
 \end{enumerate}
 
-The main difference from the critical case scenario is that we load sgens in our network before we run the timeseries iteration. Since the sgens charging times are spread across the night window, all sgens can be active at one point or another. This only becomes problematic should multiple sgens (i.e. more than 10--15) happen to be charging at once. At the same time, the household load profiles may offset a potential network overload if the charging convergence happens late a night when the loads are lowest---since most people are asleep and little to no household appliances are running.
+The main difference from the critical case scenario is that we load sgens in our network before we run the timeseries iteration. Since the sgens charging times are spread across the night window, all sgens can be active at one point or another. This only becomes problematic should a relatively large number of sgens happen to be charging at once. At the same time, the household load profiles may offset a potential network overload if the charging convergence happens late a night when the loads are lowest---since most people are asleep and little to no household appliances are running.
 
 
 \subsection{Energy community scenario}
@@ -272,7 +272,7 @@ Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu 
 \end{table}
 
 \subsection{Extreme cases analysis}
-text here
+
 
 \newpage
 \begin{figure*}
@@ -326,7 +326,6 @@ text here
 	\label{hosting_cap_stats}
 \end{table}
 
-Summary
 \begin{table}[htpb]
 	\centering
 	\begin{tabular}{lcccc}
