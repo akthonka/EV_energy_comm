@@ -1,0 +1,11 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Example power flow network with generic coordinates}}{3}{figure.caption.5}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces European Low Voltage Test Feeder layout}}{4}{figure.caption.6}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Theoretical energy community network scenario}}{11}{figure.caption.7}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Comparison of hosting capacities for time extremes}}{15}{figure.caption.10}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Graphical comparison between random and energy community scenarios}}{16}{figure.caption.13}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces \texttt {pandapower} times series module overview}}{20}{figure.caption.17}%

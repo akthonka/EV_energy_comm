@@ -25,13 +25,12 @@ def initiate():
     net.bus.vn_kv = net.bus.vn_kv / np.sqrt(3)
 
     # set asymmetric loads to zero
-    for asy_load in net.asymmetric_load.name.tolist():
-        net.asymmetric_load.p_a_mw = 0
-        net.asymmetric_load.p_b_mw = 0
-        net.asymmetric_load.p_c_mw = 0
-        net.asymmetric_load.q_a_mvar = 0
-        net.asymmetric_load.q_b_mvar = 0
-        net.asymmetric_load.q_c_mvar = 0
+    net.asymmetric_load.p_a_mw = 0
+    net.asymmetric_load.p_b_mw = 0
+    net.asymmetric_load.p_c_mw = 0
+    net.asymmetric_load.q_a_mvar = 0
+    net.asymmetric_load.q_b_mvar = 0
+    net.asymmetric_load.q_c_mvar = 0
 
     return net
 

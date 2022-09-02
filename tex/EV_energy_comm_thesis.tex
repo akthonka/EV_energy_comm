@@ -61,8 +61,17 @@
 \addcontentsline{toc}{chapter}{Abstract}
 
 
-\tableofcontents
+
+\listoftables
+\addcontentsline{toc}{chapter}{List of tables}
 \cleardoublepage
+
+\listoffigures
+\addcontentsline{toc}{chapter}{List of figures}
+\cleardoublepage
+
+\tableofcontents\cleardoublepage
+
 \pagenumbering{arabic}
 
 
@@ -79,7 +88,7 @@ To reiterate, the goal of this thesis was to investigate the distribution grid h
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.46\linewidth]{test_network}
-	\caption{An example test power flow calculation plot with line loading results. Here, one static generator is active out of four. The example network has generic coordinates instead of geographical, as seen in the rest of the plots in this paper.}
+	\caption[Example power flow network with generic coordinates]{An example power flow calculation plot with line loading results. Here, one static generator is active out of four. The example network has generic coordinates instead of geographical, as seen in the rest of the plots in this paper.}
 	\label{test_network}
 \end{figure}
 
@@ -94,7 +103,7 @@ Eventually, the abstract example network got superseded by the benchmark Europea
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.6\linewidth]{EU_LV_test_feeder}
-	\caption{European Low Voltage Test Feeder network illustration. The blue dots are the active busses, representing households \cite{Nousdilis2017}.}
+	\caption[European Low Voltage Test Feeder layout]{European Low Voltage Test Feeder network illustration. The blue dots are the active busses, representing households \cite{Nousdilis2017}.}
 	\label{EU_LV_test_feeder}
 \end{figure}
 
@@ -151,12 +160,12 @@ In addition to the formally described python class file and jupyter data process
 \section{Network application}\label{section_network_application}
 This section builds upon the fundamental operating principles of the two classes introduced in \cref{section_data_processing}. It aims to explain the usage of the python class file in order to obtain the three scenarios for the test feeder. First, consider the following assumptions.
 
-The network used in the simulation is an alteration of the standard test feeder. The original network itself is 3-phase, which would require a different power flow model---in case of \texttt{pandapower}, that would be handled by \texttt{pandapower.pf.runpp\_3ph.runpp\_3ph()}. However, given the right circumstances, it is possible to treat a 3-phase network as single-phase; namely, if we assume that all network loads are balanced. This assumption is plausible and corresponds to most real-world households, to the extent that some power modeling software (such as BLANK) don't even include a separate 3-phase computation option for this reason. With this assumption, all loads and sgens were defined and handled as single-phase in our simulation. The network was furthermore scaled down from 3-phase by dividing all the bus voltages by $\sqrt{3}$ to arrive at its single-phase equivalent.
+The network used in the simulation is an altered version of the standard test feeder. The original network itself is 3-phase, which would require a different power flow model---in case of \texttt{pandapower}, that would be handled by \texttt{pandapower.pf.runpp\_3ph.runpp\_3ph()}. However, given the right circumstances, it is possible to treat a 3-phase network as single-phase; namely, if we assume that all network loads are balanced. This assumption is plausible and corresponds to most real-world households, to the extent that some power modeling software don't even include a separate 3-phase computation option for this reason. With this assumption, all loads and sgens were defined and handled as single-phase in our simulation. The network was furthermore scaled down from 3-phase by dividing all the bus voltages by $\sqrt{3}$ to arrive at its single-phase equivalent.
 
 The night-time bracket was chosen as \texttt{18:00:00--06:00:00} and serves as the allowed time frame for EV charging during the night. This night time is based around the common Western world business day hours, such as the standard office hours of 9 a.m. to 5 p.m. in USA; the time bracket is adjusted to account for often earlier starting hours in Europe. Hereby the EVs are assumed to be used for transportation to and from work, where charging is assumed to not be available. The chosen hours are commonly referred to as night time hours in this paper and code, even if the phrasing is applied somewhat generously.
 
-\dots Level 2 charging = 7.7kW. "In terms of the voltage levels, AC charging can be divided into Levels 1, 2 and 3 charging, where level 3 has the highest charging voltage. The Levels 1 and 2 charging facilities can be installed in a private location while setting up of Level 3 charging facilities, involving separate wiring and transformer, requires permission from utility providers and are usually built in public charging stations." \cite{Das2020} \\
-\dots\\
+One of the key factors of the simulation was the chosen sgen value. This corresponds to the charging rate of EVs, measured in kW. In terms of voltage levels---and by extension, the EV charging speed---AC charging is commonly separated into three levels. "The Levels 1 and 2 charging facilities can be installed in a private location while setting up of Level 3 charging facilities, involving separate wiring and transformer, requires permission from utility providers and are usually built in public charging stations" \cite{Das2020}. For this reason, level 2 charging was chosen. Most home charging stations that support level 2 charging usually provide an output of around 7\,kW. The most common figure on the market as of this writing seems to be 7.7\,kW, which was is why it was chosen as the sgen value.
+
 With these assumptions and adjustments to the test feeder, the following 3 case scenarios were identified and analyzed.
 
 \subsection{Critical case scenario}
@@ -167,15 +176,15 @@ This case scenario aims to address the hosting capacity of our test feeder given
 	\item Load and prepare test feeder network
 	\item Define output writer and run the timeseries
 	\item Import the voltage magnitude timeseries results
-	\item Evaluate the all-time minimum load time point
-	\item Load the network configuration for that time point
-	\item Calculate hosting capacity at the critical time point
+	\item Evaluate the all-time minimum and maximum load time points
+	\item Load the network configuration for those time points
+	\item Calculate hosting capacity at both critical time points
 \end{enumerate}
 
-Hereby, at step 8, the sgens are placed in a random network locations for a single point (minute) in time. Timeseries iteration in step 4 is used to locate that point in time, but it does not compute over any sgen values. Based on test simulations, the evaluated hosting capacity never reaches 100\% for peak load time, unlike the other two scenarios.
+Hereby, at step 8, the sgens are placed in a random network locations for two points (minutes) in time. Timeseries iteration in step 4 is used to locate those points in time, but it does not compute over any sgen values. The hosting capacity is expected to be under 100\,\% for this scenario.
 
 \subsection{Random time scenario}
-This case scenario aims to represent completely uncoordinated charging patterns over the night time window period. It's used as a control comparison for the energy community scenario. The evaluation process is similar to the critical case scenario:
+This case scenario aims to represent completely uncoordinated charging patterns over the night time window period. It's used as a comparison for the energy community scenario. The evaluation process is similar to the critical case scenario:
 \begin{enumerate}
 	\item Load and prepare dataset
 	\item Create loads and sgens night dataframes
@@ -184,7 +193,7 @@ This case scenario aims to represent completely uncoordinated charging patterns 
 	\item Define output writer and run the timeseries
 	\item Import the voltage magnitude timeseries results
 	\item Evaluate the all-time minimum load time point
-	\item[Opt:] Load network configuration for all-time minimum vm p.u. time point
+	\item[Opt:] Load network configuration for all-time minimum voltage magnitude per unit time point
 \end{enumerate}
 
 The main difference from the critical case scenario is that we load sgens in our network before we run the timeseries iteration. Since the sgens charging times are spread across the night window, all sgens can be active at one point or another. This only becomes problematic should a relatively large number of sgens happen to be charging at once. At the same time, the household load profiles may offset a potential network overload if the charging convergence happens late a night when the loads are lowest---since most people are asleep and little to no household appliances are running.
@@ -195,7 +204,7 @@ This case scenario aims to propose the concept of semi-coordinated charging, who
 
 Indeed, while there have been tremendous advancements made in making individual grid elements and devices smarter, there's yet to exist a truly unified system at scale. The internet of things (IoT) offers a glimpse into a fully synchronized smart-device architecture but this concept does not transfer to vehicles as readily, due to their mobile nature and dependence on existing infrastructure. Arguably the minimum precondition for large-scale smart EV charging mechanisms is the existence of installed smart meters in residential homes. The spread of smart meter technology has proven to be highly incentivised by progressive energy tariffs and some success has been found in countries across Europe, such as Spain adopting a Real-Time-Pricing (RTP) tariff in 2015. Unfortunately, many countries are still lagging behind the practically-feasible due to their complex governmental policies---Germany in particular has been struggling with residential smart meter roll out, despite its ambitious push towards embracing renewables. Needless to say, there still remain plenty of obstacles in the way of widespread, advanced EV charging systems.
 
-With these considerations in mind, this paper proposes the most basic, simplistic way to improve grid stability through altered charging patterns. This method in fact does not rely on the existence of smart meters or intelligent controllers and can therefore be implemented in any local network (section) in a form of a rudimentary energy community. In the scope of this paper, the concept of energy community is also simplified to its most basic premise---coordinated energy use.
+With these considerations in mind, this paper proposes the most simplistic way to improve grid stability through altered charging patterns. This method in fact does not rely on the existence of smart meters or intelligent controllers and can therefore be implemented in any local network (section) in a form of a rudimentary energy community. In the scope of this paper, the concept of energy community is also simplified to its most basic premise---coordinated energy use. As such, the method can be viewed as the first stepping-stone in transition towards smart grid EV charging. 
 
 \subsubsection{Theoretical considerations}
 
@@ -204,16 +213,16 @@ Consider the following theoretical network depicted in \cref{comm_topology}, not
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.7\linewidth]{comm_topology}
-	\caption{Pictured is a theoretical network scenario for linearly placed single-line households. The energy community aims to include every new household member.}
+	\caption[Theoretical energy community network scenario]{A theoretical network scenario for linearly placed single-line households. The energy community aims to include every new household member.}
 	\label{comm_topology}
 \end{figure}
 
 
 The linear topology of the theoretical network is reminiscent of the test feeder. Known as radial operation, this is the most widespread design in both MV and LV networks. Hereby, the North American system differs from the European in transformer placement and is not discussed further, as the application of the developed model is aimed at the European LV grid, although the results can in some extent be transferable. Furthermore, spot networks (commonly found in business and industry districts) as well as grid networks (typical for downtowns of large cities) are omitted in this theoretical scenario.
 
-The theoretical radial network demonstrates a relatively straightforward load pattern. Every consecutively added household down the line from the substation increases the overall network load; the last household $n$ acquires the network minimum in voltage magnitude in case of constant household load profiles. The goal is then to avoid the critical case scenario of network overload, which is most likely to happen at, or close to, the $n$'th household bus. Under these spacial considerations, we must distribute the sgen loads temporally so as to minimize the network load. This amounts to two conditions. First, avoid multiple sgens charging at the same time as much as possible---this is the deciding factor between the two conditions. The best case scenario is then an even distribution of sgens in time. Second, should there be a in crossover charging times, the beginning of the network line should be prioritized, since its local voltage magnitudes will be (albeit slightly) lower than those at the end of the transmission line. The crossover of charging times is guaranteed to occur for a sufficiently large $n$ and depends on charging time, which we assume is constant across all households. Next, consider the concept of coordination.
+The theoretical radial network demonstrates a relatively straightforward load pattern. Every consecutively added household down the line from the substation increases the overall network load; the last household $n$ acquires the network minimum in voltage magnitude in case of constant household load profiles. The goal is then to avoid the critical case scenario of network overload, which is most likely to happen at, or close to, the $n$'th household bus. Given these spacial considerations, we must also distribute the sgen loads temporally so as to minimize the network load. This amounts to two conditions. First, avoid multiple sgens charging at the same time as much as possible---this is the deciding factor between the two conditions. The best case scenario (generally) is an even distribution of sgens in time. Second, should there be a in crossover charging times, the beginning of the network line should be prioritized, since its local voltage magnitudes will be (albeit slightly) lower than those at the end of the transmission line. The crossover of charging times is guaranteed to occur for a sufficiently large $n$ and depends on charging time, which we assume is constant across all households. Next, consider the concept of coordination.
 
-Coordination of energy use, in the context of our energy communities, is begins with coordinating pairs. In the most primitive sense, this can be as simple as an agreement between two neighbors to not charge their EVs at the same time of day. Assuming they both come home from work around the same time and want to immediately plug in their EVs to charge, one neighbor can agree to start charging after the other one is done. This alone will have an obvious beneficial effect on grid stability but would still imply most households charging around peak grid hours in the evening. The more coordinating pairs, the better. Eventually, we can extend this idea to the entire neighborhood, thus forming an energy community. The community decides to agree on dedicated charging times for individual households based on the philosophy described above.
+Coordination of energy use, in the context of our energy communities, begins with communication between multiple parties. In the most primitive sense, this can be as simple as an agreement between two neighbors to not charge their EVs at the same time of day. Assuming they both come home from work around the same time and want to immediately plug in their EVs to charge, one neighbor can agree to start charging after the other one is done. This alone will have an obvious beneficial effect on grid stability but would still imply most households charging around peak grid hours in the evening. The more coordinating pairs, the better. Eventually, we can extend this idea to the entire neighborhood, thus forming an energy community. The community decides to agree on dedicated charging times for individual households based on the philosophy described above.
 
 Referring back to \cref{comm_topology}, the energy community decides to allocate charging times iteratively, starting from the household closest to the substation. The first household will take the charging time closest to peak grid hours in the evening, the second will take the next available time slot after the first and so on. Once all the available charging time slots per night have been filled, the time slots will cycle.
 
@@ -242,7 +251,7 @@ In the case of the test feeder, the allocated sgen charging times and cycles can
 		\texttt{05:00:00} & \texttt{05:59:00} & 4\\
 		\bottomrule
 	\end{tabular}
-	\caption{Energy community charging times for test feeder network.}
+	\caption[Energy community charging times for test feeder network]{Energy community charging times for test feeder network.}
 	\label{sgen_comm_times}
 \end{table}
 
@@ -251,7 +260,7 @@ For spacial allocation, the sequence of predefined sgen locations in \texttt{pan
 
 \chapter{Results and Discussion}
 \section{Hosting capacity}
-Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu fails)
+
 \begin{table}[htpb]
 	\centering
 	\begin{tabular}{lrrrlrrr}
@@ -268,10 +277,9 @@ Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu 
 		max & 1.050 & 1.050 & 1.050 & \dots & 1.041 & 1.041 & 1.041 \\
 		\bottomrule
 	\end{tabular}
-	\caption{Example simulation timeseries results.}
+	\caption[Example simulation timeseries results]{Example simulation timeseries results.}
 \end{table}
 
-\subsection{Extreme cases analysis}
 
 
 \newpage
@@ -323,7 +331,7 @@ Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu 
 		total capacity [\%] & 10.9 & 21.8 \\
 		\bottomrule
 	\end{tabular}
-	\caption{Hosting capacity results.}
+	\caption[Hosting capacity results]{Hosting capacity results.}
 	\label{hosting_cap_stats}
 \end{table}
 
@@ -343,7 +351,7 @@ Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu 
 		max & 1.050 & 1.050 & 1.050 & 1.050 \\
 		\bottomrule
 	\end{tabular}
-	\caption{Hosting capacity voltage magnitudes in detail.}
+	\caption[Hosting capacity voltage magnitudes in detail]{Hosting capacity voltage magnitudes in detail.}
 	\label{extremes_summary}
 \end{table}
 
@@ -354,7 +362,7 @@ Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu 
 	\subfloat[\centering Random case]{{\includegraphics[width=0.45\linewidth]{random_loads_min_full} }}%
 	\qquad
 	\subfloat[\centering Energy community case]{{\includegraphics[width=0.45\linewidth]{en_comm_min_full} }}%
-	\caption{Comparison between random and energy community scenarios.}%
+	\caption[Graphical comparison between random and energy community scenarios]{Graphical comparison between random and energy community scenarios.}%
 	\label{random_vs_en_comm}%
 \end{figure}
 \FloatBarrier
@@ -371,7 +379,8 @@ Limiting factor is the voltage (line loading never exceeds 100 pct before vm pu 
 		bracket deviation [\%] & 100.8 & 75.9 & 39.5 \\
 		\bottomrule
 	\end{tabular}
-\label{random_vs_comm}
+	\label{random_vs_comm}
+	\caption[Comparison between random and energy community scenarios]{Comparison between random and energy community scenarios.}
 \end{table}
 
 Load bracket is defined as the acceptable range of bus voltage magnitude per unit. Following common network guidelines, it's taken as the open interval $(0.95\,, 1.05)$. Load bracket deviation percent is defined as:
@@ -417,7 +426,7 @@ the matrix is exactly singular---jacobian could not be solved: no clue\\
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.45\linewidth]{timeseries_module_diag.pdf}
-	\caption{The diagram shows the time series loop of the time series module. The basic functionality is compute the power flow for each time step using the given values---such as sgens or loads. Step-wise convergence will depend on several factors, such as the network parameters (i.e. load magnitudes) as well as the algorithm used for solving the power flow problem. For more module details, see the \texttt{pandapower}  \href{https://pandapower.readthedocs.io/en/v2.10.1/timeseries/timeseries_loop.html}{wiki}.}
+	\caption[\texttt{pandapower} times series module overview]{The diagram shows the time series loop of the time series module. The basic functionality is compute the power flow for each time step using the given values---such as sgens or loads. Step-wise convergence will depend on several factors, such as the network parameters (i.e. load magnitudes) as well as the algorithm used for solving the power flow problem. For more module details, see the \texttt{pandapower}  \href{https://pandapower.readthedocs.io/en/v2.10.1/timeseries/timeseries_loop.html}{wiki}.}
 	\label{timeseries_module_diag}
 \end{figure}
 

@@ -42,7 +42,7 @@ class DataAction:
         self.df = None  # comment abbreviation from hereon: df = DataFrame
         self.chunk_size = 10000  # number of datapoints in each df
         self.dfList = []
-        self.conv_fac = 1000 * 60  # convert from MW/min to W (1 min avg)
+        self.conv_fac = 1000 * 60  # convert from kW/min to W (1 min avg)
         self.night_evening_t = "18:00:00"
         self.night_morning_t = "06:00:00"
         self.night_max_t = "19:23:00"  # obtained from max_load_times.ipynb
