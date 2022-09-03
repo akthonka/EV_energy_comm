@@ -152,7 +152,7 @@ Iteration was performed over the list of sgen indices using a \texttt{for} loop.
 \subsection{Additional files}\label{subsection_additional}
 In addition to the formally described python class file and jupyter data processing notebooks, several other files were used for the simulation project. They serve as an extension to the already discussed functionality and will therefore not be covered in similar detail but deserve mentioning nonetheless.
 
-\paragraph{Bulk simulation:} Due to the random nature of the simulated load profiles selected from historical data, the results are prone to some degree of deviation. In particular, the network bus voltage minimum and maximum values in time are affected. While such deviations may not have a direct impact on the analysis of the hosting capacity evaluation, the two other scenarios---random charging time and energy community charging pattern---are more severely affected. Given the fact that our aim is to make a comparison between the random and the community scenarios, the simulation needed to be performed multiple times in order to obtain a reliable average and a convincing statement. For this purpose, a python file was created to perform bulk simulations. It follows through the same general steps described above with the inclusion of saving the voltage magnitude per unit minima (our limiting factor) to an external file per simulation per scenario. The loops are performed for 3 scenarios: random and community, as well as control, which does not include any active sgens. The results are loaded in and processed in jupyter and can be found in \cref{section_rand_vs_comm}.
+\paragraph{Bulk simulation:} Due to the random nature of the simulated load profiles selected from historical data, the results are prone to some degree of deviation. In particular, the network bus voltage minimum and maximum values in time are affected. While such deviations may not have a direct impact on the analysis of the hosting capacity evaluation, the two other scenarios---random charging time and energy community charging pattern---are more severely affected. Given the fact that our aim is to make a comparison between the random and the community scenarios, the simulation needed to be performed multiple times in order to obtain a reliable average and a convincing statement. For this purpose, a python file was created to perform bulk simulations. It follows through the same general steps described above with the inclusion of saving the vm p.u. minima (our limiting factor) to an external file per simulation per scenario. The loops are performed for 3 scenarios: random and community, as well as control, which does not include any active sgens. The results are loaded in and processed in jupyter and can be found in \cref{section_rand_vs_comm}.
 
 \paragraph{Average minima and maxima times:} As supplementary part of the analysis, the time extrema for the entire dataset were calculated. The goal was to compute the time point of highest and lowest network bus loads. The computation was performed in jupyter and follows the same data parsing principles described earlier with the addition of a running average. This is required in order to analyze the general trend and not the outlying points; for this purpose, a rolling average of 10 minutes was found to give the best results. While this computation does not directly affect the core simulation, it does justify the chosen time window as well as the starting point of the energy community algorithm. See \cref{section_improvements} for how these two points can be used to improve the proposed model.
 
@@ -193,7 +193,7 @@ This case scenario aims to represent completely uncoordinated charging patterns 
 	\item Define output writer and run the timeseries
 	\item Import the voltage magnitude timeseries results
 	\item Evaluate the all-time minimum load time point
-	\item[Opt:] Load network configuration for all-time minimum voltage magnitude per unit time point
+	\item[Opt:] Load network configuration for all-time minimum vm p.u. time point
 \end{enumerate}
 
 The main difference from the critical case scenario is that we load sgens in our network before we run the timeseries iteration. Since the sgens charging times are spread across the night window, all sgens can be active at one point or another. This only becomes problematic should a relatively large number of sgens happen to be charging at once. At the same time, the household load profiles may offset a potential network overload if the charging convergence happens late a night when the loads are lowest---since most people are asleep and little to no household appliances are running.
@@ -259,7 +259,10 @@ For spacial allocation, the sequence of predefined sgen locations in \texttt{pan
 
 
 \chapter{Results and Discussion}
+The simulation results can be divided into two groups: hosting capacity and random vs energy community comparison.
+
 \section{Hosting capacity}
+Hosting capacity calculations began by computing the time series with no sgens active. The network bus load example results can be seen in \cref{hosting_time_series_table}. As expected, the the voltage magnitude per unit drops with each bus load---hereby the extrema are sometimes shared across multiple busses (even at higher significant figure counts). The time points for voltage magnitude extremes are unique however.
 
 \begin{table}[htpb]
 	\centering
@@ -277,12 +280,13 @@ For spacial allocation, the sequence of predefined sgen locations in \texttt{pan
 		max & 1.050 & 1.050 & 1.050 & \dots & 1.041 & 1.041 & 1.041 \\
 		\bottomrule
 	\end{tabular}
-	\caption[Example simulation timeseries results]{Example simulation timeseries results.}
+	\caption[Example simulation timeseries results]{Example simulation timeseries results. The first bus's vm p.u. is at the upper acceptable bracket limit (both minima and maxima), whereby the last bus's vm p.u. minima is close to the middle of the bracket. This indicates that historical network loads are well suited for this network.}
+	\label{hosting_time_series_table}
 \end{table}
 
+The network graphs for hosting capacity time extremes calculation are shown in \cref{hopsting_cap_figures}. Visually, we can see a big difference in starting time points for sgen allocation. \Cref{hopsting_cap_figures_a} shows significant line stress in the bottom two branches of the network (seen in yellow), as opposed to \cref{hopsting_cap_figures_c} where the entire network is stabilized, implying less deviation between bus loads. Hereby we expect a greater hosting capacity for the maximum bus voltage time point due to its color profile homogeneity (shown in red) and a bigger maximum range of vm p.u., which would allow to accommodate more sgens at the lower branches. As far as filled sgen hosting capacity graphs are concerned, there's little visual difference between \cref{hopsting_cap_figures_b} and \cref{hopsting_cap_figures_d} at this scale. For more insight, consider numerical data in \cref{hosting_cap_stats} and \cref{extremes_summary}.
 
-
-\newpage
+\FloatBarrier
 \begin{figure*}
 	\centering
 	\begin{subfigure}[b]{0.475\textwidth}
@@ -290,7 +294,7 @@ For spacial allocation, the sequence of predefined sgen locations in \texttt{pan
 		\includegraphics[width=\textwidth]{hosting_cap_min_empty}
 		\caption[]%
 		{{\small No sgens at min bus voltage}}    
-		\label{fig:mean and std of net14}
+		\label{hopsting_cap_figures_a}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.475\textwidth}  
@@ -298,7 +302,7 @@ For spacial allocation, the sequence of predefined sgen locations in \texttt{pan
 		\includegraphics[width=\textwidth]{hosting_cap_min_full}
 		\caption[]%
 		{{\small Filled sgens at min bus voltage}}    
-		\label{fig:mean and std of net24}
+		\label{hopsting_cap_figures_b}
 	\end{subfigure}
 	\vskip\baselineskip
 	\begin{subfigure}[b]{0.475\textwidth}   
@@ -306,7 +310,7 @@ For spacial allocation, the sequence of predefined sgen locations in \texttt{pan
 		\includegraphics[width=\textwidth]{hosting_cap_max_empty}
 		\caption[]%
 		{{\small No sgens at max bus voltage}}    
-		\label{fig:mean and std of net34}
+		\label{hopsting_cap_figures_c}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.475\textwidth}   
@@ -314,12 +318,15 @@ For spacial allocation, the sequence of predefined sgen locations in \texttt{pan
 		\includegraphics[width=\textwidth]{hosting_cap_max_full}
 		\caption[]%
 		{{\small Filled sgens at max bus voltage}}    
-		\label{fig:mean and std of net44}
+		\label{hopsting_cap_figures_d}
 	\end{subfigure}
 	\caption[Comparison of hosting capacities for time extremes]
-	{\small Comparison between hosting capacity during minimum and maximum load times with and without sgens.} 
-	\label{fig:mean and std of nets}
+	{\small Comparison between hosting capacity during minimum (subfigures (a) and (b)) and maximum (subfigures (c) and (d)) load times with and without sgens.} 
+	\label{hopsting_cap_figures}
 \end{figure*}
+\FloatBarrier
+
+The key results of the hosting capacity simulations are summarized in \cref{hosting_cap_stats}.
 
 \begin{table}[htpb]
 	\centering
@@ -355,7 +362,7 @@ For spacial allocation, the sequence of predefined sgen locations in \texttt{pan
 	\label{extremes_summary}
 \end{table}
 
-\section{Random vs energy community}\label{section_rand_vs_comm}
+\section{Random vs energy community comparison}\label{section_rand_vs_comm}
 \FloatBarrier
 \begin{figure}[htpb]
 	\centering
