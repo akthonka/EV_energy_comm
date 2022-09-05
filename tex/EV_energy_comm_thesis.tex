@@ -206,7 +206,7 @@ Indeed, while there have been tremendous advancements made in making individual 
 
 With these considerations in mind, this paper proposes the most simplistic way to improve grid stability through altered charging patterns. This method in fact does not rely on the existence of smart meters or intelligent controllers and can therefore be implemented in any local network (section) in a form of a rudimentary energy community. In the scope of this paper, the concept of energy community is also simplified to its most basic premise---coordinated energy use. As such, the method can be viewed as the first stepping-stone in transition towards smart grid EV charging. 
 
-\subsubsection{Theoretical considerations}
+\subsubsection{Theoretical considerations}\label{subsubsection_theoretical_con}
 
 Consider the following theoretical network depicted in \cref{comm_topology}, not dissimilar from the original test case network.
 
@@ -292,7 +292,7 @@ The network graphs for hosting capacity time extremes calculation are shown in \
 	\begin{subfigure}[b]{0.475\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{hosting_cap_min_empty}
-		\caption[]%
+		\caption[]
 		{{\small No sgens at min bus voltage}}    
 		\label{hopsting_cap_figures_a}
 	\end{subfigure}
@@ -300,7 +300,7 @@ The network graphs for hosting capacity time extremes calculation are shown in \
 	\begin{subfigure}[b]{0.475\textwidth}  
 		\centering 
 		\includegraphics[width=\textwidth]{hosting_cap_min_full}
-		\caption[]%
+		\caption[]
 		{{\small Filled sgens at min bus voltage}}    
 		\label{hopsting_cap_figures_b}
 	\end{subfigure}
@@ -308,7 +308,7 @@ The network graphs for hosting capacity time extremes calculation are shown in \
 	\begin{subfigure}[b]{0.475\textwidth}   
 		\centering 
 		\includegraphics[width=\textwidth]{hosting_cap_max_empty}
-		\caption[]%
+		\caption[]
 		{{\small No sgens at max bus voltage}}    
 		\label{hopsting_cap_figures_c}
 	\end{subfigure}
@@ -316,7 +316,7 @@ The network graphs for hosting capacity time extremes calculation are shown in \
 	\begin{subfigure}[b]{0.475\textwidth}   
 		\centering 
 		\includegraphics[width=\textwidth]{hosting_cap_max_full}
-		\caption[]%
+		\caption[]
 		{{\small Filled sgens at max bus voltage}}    
 		\label{hopsting_cap_figures_d}
 	\end{subfigure}
@@ -372,17 +372,33 @@ With this discussion we arrive at the transitional phase of semi-smart charging 
 
 
 \section{Random vs energy community comparison}\label{section_rand_vs_comm}
+This section puts the energy community algorithm to the test against a random charging pattern. A representative graphical result is shown in \cref{random_vs_en_comm}.
+
 \FloatBarrier
-\begin{figure}[htpb]
+\begin{figure*}[htpb]
 	\centering
-	\subfloat[\centering Random case]{{\includegraphics[width=0.45\linewidth]{random_loads_min_full} }}%
-	\qquad
-	\subfloat[\centering Energy community case]{{\includegraphics[width=0.45\linewidth]{en_comm_min_full} }}%
-	\caption[Graphical comparison between random and energy community scenarios]{Graphical comparison between random and energy community scenarios.}%
-	\label{random_vs_en_comm}%
-\end{figure}
+	\begin{subfigure}[b]{0.475\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{random_loads_min_full}
+		\caption[]
+		{{\small Random scenario}}    
+		\label{random_vs_en_comm_a}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.475\textwidth}  
+		\centering 
+		\includegraphics[width=\textwidth]{en_comm_min_full}
+		\caption[]
+		{{\small Energy community scenario}}    
+		\label{random_vs_en_comm_b}
+	\end{subfigure}
+	\caption[Comparison of hosting capacities for time extremes]
+	{\small Graphical comparison between random and energy community scenarios.} 
+	\label{random_vs_en_comm}
+\end{figure*}
 \FloatBarrier
 
+The random scenario represents an uncoordinated charging pattern with all 55 households charging at some point during the night window. While the spacio-temporal allocation of sgens is random, we can expect results generally similar to those shown in \cref{random_vs_en_comm_a}. A defining characteristic of this scenario is the local maximum line load on the lowest branch (seen in darker blue). This corresponds with our theoretical network model characteristic in \cref{subsubsection_theoretical_con} and outlines one of the biggest weaknesses of radial operation topology. It is reassuring to then see a visual improvement in this area in \cref{random_vs_en_comm_b}. The lower branch load has a considerably more even color gradient indicating a more even distribution of loads at a lower voltage magnitude. Interestingly, the local minimum for the energy community scenario is located on a different branch to that of the random community scenario, slightly higher up the sgen list (closer towards the substation). Even then, that upper branch is still showing a lower bus voltage throughout in comparison to the random scenario's lower branch.
 
 \begin{table}[htpb]
 	\centering
@@ -395,11 +411,15 @@ With this discussion we arrive at the transitional phase of semi-smart charging 
 		bracket deviation [\%] & 100.8 & 75.9 & 39.5 \\
 		\bottomrule
 	\end{tabular}
-	\label{random_vs_comm}
 	\caption[Comparison between random and energy community scenarios]{Comparison between random and energy community scenarios.}
+	\label{table_random_vs_comm}
 \end{table}
 
-Load bracket is defined as the acceptable range of bus voltage magnitude per unit. Following common network guidelines, it's taken as the open interval $(0.95\,, 1.05)$. Load bracket deviation percent is defined as:
+The numerical representation of the bulk simulation results is given in \cref{table_random_vs_comm}. The raw data gives us the average minimum vm p.u. for both random and energy community scenarios; an additional control scenario represents a test feeder with no sgens active for comparison.\\
+
+OVERLOADING?--------------------------------------\\
+
+The results are additionally interpreted via the so-called bracket deviation metric in this paper. Recall that the load bracket is defined as the acceptable range of bus voltage magnitude per unit. Following common network guidelines, it's taken as the open interval $(0.95\,, 1.05)$. Load bracket deviation percent hereby is defined as:
 
 \begin{equation}
 	\text{Deviation [\%]} = \frac{\text{upper bracket} - \text{average voltage}}{\text{upper bracket}-\text{lower bracket}}\times 100

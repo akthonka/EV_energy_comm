@@ -29,8 +29,8 @@
 \contentsline {chapter}{\numberline {4}Results and Discussion}{13}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Hosting capacity}{13}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Random vs energy community comparison}{16}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Suggested improvements}{16}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Assumptions}{16}{subsection.4.3.1}%
+\contentsline {section}{\numberline {4.3}Suggested improvements}{17}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Assumptions}{17}{subsection.4.3.1}%
 \contentsline {subsection}{\numberline {4.3.2}Method}{17}{subsection.4.3.2}%
 \contentsline {paragraph}{Spacial:}{17}{subsection.4.3.2}%
 \contentsline {paragraph}{Temporal:}{17}{subsection.4.3.2}%
