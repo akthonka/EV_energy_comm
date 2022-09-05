@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  5 SEP 2022 15:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  5 SEP 2022 20:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -812,81 +812,58 @@ File: images//en_comm_min_full.png Graphic file (type png)
 <use images//en_comm_min_full.png>
 Package pdftex.def Info: images//en_comm_min_full.png  used on input line 390.
 (pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
- [15]
-Underfull \hbox (badness 10000) in paragraph at lines 418--419
+ [15] [16 <./images//random_loads_min_full.png> <./images//en_comm_min_full.png
+>] [17]
+Underfull \hbox (badness 10000) in paragraph at lines 457--459
 
  []
 
-[16 <./images//random_loads_min_full.png> <./images//en_comm_min_full.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 420--421
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 432--436
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 439--440
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 441--442
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 449--452
-
- []
-
-[17]
+[18]
 Chapter 5.
-(EV_energy_comm_thesis.bbl [18
+(EV_energy_comm_thesis.bbl [19
 
-]) [19
+]) [20
 
 ]
-<images//timeseries_module_diag.pdf, id=386, 387.85046pt x 643.9107pt>
+<images//timeseries_module_diag.pdf, id=394, 387.85046pt x 643.9107pt>
 File: images//timeseries_module_diag.pdf Graphic file (type pdf)
 <use images//timeseries_module_diag.pdf>
 Package pdftex.def Info: images//timeseries_module_diag.pdf  used on input line
- 464.
+ 478.
 (pdftex.def)             Requested size: 188.21288pt x 312.47316pt.
- [20
+ [21
 
  <./images//timeseries_module_diag.pdf>] (EV_energy_comm_thesis.aux)
 Package rerunfilecheck Info: File `EV_energy_comm_thesis.out' has not changed.
-(rerunfilecheck)             Checksum: A857D8505C75677E5071659DF9EED039;3268.
+(rerunfilecheck)             Checksum: 45F14A12B2C6E017E201E6AB76742B1B;3528.
  ) 
 Here is how much of TeX's memory you used:
- 21164 strings out of 477843
- 412275 string characters out of 2833414
+ 21170 strings out of 477843
+ 412373 string characters out of 2833414
  717334 words of memory out of 3000000
- 39728 multiletter control sequences out of 15000+600000
- 490594 words of font info for 85 fonts, out of 8000000 for 9000
+ 39732 multiletter control sequences out of 15000+600000
+ 490929 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,8n,87p,1306b,948s stack positions out of 10000i,1000n,20000p,200000b,80000s
  <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti
 1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
-0\ecrm0900.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
-/dpi600\ecbx1200.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
-pen/ec/dpi600\ecbx1440.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour
-/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/
-ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fon
-ts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\panto\AppData\Local\MiKT
-eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\panto\AppData\Loca
-l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\panto\AppDat
-a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\panto\
-AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk><C:/Program
- Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTe
-X/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1
-/public/amsfonts/cm/cmsy10.pfb>
-Output written on EV_energy_comm_thesis.pdf (25 pages, 955363 bytes).
+0\tcrm1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
+/dpi600\ecrm0900.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
+pen/ec/dpi600\ecbx1200.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour
+/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/
+ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fon
+ts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\panto\AppData\Local\MiKT
+eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\panto\AppData\Loca
+l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\panto\AppDat
+a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\panto\
+AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\
+panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk><C:/P
+rogram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files
+/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on EV_energy_comm_thesis.pdf (26 pages, 960190 bytes).
 PDF statistics:
- 901 PDF objects out of 1000 (max. 8388607)
- 82 named destinations out of 1000 (max. 500000)
+ 910 PDF objects out of 1000 (max. 8388607)
+ 83 named destinations out of 1000 (max. 500000)
  243 words of extra memory for PDF output out of 10000 (max. 10000000)
 

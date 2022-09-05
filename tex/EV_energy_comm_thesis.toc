@@ -30,10 +30,10 @@
 \contentsline {section}{\numberline {4.1}Hosting capacity}{13}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Random vs energy community comparison}{16}{section.4.2}%
 \contentsline {section}{\numberline {4.3}Suggested improvements}{17}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Assumptions}{17}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Method}{17}{subsection.4.3.2}%
-\contentsline {paragraph}{Spacial:}{17}{subsection.4.3.2}%
-\contentsline {paragraph}{Temporal:}{17}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Code}{17}{subsection.4.3.3}%
-\contentsline {chapter}{\numberline {5}Conclusion}{18}{chapter.5}%
-\contentsline {chapter}{Appendix}{20}{chapter*.16}%
+\contentsline {subsection}{\numberline {4.3.1}General simulation assumptions}{17}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Energy community algorithm}{18}{subsection.4.3.2}%
+\contentsline {paragraph}{Spacial:}{18}{subsection.4.3.2}%
+\contentsline {paragraph}{Temporal:}{18}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Code specifics}{18}{subsection.4.3.3}%
+\contentsline {chapter}{\numberline {5}Conclusion}{19}{chapter.5}%
+\contentsline {chapter}{Appendix}{21}{chapter*.16}%

@@ -95,7 +95,7 @@ def simulate(cycles, scenario):
 
 # run simulation
 print("Beginnig simualation...")
-cycles = 10
+cycles = 100
 path = "..\\results\\"
 
 res1 = simulate(cycles, "random")
