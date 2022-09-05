@@ -259,10 +259,10 @@ For spacial allocation, the sequence of predefined sgen locations in \texttt{pan
 
 
 \chapter{Results and Discussion}
-The simulation results can be divided into two groups: hosting capacity and random vs energy community comparison.
+The simulation results can be divided into two groups: hosting capacity and random vs energy community scenarios comparison.
 
 \section{Hosting capacity}
-Hosting capacity calculations began by computing the time series with no sgens active. The network bus load example results can be seen in \cref{hosting_time_series_table}. As expected, the the voltage magnitude per unit drops with each bus load---hereby the extrema are sometimes shared across multiple busses (even at higher significant figure counts). The time points for voltage magnitude extremes are unique however.
+Hosting capacity calculations began by computing the time series with no sgens active. The network bus load example results can be seen in \cref{hosting_time_series_table}. As expected, the the voltage magnitude per unit drops with each bus load---hereby the extrema are sometimes shared across multiple busses (even at higher significant figure counts). The time points for voltage magnitude extremes are unique however, which leads to two cases: minimum bus vm p.u and maximum bus vm p.u.
 
 \begin{table}[htpb]
 	\centering
@@ -280,11 +280,11 @@ Hosting capacity calculations began by computing the time series with no sgens a
 		max & 1.050 & 1.050 & 1.050 & \dots & 1.041 & 1.041 & 1.041 \\
 		\bottomrule
 	\end{tabular}
-	\caption[Example simulation timeseries results]{Example simulation timeseries results. The first bus's vm p.u. is at the upper acceptable bracket limit (both minima and maxima), whereby the last bus's vm p.u. minima is close to the middle of the bracket. This indicates that historical network loads are well suited for this network.}
+	\caption[Example simulation timeseries results]{Example simulation timeseries results. The first bus's vm p.u. is at the upper acceptable bracket limit (both minima and maxima), whereby the last bus's vm p.u. minima is close to the middle of the bracket, which is optimal. This indicates that historical network loads are well suited for this network.}
 	\label{hosting_time_series_table}
 \end{table}
 
-The network graphs for hosting capacity time extremes calculation are shown in \cref{hopsting_cap_figures}. Visually, we can see a big difference in starting time points for sgen allocation. \Cref{hopsting_cap_figures_a} shows significant line stress in the bottom two branches of the network (seen in yellow), as opposed to \cref{hopsting_cap_figures_c} where the entire network is stabilized, implying less deviation between bus loads. Hereby we expect a greater hosting capacity for the maximum bus voltage time point due to its color profile homogeneity (shown in red) and a bigger maximum range of vm p.u., which would allow to accommodate more sgens at the lower branches. As far as filled sgen hosting capacity graphs are concerned, there's little visual difference between \cref{hopsting_cap_figures_b} and \cref{hopsting_cap_figures_d} at this scale. For more insight, consider numerical data in \cref{hosting_cap_stats} and \cref{extremes_summary}.
+The network graphs for hosting capacity time extremes calculation are shown in \cref{hopsting_cap_figures}. Visually, we can see a big difference in color profiles for cases with different starting time points. \Cref{hopsting_cap_figures_a} shows significant line stress in the bottom two branches of the network (seen in yellow), as opposed to \cref{hopsting_cap_figures_c} where the entire network is stabilized, implying less deviation between bus loads. Hereby we expect a greater hosting capacity for the maximum bus voltage time point case due to its color profile homogeneity (shown in red) and a bigger maximum range of vm p.u., which would allow to accommodate more sgens at the lower branches. As far as filled sgen hosting capacity graphs are concerned, there's little visual difference between \cref{hopsting_cap_figures_b} and \cref{hopsting_cap_figures_d} at this scale. For more insight, consider numerical data in \cref{extremes_summary} and \cref{hosting_cap_stats}.
 
 \FloatBarrier
 \begin{figure*}
@@ -321,26 +321,12 @@ The network graphs for hosting capacity time extremes calculation are shown in \
 		\label{hopsting_cap_figures_d}
 	\end{subfigure}
 	\caption[Comparison of hosting capacities for time extremes]
-	{\small Comparison between hosting capacity during minimum (subfigures (a) and (b)) and maximum (subfigures (c) and (d)) load times with and without sgens.} 
+	{\small Comparison between hosting capacity during minimum (subfigures (a) and (b)) and maximum (subfigures (c) and (d)) load time cases with and without sgens.} 
 	\label{hopsting_cap_figures}
 \end{figure*}
 \FloatBarrier
 
-The key results of the hosting capacity simulations are summarized in \cref{hosting_cap_stats}.
-
-\begin{table}[htpb]
-	\centering
-	\begin{tabular}{lcc}
-		\toprule
-		& Minimum bus voltage & Maximum bus voltage \\
-		\midrule
-		number of sgens & 6 & 12 \\
-		total capacity [\%] & 10.9 & 21.8 \\
-		\bottomrule
-	\end{tabular}
-	\caption[Hosting capacity results]{Hosting capacity results.}
-	\label{hosting_cap_stats}
-\end{table}
+The details of time point cases for each network are shown in \cref{extremes_summary}. We can see a significant difference in minimum vm p.u. values between the "Min bus empty" and "Max bus empty" cases. This is a numerical indication of a greater hosting capacity potential for the maximum time point case. For the columns "Min bus full" and "Max bus full", we observe no significant difference between the two min values---this indicates that the maximum hosting capacity has been reached in both cases at a vm p.u. lower bracket.
 
 \begin{table}[htpb]
 	\centering
@@ -361,6 +347,29 @@ The key results of the hosting capacity simulations are summarized in \cref{host
 	\caption[Hosting capacity voltage magnitudes in detail]{Hosting capacity voltage magnitudes in detail.}
 	\label{extremes_summary}
 \end{table}
+
+The key results of the hosting capacity simulations are summarized in \cref{hosting_cap_stats}.
+
+\begin{table}[htpb]
+	\centering
+	\begin{tabular}{lcc}
+		\toprule
+		& Minimum bus voltage & Maximum bus voltage \\
+		\midrule
+		number of sgens & 6 & 12 \\
+		total capacity [\%] & 10.9 & 21.8 \\
+		\bottomrule
+	\end{tabular}
+	\caption[Hosting capacity results]{Hosting capacity results.}
+	\label{hosting_cap_stats}
+\end{table}
+
+The scenario results show a rather low hosting capacity for both time point cases. As expected, the best case of maximum bus voltage has a significantly better hosting capacity---about double that of the worst case of minimum bus voltage. In a way, this is alarming because the probability of a network overload is definitely not negligible: it only takes $\approx10\,\%$ of all households to charge their EVs during peak hours to cause a potential brownout/blackout. Furthermore, this time point is the most probable charging time point for any given individual under our assumptions of European work hours; without the presence of smart meters, a person is most likely to park their EV and set it to charge immediately. Considering the habitual nature of human actions, a network overload is only a matter of time in this case.
+
+That being said, the issue can be easily avoided with relatively little intervention. Undoubtedly, all EV chargers do (and if not, will soon) include a time setting option, which is very easy to implement. Hereby, an EV owner only needs to enable and setup the charging hour parameter once, which is a matter of seconds. At the same time, one cannot deny that not everyone will bother to do so, nor that any potential software/firmware updates will reset the setting. As such, one is able to compensate for technological shortcomings (i.e. lack of smart EV charging) with conscious human intervention (i.e. manually setting the EV to charge outside of peak hours) and vice versa.
+
+With this discussion we arrive at the transitional phase of semi-smart charging and the comparison between uncoordinated and semi-coordinated scenarios.
+
 
 \section{Random vs energy community comparison}\label{section_rand_vs_comm}
 \FloatBarrier

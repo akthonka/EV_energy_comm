@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  3 SEP 2022 16:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  5 SEP 2022 11:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -801,34 +801,34 @@ Package pdftex.def Info: images//hosting_cap_max_full.png  used on input line 3
 
 ] [14 <./images//hosting_cap_min_empty.png> <./images//hosting_cap_min_full.png
 > <./images//hosting_cap_max_empty.png> <./images//hosting_cap_max_full.png>]
-<images//random_loads_min_full.png, id=351, 702.625pt x 683.55376pt>
+<images//random_loads_min_full.png, id=352, 702.625pt x 683.55376pt>
 File: images//random_loads_min_full.png Graphic file (type png)
 <use images//random_loads_min_full.png>
 Package pdftex.def Info: images//random_loads_min_full.png  used on input line 
-369.
+378.
 (pdftex.def)             Requested size: 188.21288pt x 183.10176pt.
-<images//en_comm_min_full.png, id=352, 702.625pt x 683.55376pt>
+<images//en_comm_min_full.png, id=353, 702.625pt x 683.55376pt>
 File: images//en_comm_min_full.png Graphic file (type png)
 <use images//en_comm_min_full.png>
-Package pdftex.def Info: images//en_comm_min_full.png  used on input line 371.
+Package pdftex.def Info: images//en_comm_min_full.png  used on input line 380.
 (pdftex.def)             Requested size: 188.21288pt x 183.10176pt.
  [15]
-Underfull \hbox (badness 10000) in paragraph at lines 403--407
+Underfull \hbox (badness 10000) in paragraph at lines 412--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 410--411
+Underfull \hbox (badness 10000) in paragraph at lines 419--420
 
  []
 
 [16 <./images//random_loads_min_full.png> <./images//en_comm_min_full.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 412--413
+Underfull \hbox (badness 10000) in paragraph at lines 421--422
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 420--423
+Underfull \hbox (badness 10000) in paragraph at lines 429--432
 
  []
 
@@ -839,11 +839,11 @@ Chapter 5.
 ]) [19
 
 ]
-<images//timeseries_module_diag.pdf, id=380, 387.85046pt x 643.9107pt>
+<images//timeseries_module_diag.pdf, id=381, 387.85046pt x 643.9107pt>
 File: images//timeseries_module_diag.pdf Graphic file (type pdf)
 <use images//timeseries_module_diag.pdf>
 Package pdftex.def Info: images//timeseries_module_diag.pdf  used on input line
- 435.
+ 444.
 (pdftex.def)             Requested size: 188.21288pt x 312.47316pt.
  [20
 
@@ -858,7 +858,7 @@ Here is how much of TeX's memory you used:
  39718 multiletter control sequences out of 15000+600000
  490594 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,8n,87p,1306b,947s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 72i,8n,87p,1306b,950s stack positions out of 10000i,1000n,20000p,200000b,80000s
  <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti
 1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
 0\ecrm0900.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
@@ -874,9 +874,9 @@ AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk><C:/Program
  Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTe
 X/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1
 /public/amsfonts/cm/cmsy10.pfb>
-Output written on EV_energy_comm_thesis.pdf (25 pages, 948808 bytes).
+Output written on EV_energy_comm_thesis.pdf (25 pages, 952623 bytes).
 PDF statistics:
- 894 PDF objects out of 1000 (max. 8388607)
+ 895 PDF objects out of 1000 (max. 8388607)
  82 named destinations out of 1000 (max. 500000)
  243 words of extra memory for PDF output out of 10000 (max. 10000000)
 
