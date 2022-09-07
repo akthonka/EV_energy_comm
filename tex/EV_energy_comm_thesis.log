@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  5 SEP 2022 20:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  7 SEP 2022 19:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -583,36 +583,60 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
 )
+(C:\Program Files\MiKTeX\tex/latex/listings\listings.sty
+\lst@mode=\count325
+\lst@gtempboxa=\box67
+\lst@token=\toks31
+\lst@length=\count326
+\lst@currlwidth=\dimen269
+\lst@column=\count327
+\lst@pos=\count328
+\lst@lostspace=\dimen270
+\lst@width=\dimen271
+\lst@newlines=\count329
+\lst@lineno=\count330
+\lst@maxwidth=\dimen272
+
+(C:\Program Files\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count331
+\lst@skipnumbers=\count332
+\lst@framebox=\box68
+)
+(C:\Program Files\MiKTeX\tex/latex/listings\listings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
+))
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
 Package translations Info: No language package found. I am going to use `englis
-h' as default language. on input line 40.
+h' as default language. on input line 66.
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
 
 
 Package csquotes Warning: No multilingual support.
-(csquotes)                Cannot enable multilingual quotes on input line 40.
+(csquotes)                Cannot enable multilingual quotes on input line 66.
 
 (EV_energy_comm_thesis.aux)
 \openout1 = `EV_energy_comm_thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -650,17 +674,17 @@ LaTeX Font Info:    ... okay on input line 40.
 
 (C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count325
-\scratchdimen=\dimen269
-\scratchbox=\box67
-\nofMPsegments=\count326
-\nofMParguments=\count327
-\everyMPshowfont=\toks31
-\MPscratchCnt=\count328
-\MPscratchDim=\dimen270
-\MPnumerator=\count329
-\makeMPintoPDFobject=\count330
-\everyMPtoPDFconversion=\toks32
+\scratchcounter=\count333
+\scratchdimen=\dimen273
+\scratchbox=\box69
+\nofMPsegments=\count334
+\nofMParguments=\count335
+\everyMPshowfont=\toks32
+\MPscratchCnt=\count336
+\MPscratchDim=\dimen274
+\MPnumerator=\count337
+\makeMPintoPDFobject=\count338
+\everyMPtoPDFconversion=\toks33
 ) (C:\Program Files\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -671,9 +695,10 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 
-Package chemgreek Info: Activating mapping `default' on line 40.
+Package chemgreek Info: Activating mapping `default' on line 66.
 
 
 (C:\Users\panto\AppData\Roaming\MiKTeX\tex/latex/translations/dicts\translation
@@ -682,19 +707,20 @@ File: translations-basic-dictionary-english.trsl (english translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `english'. on input line 40.
-Package hyperref Info: Link coloring ON on input line 40.
+or `english'. on input line 66.
+Package hyperref Info: Link coloring ON on input line 66.
  (EV_energy_comm_thesis.out)
 (EV_energy_comm_thesis.out)
 \@outlinefile=\write3
 \openout3 = `EV_energy_comm_thesis.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 56.
+\c@lstlisting=\count339
+LaTeX Font Info:    Trying to load font information for U+msa on input line 82.
 
  (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 56.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 82.
 
  (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -710,8 +736,8 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [2
 
 ] (EV_energy_comm_thesis.lof
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
-1.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 8
+.
 
 (C:\Program Files\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
@@ -732,138 +758,177 @@ File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 
 ]
 Chapter 1.
+<images//ev_state_support_mech.png, id=188, 1334.73656pt x 834.86906pt>
+File: images//ev_state_support_mech.png Graphic file (type png)
+<use images//ev_state_support_mech.png>
+Package pdftex.def Info: images//ev_state_support_mech.png  used on input line 
+108.
+(pdftex.def)             Requested size: 418.25368pt x 261.60933pt.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.79 \chapter
-             {Literature Review}\label{section_literature_review} [1
+l.113 \chapter
+              {Related Work} [1
 
 
-]
+ <./images//ev_state_support_mech.png>]
 Chapter 2.
+<images//control_strats_charging.png, id=200, 1562.08594pt x 683.55376pt>
+File: images//control_strats_charging.png Graphic file (type png)
+<use images//control_strats_charging.png>
+Package pdftex.def Info: images//control_strats_charging.png  used on input lin
+e 119.
+(pdftex.def)             Requested size: 418.25368pt x 183.01831pt.
+<images//centralized_vs_decentr_ctrl.png, id=203, 1590.69281pt x 752.8125pt>
+File: images//centralized_vs_decentr_ctrl.png Graphic file (type png)
+<use images//centralized_vs_decentr_ctrl.png>
+Package pdftex.def Info: images//centralized_vs_decentr_ctrl.png  used on input
+ line 126.
+(pdftex.def)             Requested size: 418.25368pt x 197.93213pt.
 [2
 
-]
+ <./images//control_strats_charging.png>] [3 <./images//centralized_vs_decentr_
+ctrl.png>] [4]
 Chapter 3.
-<images//test_network.png, id=187, 550.055pt x 431.6125pt>
+<images//test_network.png, id=248, 550.055pt x 431.6125pt>
 File: images//test_network.png Graphic file (type png)
 <use images//test_network.png>
-Package pdftex.def Info: images//test_network.png  used on input line 90.
+Package pdftex.def Info: images//test_network.png  used on input line 187.
 (pdftex.def)             Requested size: 192.39949pt x 150.96783pt.
-[3
+[5
 
  <./images//test_network.png>]
-<images//EU_LV_test_feeder.png, id=200, 696.6025pt x 420.57124pt>
+<images//EU_LV_test_feeder.png, id=259, 696.6025pt x 420.57124pt>
 File: images//EU_LV_test_feeder.png Graphic file (type png)
 <use images//EU_LV_test_feeder.png>
-Package pdftex.def Info: images//EU_LV_test_feeder.png  used on input line 105.
+Package pdftex.def Info: images//EU_LV_test_feeder.png  used on input line 202.
 
 (pdftex.def)             Requested size: 250.95476pt x 151.50821pt.
- [4 <./images//EU_LV_test_feeder.png>] [5]
-[6] [7] [8] [9] [10]
-
-pdfTeX warning: pdflatex (file ./images//comm_topology.pdf): PDF inclusion: fou
-nd PDF version <1.7>, but at most version <1.5> allowed
-<images//comm_topology.pdf, id=265, 690.74057pt x 322.07326pt>
-File: images//comm_topology.pdf Graphic file (type pdf)
-<use images//comm_topology.pdf>
-Package pdftex.def Info: images//comm_topology.pdf  used on input line 215.
-(pdftex.def)             Requested size: 292.77629pt x 136.51318pt.
-[11 <./images//comm_topology.pdf>] [12]
-Chapter 4.
-<images//hosting_cap_min_empty.png, id=332, 702.625pt x 683.55376pt>
-File: images//hosting_cap_min_empty.png Graphic file (type png)
-<use images//hosting_cap_min_empty.png>
-Package pdftex.def Info: images//hosting_cap_min_empty.png  used on input line 
-294.
-(pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
-<images//hosting_cap_min_full.png, id=333, 702.625pt x 683.55376pt>
-File: images//hosting_cap_min_full.png Graphic file (type png)
-<use images//hosting_cap_min_full.png>
-Package pdftex.def Info: images//hosting_cap_min_full.png  used on input line 3
-02.
-(pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
-<images//hosting_cap_max_empty.png, id=334, 702.625pt x 683.55376pt>
-File: images//hosting_cap_max_empty.png Graphic file (type png)
-<use images//hosting_cap_max_empty.png>
-Package pdftex.def Info: images//hosting_cap_max_empty.png  used on input line 
-310.
-(pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
-<images//hosting_cap_max_full.png, id=335, 702.625pt x 683.55376pt>
-File: images//hosting_cap_max_full.png Graphic file (type png)
-<use images//hosting_cap_max_full.png>
-Package pdftex.def Info: images//hosting_cap_max_full.png  used on input line 3
-18.
-(pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
-[13
-
-] [14 <./images//hosting_cap_min_empty.png> <./images//hosting_cap_min_full.png
-> <./images//hosting_cap_max_empty.png> <./images//hosting_cap_max_full.png>]
-<images//random_loads_min_full.png, id=353, 702.625pt x 683.55376pt>
-File: images//random_loads_min_full.png Graphic file (type png)
-<use images//random_loads_min_full.png>
-Package pdftex.def Info: images//random_loads_min_full.png  used on input line 
-382.
-(pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
-<images//en_comm_min_full.png, id=354, 702.625pt x 683.55376pt>
-File: images//en_comm_min_full.png Graphic file (type png)
-<use images//en_comm_min_full.png>
-Package pdftex.def Info: images//en_comm_min_full.png  used on input line 390.
-(pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
- [15] [16 <./images//random_loads_min_full.png> <./images//en_comm_min_full.png
->] [17]
-Underfull \hbox (badness 10000) in paragraph at lines 457--459
-
- []
-
-[18]
-Chapter 5.
-(EV_energy_comm_thesis.bbl [19
-
-]) [20
-
-]
-<images//timeseries_module_diag.pdf, id=394, 387.85046pt x 643.9107pt>
+ [6 <./images//EU_LV_test_feeder.png>] [7]
+[8]
+<images//timeseries_module_diag.pdf, id=282, 387.85046pt x 643.9107pt>
 File: images//timeseries_module_diag.pdf Graphic file (type pdf)
 <use images//timeseries_module_diag.pdf>
 Package pdftex.def Info: images//timeseries_module_diag.pdf  used on input line
- 478.
-(pdftex.def)             Requested size: 188.21288pt x 312.47316pt.
- [21
+ 243.
+(pdftex.def)             Requested size: 133.84424pt x 222.20837pt.
+ [9 <./images//timeseries_module_diag.pdf>] [10] [11] [12] [13]
 
- <./images//timeseries_module_diag.pdf>] (EV_energy_comm_thesis.aux)
+pdfTeX warning: pdflatex (file ./images//comm_topology.pdf): PDF inclusion: fou
+nd PDF version <1.7>, but at most version <1.5> allowed
+<images//comm_topology.pdf, id=356, 690.74057pt x 322.07326pt>
+File: images//comm_topology.pdf Graphic file (type pdf)
+<use images//comm_topology.pdf>
+Package pdftex.def Info: images//comm_topology.pdf  used on input line 320.
+(pdftex.def)             Requested size: 292.77629pt x 136.51318pt.
+[14 <./images//comm_topology.pdf>] [15]
+Chapter 4.
+<images//hosting_cap_min_empty.png, id=423, 702.625pt x 683.55376pt>
+File: images//hosting_cap_min_empty.png Graphic file (type png)
+<use images//hosting_cap_min_empty.png>
+Package pdftex.def Info: images//hosting_cap_min_empty.png  used on input line 
+399.
+(pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
+<images//hosting_cap_min_full.png, id=424, 702.625pt x 683.55376pt>
+File: images//hosting_cap_min_full.png Graphic file (type png)
+<use images//hosting_cap_min_full.png>
+Package pdftex.def Info: images//hosting_cap_min_full.png  used on input line 4
+07.
+(pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
+<images//hosting_cap_max_empty.png, id=425, 702.625pt x 683.55376pt>
+File: images//hosting_cap_max_empty.png Graphic file (type png)
+<use images//hosting_cap_max_empty.png>
+Package pdftex.def Info: images//hosting_cap_max_empty.png  used on input line 
+415.
+(pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
+<images//hosting_cap_max_full.png, id=426, 702.625pt x 683.55376pt>
+File: images//hosting_cap_max_full.png Graphic file (type png)
+<use images//hosting_cap_max_full.png>
+Package pdftex.def Info: images//hosting_cap_max_full.png  used on input line 4
+23.
+(pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
+[16
+
+] [17 <./images//hosting_cap_min_empty.png> <./images//hosting_cap_min_full.png
+> <./images//hosting_cap_max_empty.png> <./images//hosting_cap_max_full.png>]
+<images//random_loads_min_full.png, id=442, 702.625pt x 683.55376pt>
+File: images//random_loads_min_full.png Graphic file (type png)
+<use images//random_loads_min_full.png>
+Package pdftex.def Info: images//random_loads_min_full.png  used on input line 
+487.
+(pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
+<images//en_comm_min_full.png, id=443, 702.625pt x 683.55376pt>
+File: images//en_comm_min_full.png Graphic file (type png)
+<use images//en_comm_min_full.png>
+Package pdftex.def Info: images//en_comm_min_full.png  used on input line 495.
+(pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
+ [18] [19 <./images//random_loads_min_full.png> <./images//en_comm_min_full.png
+>] [20] [21] [22]
+Chapter 5.
+(EV_energy_comm_thesis.bbl [23
+
+]) [24
+
+]
+<images//ev_grid_integ_net.png, id=487, 1295.59032pt x 866.48718pt>
+File: images//ev_grid_integ_net.png Graphic file (type png)
+<use images//ev_grid_integ_net.png>
+Package pdftex.def Info: images//ev_grid_integ_net.png  used on input line 584.
+
+(pdftex.def)             Requested size: 418.25368pt x 279.72754pt.
+ [25
+
+ <./images//ev_grid_integ_net.png>]
+(C:\Program Files\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 592.
+
+(C:/Users/panto/Documents/git/personal/EV_energy_comm/python/data_process.py
+[26] [27] [28] [29] [30] [31]) [32] (EV_energy_comm_thesis.aux)
 Package rerunfilecheck Info: File `EV_energy_comm_thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 45F14A12B2C6E017E201E6AB76742B1B;3528.
+(rerunfilecheck)             Checksum: 8548EB7D3FA52BA9F6A079E1E6EAD5A1;3802.
  ) 
 Here is how much of TeX's memory you used:
- 21170 strings out of 477843
- 412373 string characters out of 2833414
- 717334 words of memory out of 3000000
- 39732 multiletter control sequences out of 15000+600000
- 490929 words of font info for 86 fonts, out of 8000000 for 9000
+ 23689 strings out of 477843
+ 448093 string characters out of 2833414
+ 1541026 words of memory out of 3000000
+ 41755 multiletter control sequences out of 15000+600000
+ 491242 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,8n,87p,1306b,948s stack positions out of 10000i,1000n,20000p,200000b,80000s
- <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti
-1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
-0\tcrm1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
-/dpi600\ecrm0900.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
-pen/ec/dpi600\ecbx1200.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour
-/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/
-ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fon
-ts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\panto\AppData\Local\MiKT
-eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\panto\AppData\Loca
-l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\panto\AppDat
-a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\panto\
-AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\
-panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk><C:/P
-rogram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files
-/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on EV_energy_comm_thesis.pdf (26 pages, 960190 bytes).
+ 72i,14n,87p,1306b,2692s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi525\ectt
+0800.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
+0\ecrm0500.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
+/dpi600\ecti1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
+pen/ec/dpi600\tcrm1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour
+/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/
+ljfour/jknappen/ec/dpi600\ecrm0900.pk> <C:\Users\panto\AppData\Local\MiKTeX\fon
+ts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\panto\AppData\Local\MiKT
+eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\panto\AppData\Loca
+l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\panto\AppDat
+a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\panto\
+AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\
+panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\
+Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk
+> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1
+440.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600
+\ecrm1728.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb
+><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><C:/Pro
+gram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/a
+msfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+r7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/P
+rogram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX/fonts/
+type1/public/amsfonts/symbols/msam10.pfb>
+Output written on EV_energy_comm_thesis.pdf (37 pages, 4614889 bytes).
 PDF statistics:
- 910 PDF objects out of 1000 (max. 8388607)
- 83 named destinations out of 1000 (max. 500000)
- 243 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1700 PDF objects out of 1728 (max. 8388607)
+ 556 named destinations out of 1000 (max. 500000)
+ 279 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -21,6 +21,11 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
+\bibitem{Kapustin2020}
+N.~O. Kapustin and D.~A. Grushevenko, ``Long-term electric vehicles outlook and
+  their potential impact on electric grid,'' \emph{Energy Policy}, vol. 137, p.
+  111103, feb 2020.
+
 \bibitem{Das2020}
 H.~Das, M.~Rahman, S.~Li, and C.~Tan, ``Electric vehicles standards, charging
   infrastructure, and impact on grid integration: A technological review,''
@@ -32,6 +37,15 @@ G.~Gruosso, G.~S. Gajani, Z.~Zhang, L.~Daniel, and P.~Maffezzoni,
   ``Uncertainty-aware computational tools for power distribution networks
   including electrical vehicle charging and load profiles,'' \emph{{IEEE}
   Access}, vol.~7, pp. 9357--9367, 2019.
+
+\bibitem{Alturki2018}
+M.~Alturki, A.~Khodaei, A.~Paaso, and S.~Bahramirad, ``Optimization-based
+  distribution grid hosting capacity calculations,'' \emph{Applied Energy},
+  vol. 219, pp. 350--360, jun 2018.
+
+\bibitem{Albadi2020}
+M.~Albadi, ``Power flow analysis,'' in \emph{Computational Models in
+  Engineering}.\hskip 1em plus 0.5em minus 0.4em\relax {IntechOpen}, mar 2020.
 
 \bibitem{OpenPowerSystemData}
 \BIBentryALTinterwordspacing

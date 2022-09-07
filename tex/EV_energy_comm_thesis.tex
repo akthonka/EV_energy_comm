@@ -28,6 +28,32 @@
 \titleformat{\chapter}{\bfseries\LARGE}{\thechapter~}{0em}{}
 \usepackage[autostyle]{csquotes} % better quotes
 
+\usepackage{xcolor}
+\usepackage{listings} % for code
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\scriptsize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+\lstset{style=mystyle}
+
 % DARK-MODE on PDF reader
 \usepackage{xcolor}
 \pagecolor[HTML]{1f1f1f} % dark color
@@ -76,14 +102,85 @@
 
 
 \chapter{Introduction}
-\chapter{Literature Review}\label{section_literature_review}
-Good intro into EV situation and market: \cite{Das2020}
 
-Really good method, but I can't math: \cite{Gruosso2019}
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=\linewidth]{ev_state_support_mech}
+	\caption[Centralized and decentralized control architecture]{Electric vehicles state support mechanisms and national goals across the world. \cite{Kapustin2020}.}
+	\label{ev_state_support_mech}
+\end{figure}
+
+\chapter{Related Work}
+\section{Literature review}\label{section_literature_review}
+The inspirational starting point for this thesis was the paper "Electric vehicles standards, charging infrastructure, and impact on grid integration: A technological review" by H.S. Das et al. \cite{Das2020}. It provides a comprehensive overview of the current EV status and the challenges of EV integration across multiple organizational fields. Notably, it classifies EV charging control strategies across different attributes, as seen in \cref{control_strats_charging}. Hereby the concept of coordinated vs uncoordinated charging strategies became one of the main focal points for this thesis paper, leading to the introduction of the semi-coordinated charging method. Further points of interest in H.S. Das's paper include the distinction between centralized and decentralized control architectures, as seen in \cref{centralized_vs_decentr_ctrl}. The researchers claim that decentralized/distributed mechanisms are superior in terms of computational complexity, real-time implementation and offer more user convenience.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=\linewidth]{control_strats_charging}
+	\caption[]{Classification of control strategies used in EV charging system \cite{Das2020}.}
+	\label{control_strats_charging}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=\linewidth]{centralized_vs_decentr_ctrl}
+	\caption[Centralized and decentralized control architecture]{Centralized and decentralized control architecture of EV charging system \cite{Das2020}.}
+	\label{centralized_vs_decentr_ctrl}
+\end{figure}
+
+A more advanced variation of this paper's method can be found in an IEEE Access article "Uncertainty-Aware Computational Tools for Power Distribution Networks Including Electrical Vehicle Charging and Load Profiles" by Giambattista Gruosso et al. \cite{Gruosso2019}. It describes an efficient, uncertainty-aware load flow analysis reliant on generalized Polynomial Chaos and Stochastic testing methods. The authors use historical load profiles to simulate variation in both residential loads and EV charging profiles, which was additionally compared against a Monte Carlo simulation. Similarly to this thesis, an example network of choice was the European Low Voltage Test Feeder, whereby all of the loads were assumed to be single phase. The result was a technique able to account for real data-based load profiles for network quality assessment.
+
+For the computation of distribution grid hosting capacity, consider the paper "Optimization-based distribution grid hosting capacity calculations" by Mansoor Alturki et al. \cite{Alturki2018}. The authors propose an optimization-based method for determining the hosting capacity using linear power flow equations. Unlike traditional nonlinear models, the proposed method does not rely on iteration in order to find a near-optimal hosting capacity solution. The obtained solution at operating point provides access to both active and reactive power flow information, additionally accounting for seasonal load variations.
+
+\section{Power flow analysis}
+Power flow (or load flow) study is a numerical analysis of the flow of electric power in a network. Its objective is to calculate the voltages---consisting of magnitudes and angles---given the network conditions defined by loads, generation and other variables.
+
+
+
+The Newton-Raphson technique is a method of successive approximation based on the Taylor's expansion approximation used to solve $f(x)=c$. In the context of unknown power flow problems, the unknown variables $x$ are: voltage magnitude at load busses ($\lvert V_i\rvert$), angles at load busses ($\angle\delta_i$) and voltage angles at regulated buses ($\delta_i$). The specified quantities $c$ are both the net scheduled injected real power ($P_i^{sch}$) and the net scheduled injected reactive power ($jQ_i^{sch}$). See "Computational Models in Engineering" for more details \cite{Albadi2020}.
+
+The iterative values of real power are calculated using:
+\begin{equation}
+	P_i^{[k+1]}=\sum^{n}_{j=1}\lvert V_i\rvert^{[k]}\lvert V_j\rvert^{[k \text{ or } k+1]}\lvert Y_{ij}\rvert\cos\Bigl(\Theta_{ij}-\delta_i^{[k]}+\delta_j^{[k]}\Bigr)
+\end{equation}
+
+The iterative values of reactive power are calculated as:
+\begin{equation}
+	Q_i^{[k+1]}=-\sum^{n}_{j=1}\lvert V_i\rvert^{[k]}\lvert V_j\rvert^{[k \text{ or } k+1]}\lvert Y_{ij}\rvert\sin\Bigl(\Theta_{ij}-\delta_i^{[k]}+\delta_j^{[k]}\Bigr)
+\end{equation}
+
+whereby $Y$ is a symmetrical admittance matrix, consisting of admittance values of both lines and busses.
+
+The Newton-Raphson power flow formulation can be solved using the following \cref{nr_form}:
+\begin{equation}\label{nr_form}
+	\begin{bmatrix}
+		\Delta P_i^{[k]}\\
+		\Delta Q_t^{[k]}
+	\end{bmatrix}
+	=
+	\underbrace{
+		\begin{bmatrix}
+			\frac{\partial P_i}{\partial \delta_i}^{[k]} & \frac{\partial P_i}{\partial \lvert V_i \rvert}^{[k]}\\
+			\frac{\partial Q^i}{\partial \delta_i}^{[k]} & \frac{\partial Q^i}{\partial \lvert V_i \rvert}^{[k]}
+		\end{bmatrix}
+	}_{\llap{\small Jacobian matrix\:}
+		f'\,=\,
+		\begin{bmatrix}
+			J_{P\delta} & J_{P\lvert V\rvert}\\
+			J_{Q\delta} & J_{Q\lvert V\rvert}
+		\end{bmatrix}
+	}
+	\begin{bmatrix}
+		\Delta\delta_i^{[k]}\\
+		\Delta\lvert V_i \rvert^{[k]}
+	\end{bmatrix}
+\end{equation}
+
+
 
 \chapter{Goal and Method}
 \section{Approach}\label{section_approach}
-To reiterate, the goal of this thesis was to investigate the distribution grid hosting capacity of electric vehicles and the effect the involvement of energy communities can have on it. Over the span of roughly two months, the method presented in this paper went through countless iterations in terms of functionality as well as network application (down to the last two weeks before deadline). The original testing models were performed on a simple test network with arbitrary values (see \cref{test_network}). These tests were done in order to get a feel for the chosen software tools and to better understand their potential real world application and the required scope of work.
+The goal of this thesis was to investigate the distribution grid hosting capacity of electric vehicles and the effect the involvement of energy communities can have on it. Over the span of roughly two months, the method presented in this paper went through countless iterations in terms of functionality as well as network application (down to the last two weeks before deadline). The original testing models were performed on a simple test network with arbitrary values (see \cref{test_network}). These tests were done in order to get a feel for the chosen software tools and to better understand their potential real world application and the required scope of work.
 
 \begin{figure}[htpb]
 	\centering
@@ -111,9 +208,9 @@ The next section will describe the functionality of custom python classes. For m
 
 \newpage
 \section{Data processing}\label{section_data_processing}
-Given the scope of the project, the idea was to create a system flexible enough for iterative data manipulation and ideally one that would support multiple network types. The project was written entirely in python due to language simplicity as well as availability of advanced modules. Data handling was done using the \texttt{pandas} module, whereas the network simulation was performed using the \texttt{pandapower} module.
+Given the scope of the project, the idea was to create a system flexible enough for iterative data manipulation and ideally one that would support multiple network types. The project was written entirely in python due to language simplicity as well as availability of advanced modules. Data handling was done using the \texttt{pandas} module, whereas the network simulation was performed using the \texttt{pandapower} toolbox library.
 
-For the sake of clarity, most of the code was split between a python class file and jupyter notebooks. For early testing and code prototyping, jupyter notebooks are sufficient but they quickly lose readability as the code complexity grows. The general methodology was therefore to write core functions in jupyter to then integrate them into an external python class file. The resultant python class file consists of two classes: one for handling data processing and another for operations based on the \texttt{pandapower} module. Common input settings (for instance, the time window) are saved as class variables, such that only the most top-level functions are called in jupyter.
+For the sake of clarity, most of the code was split between a python class file and jupyter notebooks. For early testing and code prototyping, jupyter notebooks are sufficient but they quickly lose readability as the code complexity grows. The general methodology was therefore to write core functions in jupyter to then integrate them into an external python class file. The resultant python class file consists of two classes: one for handling data processing and another for operations based on the \texttt{pandapower} library. Common input settings (for instance, the time window) are saved as class variables, such that only the most top-level functions are called in jupyter.
 
 \subsection{DataAction class}
 The following information describes the code of the python class responsible for core data processing. While the general methodology is applicable to any dataset, these functions are tailored specifically to the household dataset and will be described as such. Additionally, the functions mentioned here target the test feeder network as our simulation case but can be adapted for any network, with several caveats mentioned later. The following paragraphs serve to summarize the operation of one or more functions based on their application.
@@ -140,8 +237,16 @@ The following information describes the code of the python class generally respo
 
 \paragraph{Network preparation and controllers:} In order to perform the timeseries iteration we first need to prepare our network. In the case of our chosen simulation---test feeder network---this involves some additional steps (see \cref{section_network_application}). First, create the network, including the loads and sgens. It's recommended to stick to a consistent naming convention for loads and sgens across the network properties and the external night dataframes, in order to avoid unnecessary problems when configuring the controller in the next step.
 
-The controller is a function whose purpose is to update the network values iteratively from a lookup table. The methodology will depend on your software of choice, but in our case we will be using the \texttt{pandapower} controllers made specifically for timeseries module. \Cref{timeseries_module_diag} in \cref{chapter_appendix} shows a general overview of the built-in module.
-For our simulation, we will need 2 constant controllers for loads and sgens. Hereby, the correspondent data sources are the night dataframes that were defined in the DataAction class. Lastly, the timeseries iteration needs to be given a defined number of time steps, which in our case will be given by the index length of (either) night dataframe. With this information, the power flow can be computed iteratively based on tabular variable inputs. However, this will yield no useful results on its own, which is why we need to additionally define an output writer.
+\FloatBarrier
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.32\linewidth]{timeseries_module_diag.pdf}
+	\caption[\texttt{pandapower} times series module overview]{The diagram shows the time series loop of the time series module. The basic functionality is compute the power flow for each time step using the given values---such as sgens or loads. Step-wise convergence will depend on several factors, such as the network parameters (i.e. load magnitudes) as well as the algorithm used for solving the power flow problem. For more module details, see the \texttt{pandapower}  \href{https://pandapower.readthedocs.io/en/v2.10.1/timeseries/timeseries_loop.html}{wiki}.}
+	\label{timeseries_module_diag}
+\end{figure}
+\FloatBarrier
+
+The controller is a function whose purpose is to update the network values iteratively from a lookup table. The methodology will depend on your software of choice, but in our case we will be using the \texttt{pandapower} controllers made specifically for timeseries module. \Cref{timeseries_module_diag} shows a general overview of the built-in module. For our simulation, we will need 2 constant controllers for loads and sgens. Hereby, the correspondent data sources are the night dataframes that were defined in the DataAction class. Lastly, the timeseries iteration needs to be given a defined number of time steps, which in our case will be given by the index length of (either) night dataframe. With this information, the power flow can be computed iteratively based on tabular variable inputs. However, this will yield no useful results on its own, which is why we need to additionally define an output writer.
 
 \paragraph{Time iteration and output:} An output writer is a function with a simple job of recording computed information, in an desired format, for each timeseries step. In our case, we will again be using the output writer function supplied with the \texttt{pandapower} timeseries module and outputting into an Excel file for the sake of convenience and troubleshooting. However, we aim to continue data processing in \texttt{pandas}, so we define another import function for said Excel results file. The imported dataframe can now provide relevant statistics and metrics. For our evaluation, the one of the key computations is the all-time minimum load value across all busses (see \cref{section_network_application} for more details).
 
@@ -202,7 +307,7 @@ The main difference from the critical case scenario is that we load sgens in our
 \subsection{Energy community scenario}
 This case scenario aims to propose the concept of semi-coordinated charging, whose main idea is that of simplicity with minimum requirements. As mentioned in  \cref{section_literature_review}, there is no shortage of highly optimized models proposed. Both centralized charging management algorithms and decentralized/distributed charging mechanisms should undoubtedly serve as the goal of EV technology and its future implementation. That being said, these models remain mostly conceptual in nature, owing to their intricacy of operation as well as high upfront resource demands.
 
-Indeed, while there have been tremendous advancements made in making individual grid elements and devices smarter, there's yet to exist a truly unified system at scale. The internet of things (IoT) offers a glimpse into a fully synchronized smart-device architecture but this concept does not transfer to vehicles as readily, due to their mobile nature and dependence on existing infrastructure. Arguably the minimum precondition for large-scale smart EV charging mechanisms is the existence of installed smart meters in residential homes. The spread of smart meter technology has proven to be highly incentivised by progressive energy tariffs and some success has been found in countries across Europe, such as Spain adopting a Real-Time-Pricing (RTP) tariff in 2015. Unfortunately, many countries are still lagging behind the practically-feasible due to their complex governmental policies---Germany in particular has been struggling with residential smart meter roll out, despite its ambitious push towards embracing renewables. Needless to say, there still remain plenty of obstacles in the way of widespread, advanced EV charging systems.
+Indeed, while there have been tremendous advancements made in making individual grid elements and devices smarter, there's yet to exist a truly unified system at scale. The internet of things (IoT) offers a glimpse into a fully synchronized smart-device architecture but this concept does not transfer to vehicles as readily, due to their mobile nature and dependence on existing infrastructure (see \cref{ev_grid_integ_net}). Arguably the minimum precondition for large-scale smart EV charging mechanisms is the existence of installed smart meters in residential homes. The spread of smart meter technology has proven to be highly incentivised by progressive energy tariffs and some success has been found in countries across Europe, such as Spain adopting a Real-Time-Pricing (RTP) tariff in 2015. Unfortunately, many countries are still lagging behind the practically-feasible due to their complex governmental policies---Germany in particular has been struggling with residential smart meter roll out, despite its ambitious push towards embracing renewables. Needless to say, there still remain plenty of obstacles in the way of widespread, advanced EV charging systems.
 
 With these considerations in mind, this paper proposes the most simplistic way to improve grid stability through altered charging patterns. This method in fact does not rely on the existence of smart meters or intelligent controllers and can therefore be implemented in any local network (section) in a form of a rudimentary energy community. In the scope of this paper, the concept of energy community is also simplified to its most basic premise---coordinated energy use. As such, the method can be viewed as the first stepping-stone in transition towards smart grid EV charging. 
 
@@ -438,7 +543,7 @@ Perhaps the biggest uncertainty in the simulation parameters was the charging wi
 	\item typical battery discharge rate\quad .
 \end{itemize}
 
-As such, this paper assumes that the end user will continuously top-up the EV battery on a daily basis. Hereby, the EV battery technology is the key factor to widespread EV adoption. The field is rapidly developing, which makes it hard to predict precise technical details, such as maximum charging rates. At the same time, since it is highly unlikely to expect Level 3 DC charging reach widespread household integration, our assumption for 7.7\,kW charging rate remains plausible. Workplace or public charging stations are most likely to see installation in the near future, which could reduce the total number of household EV charging stations drastically. Lastly, a completely thorough analysis could additionally factor in energy tariffs and their effects on person's charging habits.
+This paper assumes that the end user will continuously top-up the EV battery on a daily basis. Hereby, the EV battery technology is the key factor to widespread EV adoption. The field is rapidly developing, which makes it hard to predict precise technical details, such as maximum charging rates. At the same time, since it is highly unlikely to expect Level 3 DC charging reach widespread household integration, our assumption for 7.7\,kW charging rate remains plausible. Workplace or public charging stations are most likely to see installation in the near future, which could reduce the total number of household EV charging stations drastically. Lastly, a completely thorough analysis could additionally factor in energy tariffs and their effects on person's charging habits.
 
 \newpage
 \subsection{Energy community algorithm}
@@ -446,24 +551,25 @@ The energy community spatio-temporal algorithm is in no way optimal and is an ex
 
 \paragraph{Spacial:} The current algorithm relies on correct ordering of busses for iteration and does not account for significant deviation or branching from linear topology. This implies that the results depend significantly on manual ordering of busses, which can become unintuitive with enough complexity. A possible solution would be to implement a tree path length comparison algorithm, though certain cases such as branches of equal lengths may be difficult to account for. (This is even possible to do in \texttt{pandapower} using \texttt{calc\_distance\_to\_bus()} function.) Alternatively, one could limit the current algorithm to smaller sections of the network and run it locally, since it would still optimize for distance from substation. As last resort, brute forcing different bus ordering cases should not take long (given appropriate boundary conditions), given the relative simplicity of the simulation.
 
-\paragraph{Temporal:} There are two time-based shortcomings of the algorithm. Firstly, the programmed value for sgen allocation starting time (\texttt{18:00:00}) does not match the computed historical dataset peak-time (\texttt{19:23:00}) as dictated in \cref{subsubsection_theoretical_con}. A function for proper sgen charging time was actually written, which involved nested time conditional \texttt{for} loops. However the updated function was eventually scrapped due to the complexity of new code, as the energy community function would need to be rewritten and there was not enough time.
+\paragraph{Temporal:} There are two time-based shortcomings of the algorithm. Firstly, the programmed value for sgen allocation starting time (\texttt{18:00:00}) does not match the computed historical dataset peak-time (\texttt{19:23:00}) as dictated in \cref{subsubsection_theoretical_con}. A function for proper sgen charging time was actually written, which involved nested time conditional \texttt{for} loops. However the updated function was eventually scrapped due to the complexity of new code, as the energy community function would also need to be rewritten and there was simply not enough time.
 
-Secondly, average sgen distribution in time is not optimal. Ideally, most sgens would be shifted towards the time of vm p.u. minimum, which was computed to be \texttt{02:26:00} based on historical data. Referring back to \cref{sgen_comm_times}, we can see that there are 5 sgens active at \texttt{18:00:00}--\texttt{00:00:00}, followed the remaining time slots at night to be filled with 4 sgens---this ordering should at least be reversed. Unfortunately there is no easy fix that comes to mind, since it would require to separate the spacial from the temporal and ultimately write a new, more complex algorithm. What this simulation ultimately shows however, is that the spacial component has a far greater impact on the results than the temporal and that this shortcoming could therefore be ignored.
-
-
+Secondly, average sgen distribution in time is not optimal. Ideally, most sgens would be shifted towards the time of vm p.u. minimum, which was computed to be \texttt{02:26:00} based on historical data. Referring back to \cref{sgen_comm_times}, we can see that there are 5 sgens active during the \texttt{18:00:00}--\texttt{00:00:00} interval, followed by the remaining time slots at night to be filled with 4 sgens---this ordering should be reversed. Unfortunately there is no easy fix that comes to mind, since it would require one to separate the spacial from the temporal, thus writing a new algorithm altogether. What this simulation ultimately shows however, is that the spacial component has a far greater impact on the results than the temporal and that this shortcoming could therefore be ignored.
 
 
 \subsection{Code specifics}
-A considerable amount of effort was put into making code "proper".\\
-splitting function could waste less data (first day, last two days in list)\\
+A considerable amount of effort was put into making the data analysis code "proper" (to be best of author's knowledge and ability at the time). Nevertheless, several problems remained unfixed: these should not have had a negative impact on the simulation results, only on the runtime. For instance, the dataframe list splitting function ultimately discards 2 days of data per list (beginning and end).In scope of the total size of the household dataset, this is a negligible loss of information but it could still use improvement.
 
+A more problematic issue was the following terminal dual warning:
 \noindent
-The following terminal dual warning is thrown:
-\begin{itemize}[leftmargin=2.2cm]
-	\item[\texttt{pandapower}] create\_jacobian.py: "RuntimeWarning: invalid value encountered in true\_divide"
-	\item[\texttt{scipy}] linsolve.py: "MatrixRankWarning: Matrix is exactly singular"
+\begin{itemize}[leftmargin=2.1cm]
+	\item[\texttt{pandapower}] create\_jacobian.py:\\
+		\texttt{"RuntimeWarning: invalid value encountered in true\_divide}"
+	\item[\texttt{scipy}] linsolve.py:\\
+		\texttt{"MatrixRankWarning: Matrix is exactly singular"}
 \end{itemize}
+This would only appear occasionally, seemingly independent of most simulation parameters (such as load magnitudes or sgen values). It did not prevent the power flow from returning a solution and the results always appeared within the expected range. As such, this warning was mostly avoided through re-runs or, in case of the bulk simulation, through averaging of results.
 
+Lastly, occasionally there appeared to be mismatch in index and table lengths when parsing the dataframe tables, which would be solved via a simple rerun. It's possible that this bug is kernel-related to the local python installation; like the others above-mentioned, it does not impact the validity of results.
 
 
 \chapter{Conclusion}
@@ -475,11 +581,15 @@ The following terminal dual warning is thrown:
 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[width=0.45\linewidth]{timeseries_module_diag.pdf}
-	\caption[\texttt{pandapower} times series module overview]{The diagram shows the time series loop of the time series module. The basic functionality is compute the power flow for each time step using the given values---such as sgens or loads. Step-wise convergence will depend on several factors, such as the network parameters (i.e. load magnitudes) as well as the algorithm used for solving the power flow problem. For more module details, see the \texttt{pandapower}  \href{https://pandapower.readthedocs.io/en/v2.10.1/timeseries/timeseries_loop.html}{wiki}.}
-	\label{timeseries_module_diag}
+	\includegraphics[width=\linewidth]{ev_grid_integ_net}
+	\caption[]{EV grid integration framework \cite{Das2020}.}
+	\label{ev_grid_integ_net}
 \end{figure}
 
+
+\newpage
+\section*{Data processing file code}
+\lstinputlisting[language=Python]{"C:/Users/panto/Documents/git/personal/EV_energy_comm/python/data_process.py"}
 
 \end{document}
 
