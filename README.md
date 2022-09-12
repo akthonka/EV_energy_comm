@@ -14,3 +14,6 @@ The simulation data is not directly included in this git due to size limitations
 
         da.folder_path = r"\\path\\"
         da.imp_procc("data_filename.csv", keep_cols)
+
+## Bulk simulation results
+Bulk simulation results used for the final thesis comparison of scenarios can be found in the */results/backup/* folder. They contain data from 3 scenarios, each consisting of 100 simulations.
