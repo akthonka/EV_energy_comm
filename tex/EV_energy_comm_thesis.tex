@@ -102,17 +102,25 @@
 
 
 \chapter{Introduction}
+Electrification of transportation represents a major role in a move towards a sustainable future of energy systems. It brings about a number of interdisciplinary challenges, requiring simultaneous coordination from multiple fields of study. This paper aims to address one of these components from the perspective of the power distribution network---namely, the hosting capacity limitations of the electric grid.
 
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=\linewidth]{ev_state_support_mech}
-	\caption[Centralized and decentralized control architecture]{Electric vehicles state support mechanisms and national goals across the world. \cite{Kapustin2020}.}
+	\caption[EV state support and goals]{Electric vehicles state support mechanisms and national goals across the world. \cite{Kapustin2020}.}
 	\label{ev_state_support_mech}
 \end{figure}
 
+The transition from internal combustion engine (ICE) vehicles to electric vehicles (EVs) has entered world-wide adoption. A large portion of the western world has already set hard targets in order to facilitate this transition, ranging from tax incentives to outright abandonment of ICE car sales within the next 20 years (see \cref{ev_state_support_mech}). While the EV technology has made tremendous advancements over the past several decades---especially in terms of mobility range---this alone may not be enough for complete integration of EVs. Full-scale transition towards EV adoption would require the underlying infrastructure to be able to support charging, discharging (Vehicle-to-Grid) and coordinated management of EVs. However, contrary to the rapid development of EV technology, the electric grid remained relatively unchanged since the years of its early inception. The coveted transition towards the smart grid is mostly not feasible as a single-step on a large scale, which begs the question of how well does the existing system accommodate the transition towards EV integration.
+
+This paper aims to investigate this question from multiple angles. The main premise is a simple substitution of ICE vehicles for EVs in the context of the current grid under a multitude of assumptions. The scope of this study is limited to the low voltage grid, to which all of the EV charging is hypothetically constrained. Furthermore, no public charging stations were considered in this study. Despite their growing popularity, the goal of this paper was to investigate the minimum investment conditions for near-future EV charging scenarios; as such, only residential home chargers were considered.
+
+The main method employed in this paper's study is a power flow analysis using randomized historical load profiles. Hereby the biggest block of information processing was arguably the data analysis, the details of which will be described first. Next, the concepts of various charging strategies will be introduced in a form of three scenarios: critical case, random time and energy community. Finally, the results will be presented in 2 parts: hosting capacity evaluation and the comparison between random and energy community scenarios. Additionally, suggested improvements will be provided for multiple areas of this paper.
+
+
 \chapter{Related Work}
 \section{Literature review}\label{section_literature_review}
-The inspirational starting point for this thesis was the paper "Electric vehicles standards, charging infrastructure, and impact on grid integration: A technological review" by H.S. Das et al. \cite{Das2020}. It provides a comprehensive overview of the current EV status and the challenges of EV integration across multiple organizational fields. Notably, it classifies EV charging control strategies across different attributes, as seen in \cref{control_strats_charging}. Hereby the concept of coordinated vs uncoordinated charging strategies became one of the main focal points for this thesis paper, leading to the introduction of the semi-coordinated charging method. Further points of interest in H.S. Das's paper include the distinction between centralized and decentralized control architectures, as seen in \cref{centralized_vs_decentr_ctrl}. The researchers claim that decentralized/distributed mechanisms are superior in terms of computational complexity, real-time implementation and offer more user convenience.
+The inspirational starting point for this thesis was the paper "Electric vehicles standards, charging infrastructure, and impact on grid integration: A technological review" by H.S. Das et al. \cite{Das2020}. It provides a comprehensive overview of the current EV status and the challenges of EV integration across multiple organizational fields. Notably, it classifies EV charging control strategies across different attributes, as seen in \cref{control_strats_charging}. Hereby the concept of coordinated vs uncoordinated charging strategies became one of the main focal points for this thesis paper, leading to the introduction of the semi-coordinated charging method. Further points of interest in H.S. Das's paper include the distinction between centralized and decentralized control architectures, as seen in \cref{centralized_vs_decentr_ctrl}. The researchers claim that decentralized/distributed mechanisms are superior in terms of computational complexity, real-time implementation and offer more user convenience. In a similar fashion, the paper "Integration of electric vehicles and management in the internet of energy" by K. Mahmud et al. discusses the future grid and the essentials of adaptive charging infrastructure for EV integration, noting the importance of coordinated EV management \cite{Mahmud2018}.
 
 \begin{figure}[htpb]
 	\centering
@@ -130,14 +138,17 @@ The inspirational starting point for this thesis was the paper "Electric vehicle
 
 A more advanced variation of this paper's method can be found in an IEEE Access article "Uncertainty-Aware Computational Tools for Power Distribution Networks Including Electrical Vehicle Charging and Load Profiles" by Giambattista Gruosso et al. \cite{Gruosso2019}. It describes an efficient, uncertainty-aware load flow analysis reliant on generalized Polynomial Chaos and Stochastic testing methods. The authors use historical load profiles to simulate variation in both residential loads and EV charging profiles, which was additionally compared against a Monte Carlo simulation. Similarly to this thesis, an example network of choice was the European Low Voltage Test Feeder, whereby all of the loads were assumed to be single phase. The result was a technique able to account for real data-based load profiles for network quality assessment.
 
-For the computation of distribution grid hosting capacity, consider the paper "Optimization-based distribution grid hosting capacity calculations" by Mansoor Alturki et al. \cite{Alturki2018}. The authors propose an optimization-based method for determining the hosting capacity using linear power flow equations. Unlike traditional nonlinear models, the proposed method does not rely on iteration in order to find a near-optimal hosting capacity solution. The obtained solution at operating point provides access to both active and reactive power flow information, additionally accounting for seasonal load variations.
+For the computation of distribution grid hosting capacity, consider the paper "Optimization-based distribution grid hosting capacity calculations" by Mansoor Alturki et al. \cite{Alturki2018}. The authors propose an optimization-based method for determining the hosting capacity using linear power flow equations. Unlike traditional nonlinear models, the proposed method does not rely on iteration in order to find a near-optimal hosting capacity solution. The obtained solution at operating point provides access to both active and reactive power flow information, additionally accounting for seasonal load variations. A more common, iterative approach---such as the one used in this paper---can be found in "EV Hosting Capacity Analysis on Distribution Grids" by Priti Paudyal et al. \cite{PritiPaudyal2021}.
 
+The paper "Applying responsible algorithm design to neighbourhood-scale batteries in Australia" by H. Ransan-Cooper et al. is an interdisciplinary study that examines the systemic concerns to design and operation of energy algorithms. The study focused on comparing 6  different metrics used for algorithm design, whereby the algorithm of interest is the timer algorithm. "The timer algorithm is designed to challenge assumptions in techno-economic optimization by explicitly forgoing economic or environmental optimization to instead optimize for explainability as a response to citizen concerns about a lack of transparency in the energy system" \cite{RansanCooper2021}. Interestingly, the timer algorithm employed the same night window as the one used in this paper. The researchers claim that "it is possible that non-‘optimal’ timer algorithms may meet public needs because they relieve concerns about complexity and a lack of transparency" \cite{RansanCooper2021}. This statement directly supports the motivation behind this paper's energy community algorithm.
+
+The next section will summarize the basics of the power flow analysis and nonlinear models.
+
+\newpage
 \section{Power flow analysis}
-Power flow (or load flow) study is a numerical analysis of the flow of electric power in a network. Its objective is to calculate the voltages---consisting of magnitudes and angles---given the network conditions defined by loads, generation and other variables.
+Power flow (or load flow) study is a numerical analysis of the flow of electric power in a network. Its objective is to calculate the bus voltages---consisting of magnitudes and angles---given the network conditions defined by loads, generation and other variables. The busses are classified into 3 types: load, generation and slack. Load (or PQ) busses have no generators connected to them. Conversely, all busses with at least one generator connected to them are called generator (or PV) buses, with one arbitrary exception---the slack bus. Also known as the swing or reference bus, the slack bus is used to compensate for system losses by either emitting or absorbing active and reactive power within the system. For a system consisting of $n$ buses and $g$ generators, there are $2(n-1)-(g-1)$ unknowns. In order to solve for these unknowns, a special admittance matrix is used to construct real and reactive power balance equations. This results in a system of nonlinear equations which can be solved in a variety of methods. The most common method is the Newton-Raphson method.
 
-
-
-The Newton-Raphson technique is a method of successive approximation based on the Taylor's expansion approximation used to solve $f(x)=c$. In the context of unknown power flow problems, the unknown variables $x$ are: voltage magnitude at load busses ($\lvert V_i\rvert$), angles at load busses ($\angle\delta_i$) and voltage angles at regulated buses ($\delta_i$). The specified quantities $c$ are both the net scheduled injected real power ($P_i^{sch}$) and the net scheduled injected reactive power ($jQ_i^{sch}$). See "Computational Models in Engineering" for more details \cite{Albadi2020}.
+The Newton-Raphson technique is a method of successive approximation based on the Taylor's expansion approximation used to solve $f(x)=c$. In the context of power flow problems, the unknown variables $x$ are: voltage magnitude at load busses ($\lvert V_i\rvert$), angles at load busses ($\angle\delta_i$) and voltage angles at regulated buses ($\delta_i$). The specified quantities $c$ are both the net scheduled (known) injected real power ($P_i^{sch}$) and the net scheduled injected reactive power ($jQ_i^{sch}$).
 
 The iterative values of real power are calculated using:
 \begin{equation}
@@ -149,9 +160,7 @@ The iterative values of reactive power are calculated as:
 	Q_i^{[k+1]}=-\sum^{n}_{j=1}\lvert V_i\rvert^{[k]}\lvert V_j\rvert^{[k \text{ or } k+1]}\lvert Y_{ij}\rvert\sin\Bigl(\Theta_{ij}-\delta_i^{[k]}+\delta_j^{[k]}\Bigr)
 \end{equation}
 
-whereby $Y$ is a symmetrical admittance matrix, consisting of admittance values of both lines and busses.
-
-The Newton-Raphson power flow formulation can be solved using the following \cref{nr_form}:
+whereby $Y$ is a symmetrical admittance matrix, consisting of admittance values of both lines and busses. The Newton-Raphson power flow formulation can be solved using the following \cref{nr_form}. See "Computational Models in Engineering" for more details \cite{Albadi2020}.
 \begin{equation}\label{nr_form}
 	\begin{bmatrix}
 		\Delta P_i^{[k]}\\
@@ -176,6 +185,7 @@ The Newton-Raphson power flow formulation can be solved using the following \cre
 	\end{bmatrix}
 \end{equation}
 
+In this paper, we will be using the standard Newton-Raphson method. Some of the other power flow analysis methods include the Gauss-Siedel method, the fast-decoupled-load-flow method, the backward-forward sweep (BFS) method as well as the DC power flow technique. 
 
 
 \chapter{Goal and Method}
@@ -189,13 +199,13 @@ The goal of this thesis was to investigate the distribution grid hosting capacit
 	\label{test_network}
 \end{figure}
 
-Early on, it was decided to incorporate real-world data as a basis of the simulation. Arguably the best (at the time of writing) data platform for this application is Open Power System Data---more specifically, the contributed household data package. It contains measured time series data for various households and businesses relevant for low-voltage power system modeling. In terms of geographical scope, it incorporates data from 11 households in Konstanz, southern Germany, as part of the CoSSMic project for the optimization of energy systems in smart cities. The gathered data is quite expansive, spanning a time range of over 4 years with a resolution of up to 1 minute measurements, even tracking single-device consumption. Cumulative energy measurements accounted for data gaps from communication problems and "all data gaps are either interpolated linearly, or filled with data of prior days" \cite{OpenPowerSystemData}, though no further detail is provided in this regard. Overall, this was the perfect fit for my simulation aimed at a standard European low voltage grid of a residential area.
+Early on, it was decided to incorporate real-world data as a basis of the simulation. Arguably the best (at the time of writing) data platform for this application is Open Power System Data---more specifically, the contributed household data package. It contains measured time series data for various households and businesses relevant for low-voltage power system modeling. In terms of geographical scope, it incorporates data from 11 households in Konstanz, southern Germany, as part of the CoSSMic project for the optimization of energy systems in smart cities. The gathered data is quite expansive, spanning a time range of over 4 years with a resolution of up to 1 minute measurements, even tracking single-device consumption. Cumulative energy measurements accounted for data gaps from communication problems and "all data gaps are either interpolated linearly, or filled with data of prior days" \cite{OpenPowerSystemData}, though no further detail is provided in this regard. Overall, this was the perfect fit for this paper's simulation aimed at a standard European low voltage grid of a residential area.
 
 Using and incorporating the Open Power System Data household dataset proved to be quite a challenge on its own. Details regarding final data analysis are described in \cref{section_data_processing}. Once the data was processed and loaded into the network for further computations, the question became how to formulate and subsequently evaluate simulation scenarios. Hereby, the number of variables to take into account can practically be expanded far beyond the scope of the paper. For instance, an alternative tool considered for the simulation of load data was the LoadProfileGenerator (LPG), which is a highly-customizable tool for modeling residential energy consumption. LPG performs complete behavior simulation of a household residents in order to generate load curves. To that extent, it would have been possible to take said curves and implement them into our network case, while investigating individual households' behaviors across a community of like-minded, cooperative individuals. However, this was deemed far too comprehensive given the time constraints, but also not as potentially insightful.
 
-Additionally, in order to make best use of the historical data, it was decided to perform time series iteration power flows. In a sense, this provides a similar advantage to LPG functionality by mimicking random human behavior over time, only with no unnecessary explanations behind it. The main idea became to sample a random historical load profile per household and to consider when/how an EV charger could optimally function in time. While this may be a relatively simple question to answer for a single household---given the residents' preferences and habits, it's merely a load optimization problem---the main issue lies with multiple parties involved. In turn, those parties are connected on a network in different ways, bringing topology into account. Thus, time and space both dictate the conditions for a given network.
+Additionally, in order to make best use of the historical data, it was decided to perform time series iteration of power flows. In a sense, this provides a similar advantage to LPG's functionality by mimicking random human behavior over time, only with no unnecessary explanations behind it. The main idea became to sample a random historical load profile per household and to consider when/how an EV charger could optimally function in time. While this may be a relatively simple question to answer for a single household---given the residents' preferences and habits, it's merely a load optimization problem---the main issue lies with multiple parties involved. In turn, those parties are connected on a network in different ways, bringing topology into account. Thus, time and space both dictate the conditions for a given network.
 
-Eventually, the abstract example network got superseded by the benchmark European Low Voltage Test Feeder (from hereon: test feeder) (see \cref{EU_LV_test_feeder}). Three scenarios were chosen for evaluation: critical case, random charging, semi-coordinated charging. The critical case is used for hosting capacity evaluation of our simulation for singular time points, whereas the two other scenarios demonstrate time-dependent charging behavior models. Detailed explanation for this approach is given in \cref{section_network_application}. From hereon, EV home charging stations will be referred to as static generators in the context of power modeling.
+Eventually, the abstract example network got superseded by the benchmark European Low Voltage Test Feeder (from hereon: test feeder) (see \cref{EU_LV_test_feeder}). Three scenarios were chosen for evaluation: critical case, random charging, semi-coordinated charging. The critical case is used for hosting capacity evaluation of our simulation for singular time points, whereas the two other scenarios demonstrate time-dependent charging behavior models. Detailed explanation for this approach is given in \cref{section_network_application}. From hereon, EV home charging stations will be referred to as (negative) static generators in the context of power modeling.
 
 \begin{figure}[htpb]
 	\centering
@@ -208,12 +218,12 @@ The next section will describe the functionality of custom python classes. For m
 
 \newpage
 \section{Data processing}\label{section_data_processing}
-Given the scope of the project, the idea was to create a system flexible enough for iterative data manipulation and ideally one that would support multiple network types. The project was written entirely in python due to language simplicity as well as availability of advanced modules. Data handling was done using the \texttt{pandas} module, whereas the network simulation was performed using the \texttt{pandapower} toolbox library.
+Given the scope of the project, the idea was to create a system flexible enough for iterative data manipulation and ideally one that would support multiple network types. The project was written entirely in python due to language simplicity as well as availability of advanced libraries. Data handling was done using the \texttt{pandas} library, whereas the network simulation was performed using the \texttt{pandapower} toolbox library.
 
 For the sake of clarity, most of the code was split between a python class file and jupyter notebooks. For early testing and code prototyping, jupyter notebooks are sufficient but they quickly lose readability as the code complexity grows. The general methodology was therefore to write core functions in jupyter to then integrate them into an external python class file. The resultant python class file consists of two classes: one for handling data processing and another for operations based on the \texttt{pandapower} library. Common input settings (for instance, the time window) are saved as class variables, such that only the most top-level functions are called in jupyter.
 
 \subsection{DataAction class}
-The following information describes the code of the python class responsible for core data processing. While the general methodology is applicable to any dataset, these functions are tailored specifically to the household dataset and will be described as such. Additionally, the functions mentioned here target the test feeder network as our simulation case but can be adapted for any network, with several caveats mentioned later. The following paragraphs serve to summarize the operation of one or more functions based on their application.
+The following information describes the code of the python class responsible for core data processing. While the general methodology is applicable to any dataset, these functions are tailored specifically to the household dataset (\texttt{household\_data\_1min\_singleindex\_filtered.csv}) and will be described as such. Additionally, the functions mentioned here target the test feeder network as our simulation case but can be adapted for any network, with several caveats mentioned later. The following paragraphs serve to summarize the operation of one or more functions based on their application.
 
 \paragraph{Data import and segmenting:} The raw dataset is imported as a dataframe without additional options. Dropping the rest, we keep only 3 columns: \texttt{DE\_KN\_residential1\_grid\_import}, \texttt{DE\_KN\_residential2\_grid\_import} and \texttt{utc\_timestamp}. Since we will be performing conditional time-based operations, we set the timestamp column as index for ease of use. While it is possible to front-load a lot of data processing functions at this step---such as parsing datetimes---it is not recommended due to unnecessary computation time. A better approach is to segment the data for piece-wise processing and function testing, whereby it would be possible to iterate computations over the entire dataset in the future. Therefore, we split the imported dataframe (of a little over a million data points) into a list of smaller dataframes (each 10000 data points long, with residual last dataframe being a bit smaller). If you are using class variables for storing the dataframe list, don't forget to clear it before each sampling run when performing bulk simulations (see \cref{subsection_additional}).
 
@@ -254,6 +264,7 @@ The controller is a function whose purpose is to update the network values itera
 
 Iteration was performed over the list of sgen indices using a \texttt{for} loop. The list is scrambled prior iteration in order to mimic uncoordinated charging patterns. An additional variable for storing the hosting capacity count is created. For each cycle of the loop, the following metric variables are computed by running a power flow calculation: minimum bus voltage magnitude per unit (vm p.u.) and maximum line loading percent. The next step is conditional. If the metric variables don't exceed preset limits, add an sgen value and increase the hosting capacity count by one. The loop proceeds onto the next cycle and computes the new power flow state of the network. Checking the metric variables again, if (at some point) the preset limits are exceeded, then we need to undo the effects of the last cycle. As such, the hosting capacity count is reduced by one and the last filled sgen is reset to zero. This breaks the loop. The function then computes one final power flow computation to obtain for an output plot and prints the maximum hosting capacity result.
 
+\newpage
 \subsection{Additional files}\label{subsection_additional}
 In addition to the formally described python class file and jupyter data processing notebooks, several other files were used for the simulation project. They serve as an extension to the already discussed functionality and will therefore not be covered in similar detail but deserve mentioning nonetheless.
 
@@ -307,7 +318,7 @@ The main difference from the critical case scenario is that we load sgens in our
 \subsection{Energy community scenario}
 This case scenario aims to propose the concept of semi-coordinated charging, whose main idea is that of simplicity with minimum requirements. As mentioned in  \cref{section_literature_review}, there is no shortage of highly optimized models proposed. Both centralized charging management algorithms and decentralized/distributed charging mechanisms should undoubtedly serve as the goal of EV technology and its future implementation. That being said, these models remain mostly conceptual in nature, owing to their intricacy of operation as well as high upfront resource demands.
 
-Indeed, while there have been tremendous advancements made in making individual grid elements and devices smarter, there's yet to exist a truly unified system at scale. The internet of things (IoT) offers a glimpse into a fully synchronized smart-device architecture but this concept does not transfer to vehicles as readily, due to their mobile nature and dependence on existing infrastructure (see \cref{ev_grid_integ_net}). Arguably the minimum precondition for large-scale smart EV charging mechanisms is the existence of installed smart meters in residential homes. The spread of smart meter technology has proven to be highly incentivised by progressive energy tariffs and some success has been found in countries across Europe, such as Spain adopting a Real-Time-Pricing (RTP) tariff in 2015. Unfortunately, many countries are still lagging behind the practically-feasible due to their complex governmental policies---Germany in particular has been struggling with residential smart meter roll out, despite its ambitious push towards embracing renewables. Needless to say, there still remain plenty of obstacles in the way of widespread, advanced EV charging systems.
+Indeed, while there have been tremendous advancements made in making individual grid elements and devices smarter, there's yet to exist a truly unified system at scale. The internet of things (IoT) offers a glimpse into a fully synchronized smart-device architecture but this concept does not transfer to vehicles as readily, due to their mobile nature and dependence on existing infrastructure. Arguably the minimum precondition for large-scale smart EV charging mechanisms is the existence of installed smart meters in residential homes. The spread of smart meter technology has proven to be highly incentivised by progressive energy tariffs and some success has been found in countries across Europe, such as Spain adopting a Real-Time-Pricing (RTP) tariff in 2015. Unfortunately, many countries are still lagging behind the practically-feasible due to their complex governmental policies---Germany in particular has been struggling with residential smart meter roll out, despite its ambitious push towards embracing renewables. Needless to say, there still remain plenty of obstacles in the way of widespread, advanced EV charging systems.
 
 With these considerations in mind, this paper proposes the most simplistic way to improve grid stability through altered charging patterns. This method in fact does not rely on the existence of smart meters or intelligent controllers and can therefore be implemented in any local network (section) in a form of a rudimentary energy community. In the scope of this paper, the concept of energy community is also simplified to its most basic premise---coordinated energy use. As such, the method can be viewed as the first stepping-stone in transition towards smart grid EV charging. 
 
@@ -497,7 +508,7 @@ This section puts the energy community algorithm to the test against a random ch
 		{{\small Energy community scenario}}    
 		\label{random_vs_en_comm_b}
 	\end{subfigure}
-	\caption[Comparison of hosting capacities for time extremes]
+	\caption[Comparison of hosting capacities for random and energy community scenarios]
 	{\small Graphical comparison between random and energy community scenarios.} 
 	\label{random_vs_en_comm}
 \end{figure*}
@@ -531,6 +542,7 @@ The results are additionally interpreted via the so-called bracket deviation met
 Taking the difference of two brackets, we can show that the energy community scenario is approximately 29.4\% more effective than random charging scenario on average. This was a pleasantly surprising result, given how rudimentary and overly-simplified the energy community algorithm is. The next section will further explain the simulations' shortcomings and suggest various improvements.
 
 \vfill
+\newpage
 \section{Suggested improvements}\label{section_improvements}
 This section concerns itself with the shortcomings and limitations of this paper's work.
 
@@ -545,7 +557,6 @@ Perhaps the biggest uncertainty in the simulation parameters was the charging wi
 
 This paper assumes that the end user will continuously top-up the EV battery on a daily basis. Hereby, the EV battery technology is the key factor to widespread EV adoption. The field is rapidly developing, which makes it hard to predict precise technical details, such as maximum charging rates. At the same time, since it is highly unlikely to expect Level 3 DC charging reach widespread household integration, our assumption for 7.7\,kW charging rate remains plausible. Workplace or public charging stations are most likely to see installation in the near future, which could reduce the total number of household EV charging stations drastically. Lastly, a completely thorough analysis could additionally factor in energy tariffs and their effects on person's charging habits.
 
-\newpage
 \subsection{Energy community algorithm}
 The energy community spatio-temporal algorithm is in no way optimal and is an extreme over-simplification of the problem. Its main purpose is to serve as a starting point for when there is none, and to serve as a demonstration for what minimum effort can achieve in the context of grid stability. Consider the shortcomings of both dimensions separately.
 
@@ -575,20 +586,11 @@ Lastly, occasionally there appeared to be mismatch in index and table lengths wh
 \chapter{Conclusion}
 \bibliographystyle{IEEEtran} %displays URLs
 \bibliography{bib_library}
+\addcontentsline{toc}{chapter}{Bibliography}
 
 \chapter*{Appendix}\label{chapter_appendix}
 \addcontentsline{toc}{chapter}{Appendix}
 
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=\linewidth]{ev_grid_integ_net}
-	\caption[]{EV grid integration framework \cite{Das2020}.}
-	\label{ev_grid_integ_net}
-\end{figure}
-
-
-\newpage
-\section*{Data processing file code}
 \lstinputlisting[language=Python]{"C:/Users/panto/Documents/git/personal/EV_energy_comm/python/data_process.py"}
 
 \end{document}

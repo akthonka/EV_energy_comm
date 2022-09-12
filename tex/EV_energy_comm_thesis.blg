@@ -13,46 +13,51 @@ Database file #1: bib_library.bib
 -- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Name 1 in "Priti Paudyal, Shibani Ghosh, Santosh Veda,Deepak Tiwari, and Jal Desai" has a comma at the end for entry PritiPaudyal2021
+while executing---line 2403 of file IEEEtran.bst
+Too many commas in name 1 of "Priti Paudyal, Shibani Ghosh, Santosh Veda,Deepak Tiwari, and Jal Desai" for entry PritiPaudyal2021
+while executing---line 2403 of file IEEEtran.bst
 
 Done.
-You've used 7 entries,
+You've used 10 entries,
             4087 wiz_defined-function locations,
-            871 strings with 8926 characters,
-and the built_in function-call counts, 4700 in all, are:
-= -- 373
-> -- 107
-< -- 26
-+ -- 56
-- -- 21
-* -- 223
-:= -- 718
-add.period$ -- 15
-call.type$ -- 7
-change.case$ -- 7
-chr.to.int$ -- 54
-cite$ -- 7
-duplicate$ -- 366
-empty$ -- 390
-format.name$ -- 26
-if$ -- 1080
+            892 strings with 9654 characters,
+and the built_in function-call counts, 7219 in all, are:
+= -- 578
+> -- 168
+< -- 49
++ -- 90
+- -- 31
+* -- 348
+:= -- 1089
+add.period$ -- 22
+call.type$ -- 10
+change.case$ -- 10
+chr.to.int$ -- 108
+cite$ -- 10
+duplicate$ -- 545
+empty$ -- 588
+format.name$ -- 39
+if$ -- 1668
 int.to.chr$ -- 0
-int.to.str$ -- 7
-missing$ -- 65
-newline$ -- 46
-num.names$ -- 7
-pop$ -- 164
+int.to.str$ -- 10
+missing$ -- 95
+newline$ -- 57
+num.names$ -- 10
+pop$ -- 230
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 365
+skip$ -- 556
 stack$ -- 0
-substring$ -- 158
-swap$ -- 277
-text.length$ -- 8
+substring$ -- 287
+swap$ -- 431
+text.length$ -- 13
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 7
+type$ -- 10
 warning$ -- 0
-while$ -- 17
-width$ -- 8
-write$ -- 87
+while$ -- 28
+width$ -- 12
+write$ -- 119
+(There were 2 error messages)

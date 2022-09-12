@@ -2,40 +2,41 @@
 \contentsline {chapter}{List of tables}{ii}{chapter*.2}%
 \contentsline {chapter}{List of figures}{iii}{chapter*.3}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Related Work}{2}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Literature review}{2}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Power flow analysis}{3}{section.2.2}%
-\contentsline {chapter}{\numberline {3}Goal and Method}{5}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Approach}{5}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Data processing}{7}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}DataAction class}{7}{subsection.3.2.1}%
-\contentsline {paragraph}{Data import and segmenting:}{7}{subsection.3.2.1}%
-\contentsline {paragraph}{Datetime parsing function:}{7}{subsection.3.2.1}%
-\contentsline {paragraph}{Night profile functions:}{8}{subsection.3.2.1}%
-\contentsline {paragraph}{Create loads and static generators:}{8}{subsection.3.2.1}%
-\contentsline {paragraph}{Random static generators:}{8}{subsection.3.2.1}%
-\contentsline {paragraph}{Energy community static generators:}{8}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}NetworkCalculation class}{9}{subsection.3.2.2}%
-\contentsline {paragraph}{Network preparation and controllers:}{9}{subsection.3.2.2}%
-\contentsline {paragraph}{Time iteration and output:}{10}{figure.caption.10}%
-\contentsline {paragraph}{Hosting capacity evaluation:}{10}{figure.caption.10}%
-\contentsline {subsection}{\numberline {3.2.3}Additional files}{10}{subsection.3.2.3}%
-\contentsline {paragraph}{Bulk simulation:}{10}{subsection.3.2.3}%
-\contentsline {paragraph}{Average minima and maxima times:}{11}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}Network application}{12}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Critical case scenario}{12}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Random time scenario}{13}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Energy community scenario}{13}{subsection.3.3.3}%
-\contentsline {subsubsection}{Theoretical considerations}{14}{subsection.3.3.3}%
-\contentsline {subsubsection}{Test feeder application}{15}{figure.caption.11}%
-\contentsline {chapter}{\numberline {4}Results and Discussion}{16}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Hosting capacity}{16}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Random vs energy community comparison}{19}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Suggested improvements}{20}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}General simulation assumptions}{20}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Energy community algorithm}{21}{subsection.4.3.2}%
-\contentsline {paragraph}{Spacial:}{21}{subsection.4.3.2}%
-\contentsline {paragraph}{Temporal:}{21}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Code specifics}{21}{subsection.4.3.3}%
-\contentsline {chapter}{\numberline {5}Conclusion}{23}{chapter.5}%
-\contentsline {chapter}{Appendix}{25}{chapter*.20}%
+\contentsline {chapter}{\numberline {2}Related Work}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Literature review}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Power flow analysis}{5}{section.2.2}%
+\contentsline {chapter}{\numberline {3}Goal and Method}{6}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Approach}{6}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Data processing}{8}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}DataAction class}{8}{subsection.3.2.1}%
+\contentsline {paragraph}{Data import and segmenting:}{8}{subsection.3.2.1}%
+\contentsline {paragraph}{Datetime parsing function:}{8}{subsection.3.2.1}%
+\contentsline {paragraph}{Night profile functions:}{9}{subsection.3.2.1}%
+\contentsline {paragraph}{Create loads and static generators:}{9}{subsection.3.2.1}%
+\contentsline {paragraph}{Random static generators:}{9}{subsection.3.2.1}%
+\contentsline {paragraph}{Energy community static generators:}{9}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}NetworkCalculation class}{10}{subsection.3.2.2}%
+\contentsline {paragraph}{Network preparation and controllers:}{10}{subsection.3.2.2}%
+\contentsline {paragraph}{Time iteration and output:}{11}{figure.caption.10}%
+\contentsline {paragraph}{Hosting capacity evaluation:}{11}{figure.caption.10}%
+\contentsline {subsection}{\numberline {3.2.3}Additional files}{12}{subsection.3.2.3}%
+\contentsline {paragraph}{Bulk simulation:}{12}{subsection.3.2.3}%
+\contentsline {paragraph}{Average minima and maxima times:}{12}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Network application}{13}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Critical case scenario}{13}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Random time scenario}{14}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Energy community scenario}{14}{subsection.3.3.3}%
+\contentsline {subsubsection}{Theoretical considerations}{15}{subsection.3.3.3}%
+\contentsline {subsubsection}{Test feeder application}{16}{figure.caption.11}%
+\contentsline {chapter}{\numberline {4}Results and Discussion}{17}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Hosting capacity}{17}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Random vs energy community comparison}{20}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Suggested improvements}{22}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}General simulation assumptions}{22}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Energy community algorithm}{22}{subsection.4.3.2}%
+\contentsline {paragraph}{Spacial:}{22}{subsection.4.3.2}%
+\contentsline {paragraph}{Temporal:}{22}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Code specifics}{23}{subsection.4.3.3}%
+\contentsline {chapter}{\numberline {5}Conclusion}{24}{chapter.5}%
+\contentsline {chapter}{Bibliography}{25}{chapter*.19}%
+\contentsline {chapter}{Appendix}{26}{chapter*.20}%

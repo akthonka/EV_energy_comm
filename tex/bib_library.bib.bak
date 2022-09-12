@@ -60,4 +60,48 @@
   publisher = {Elsevier {BV}},
 }
 
+@InCollection{Albadi2020,
+  author    = {Mohammed Albadi},
+  booktitle = {Computational Models in Engineering},
+  publisher = {{IntechOpen}},
+  title     = {Power Flow Analysis},
+  year      = {2020},
+  month     = {mar},
+  doi       = {10.5772/intechopen.83374},
+}
+
+@Article{RansanCooper2021,
+  author    = {Hedda Ransan-Cooper and Björn C. P. Sturmberg and Marnie E. Shaw and Lachlan Blackhall},
+  journal   = {Nature Energy},
+  title     = {Applying responsible algorithm design to neighbourhood-scale batteries in Australia},
+  year      = {2021},
+  month     = {jul},
+  number    = {8},
+  pages     = {815--823},
+  volume    = {6},
+  doi       = {10.1038/s41560-021-00868-9},
+  publisher = {Springer Science and Business Media {LLC}},
+}
+
+@InProceedings{PritiPaudyal2021,
+  author    = {Priti Paudyal, Shibani Ghosh, Santosh Veda,Deepak Tiwari, and Jal Desai},
+  booktitle = {2021 {IEEE} Power and Energy Society General Meeting},
+  title     = {EV Hosting Capacity Analysis on Distribution Grids},
+  year      = {2021},
+  publisher = {National Renewable Energy Laboratory},
+  url       = {https://www.nrel.gov/docs/fy21osti/75639.pdf},
+}
+
+@Article{Mahmud2018,
+  author    = {Khizir Mahmud and Graham E. Town and Sayidul Morsalin and M.J. Hossain},
+  journal   = {Renewable and Sustainable Energy Reviews},
+  title     = {Integration of electric vehicles and management in the internet of energy},
+  year      = {2018},
+  month     = {feb},
+  pages     = {4179--4203},
+  volume    = {82},
+  doi       = {10.1016/j.rser.2017.11.004},
+  publisher = {Elsevier {BV}},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
