@@ -31,12 +31,8 @@
 \contentsline {chapter}{\numberline {4}Results and Discussion}{17}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Hosting capacity}{17}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Random vs energy community comparison}{20}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Suggested improvements}{22}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}General simulation assumptions}{22}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Energy community algorithm}{22}{subsection.4.3.2}%
-\contentsline {paragraph}{Spacial:}{22}{subsection.4.3.2}%
-\contentsline {paragraph}{Temporal:}{22}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Code specifics}{23}{subsection.4.3.3}%
-\contentsline {chapter}{\numberline {5}Conclusion}{24}{chapter.5}%
-\contentsline {chapter}{Bibliography}{25}{chapter*.19}%
-\contentsline {chapter}{Appendix}{26}{chapter*.20}%
+\contentsline {chapter}{\numberline {5}Conclusion}{22}{chapter.5}%
+\contentsline {paragraph}{Spacial:}{22}{chapter.5}%
+\contentsline {paragraph}{Temporal:}{23}{chapter.5}%
+\contentsline {chapter}{Bibliography}{24}{chapter*.19}%
+\contentsline {chapter}{Appendix}{25}{chapter*.20}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  12 SEP 2022 11:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  12 SEP 2022 20:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -758,170 +758,169 @@ File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 
 ]
 Chapter 1.
-<images//ev_state_support_mech.png, id=193, 1334.73656pt x 834.86906pt>
+<images//ev_state_support_mech.png, id=175, 1334.73656pt x 834.86906pt>
 File: images//ev_state_support_mech.png Graphic file (type png)
 <use images//ev_state_support_mech.png>
 Package pdftex.def Info: images//ev_state_support_mech.png  used on input line 
-109.
+110.
 (pdftex.def)             Requested size: 418.25368pt x 261.60933pt.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.115 
+l.116 
        [1
 
 
  <./images//ev_state_support_mech.png>] [2]
 Chapter 2.
-<images//control_strats_charging.png, id=212, 1562.08594pt x 683.55376pt>
+<images//control_strats_charging.png, id=194, 1562.08594pt x 683.55376pt>
 File: images//control_strats_charging.png Graphic file (type png)
 <use images//control_strats_charging.png>
 Package pdftex.def Info: images//control_strats_charging.png  used on input lin
-e 127.
+e 128.
 (pdftex.def)             Requested size: 418.25368pt x 183.01831pt.
-<images//centralized_vs_decentr_ctrl.png, id=215, 1590.69281pt x 752.8125pt>
+<images//centralized_vs_decentr_ctrl.png, id=197, 1590.69281pt x 752.8125pt>
 File: images//centralized_vs_decentr_ctrl.png Graphic file (type png)
 <use images//centralized_vs_decentr_ctrl.png>
 Package pdftex.def Info: images//centralized_vs_decentr_ctrl.png  used on input
- line 134.
+ line 135.
 (pdftex.def)             Requested size: 418.25368pt x 197.93213pt.
 [3
 
  <./images//control_strats_charging.png>] [4 <./images//centralized_vs_decentr_
 ctrl.png>] [5]
 Chapter 3.
-<images//test_network.png, id=265, 550.055pt x 431.6125pt>
+<images//test_network.png, id=245, 550.055pt x 431.6125pt>
 File: images//test_network.png Graphic file (type png)
 <use images//test_network.png>
-Package pdftex.def Info: images//test_network.png  used on input line 197.
+Package pdftex.def Info: images//test_network.png  used on input line 198.
 (pdftex.def)             Requested size: 192.39949pt x 150.96783pt.
 [6
 
  <./images//test_network.png>]
-<images//EU_LV_test_feeder.png, id=276, 696.6025pt x 420.57124pt>
+<images//EU_LV_test_feeder.png, id=256, 696.6025pt x 420.57124pt>
 File: images//EU_LV_test_feeder.png Graphic file (type png)
 <use images//EU_LV_test_feeder.png>
-Package pdftex.def Info: images//EU_LV_test_feeder.png  used on input line 212.
+Package pdftex.def Info: images//EU_LV_test_feeder.png  used on input line 213.
 
 (pdftex.def)             Requested size: 250.95476pt x 151.50821pt.
  [7 <./images//EU_LV_test_feeder.png>] [8]
 [9]
-<images//timeseries_module_diag.pdf, id=299, 387.85046pt x 643.9107pt>
+<images//timeseries_module_diag.pdf, id=279, 387.85046pt x 643.9107pt>
 File: images//timeseries_module_diag.pdf Graphic file (type pdf)
 <use images//timeseries_module_diag.pdf>
 Package pdftex.def Info: images//timeseries_module_diag.pdf  used on input line
- 253.
+ 254.
 (pdftex.def)             Requested size: 133.84424pt x 222.20837pt.
  [10 <./images//timeseries_module_diag.pdf>] [11] [12] [13] [14]
 
 pdfTeX warning: pdflatex (file ./images//comm_topology.pdf): PDF inclusion: fou
 nd PDF version <1.7>, but at most version <1.5> allowed
-<images//comm_topology.pdf, id=372, 690.74057pt x 322.07326pt>
+<images//comm_topology.pdf, id=352, 690.74057pt x 322.07326pt>
 File: images//comm_topology.pdf Graphic file (type pdf)
 <use images//comm_topology.pdf>
-Package pdftex.def Info: images//comm_topology.pdf  used on input line 331.
+Package pdftex.def Info: images//comm_topology.pdf  used on input line 332.
 (pdftex.def)             Requested size: 292.77629pt x 136.51318pt.
 [15 <./images//comm_topology.pdf>] [16]
 Chapter 4.
-<images//hosting_cap_min_empty.png, id=438, 702.625pt x 683.55376pt>
+<images//hosting_cap_min_empty.png, id=418, 702.625pt x 683.55376pt>
 File: images//hosting_cap_min_empty.png Graphic file (type png)
 <use images//hosting_cap_min_empty.png>
 Package pdftex.def Info: images//hosting_cap_min_empty.png  used on input line 
-410.
+409.
 (pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
-<images//hosting_cap_min_full.png, id=439, 702.625pt x 683.55376pt>
+<images//hosting_cap_min_full.png, id=419, 702.625pt x 683.55376pt>
 File: images//hosting_cap_min_full.png Graphic file (type png)
 <use images//hosting_cap_min_full.png>
 Package pdftex.def Info: images//hosting_cap_min_full.png  used on input line 4
-18.
+17.
 (pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
-<images//hosting_cap_max_empty.png, id=440, 702.625pt x 683.55376pt>
+<images//hosting_cap_max_empty.png, id=420, 702.625pt x 683.55376pt>
 File: images//hosting_cap_max_empty.png Graphic file (type png)
 <use images//hosting_cap_max_empty.png>
 Package pdftex.def Info: images//hosting_cap_max_empty.png  used on input line 
-426.
+425.
 (pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
-<images//hosting_cap_max_full.png, id=441, 702.625pt x 683.55376pt>
+<images//hosting_cap_max_full.png, id=421, 702.625pt x 683.55376pt>
 File: images//hosting_cap_max_full.png Graphic file (type png)
 <use images//hosting_cap_max_full.png>
 Package pdftex.def Info: images//hosting_cap_max_full.png  used on input line 4
-34.
+33.
 (pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
 [17
 
 ] [18 <./images//hosting_cap_min_empty.png> <./images//hosting_cap_min_full.png
 > <./images//hosting_cap_max_empty.png> <./images//hosting_cap_max_full.png>]
-<images//random_loads_min_full.png, id=457, 702.625pt x 683.55376pt>
+<images//random_loads_min_full.png, id=437, 702.625pt x 683.55376pt>
 File: images//random_loads_min_full.png Graphic file (type png)
 <use images//random_loads_min_full.png>
 Package pdftex.def Info: images//random_loads_min_full.png  used on input line 
-498.
+497.
 (pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
-<images//en_comm_min_full.png, id=458, 702.625pt x 683.55376pt>
+<images//en_comm_min_full.png, id=438, 702.625pt x 683.55376pt>
 File: images//en_comm_min_full.png Graphic file (type png)
 <use images//en_comm_min_full.png>
-Package pdftex.def Info: images//en_comm_min_full.png  used on input line 506.
+Package pdftex.def Info: images//en_comm_min_full.png  used on input line 505.
 (pdftex.def)             Requested size: 198.67303pt x 193.2816pt.
  [19] [20 <./images//random_loads_min_full.png> <./images//en_comm_min_full.png
->] [21] [22] [23]
+>] [21]
 Chapter 5.
-(EV_energy_comm_thesis.bbl [24
+[22
 
-]) [25
+] (EV_energy_comm_thesis.bbl [23]) [24
 
 ]
 (C:\Program Files\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 594.
+nput line 576.
 
 (C:/Users/panto/Documents/git/personal/EV_energy_comm/python/data_process.py
-[26
+[25
 
-] [27] [28] [29] [30] [31]) [32] (EV_energy_comm_thesis.aux)
+] [26] [27] [28] [29] [30]) [31] (EV_energy_comm_thesis.aux)
 Package rerunfilecheck Info: File `EV_energy_comm_thesis.out' has not changed.
-(rerunfilecheck)             Checksum: ED8354A9276A3ED63370846B8296C061;3908.
+(rerunfilecheck)             Checksum: 304C67C46C2A50A7CC3BFA67C1699D59;3189.
  ) 
 Here is how much of TeX's memory you used:
- 23682 strings out of 477843
- 447809 string characters out of 2833414
- 1570206 words of memory out of 3000000
- 41746 multiletter control sequences out of 15000+600000
- 491242 words of font info for 87 fonts, out of 8000000 for 9000
+ 23670 strings out of 477843
+ 447641 string characters out of 2833414
+ 1570177 words of memory out of 3000000
+ 41740 multiletter control sequences out of 15000+600000
+ 490907 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,14n,87p,1387b,2759s stack positions out of 10000i,1000n,20000p,200000b,80000s
  <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi525\ectt
 0800.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
 0\ecrm0500.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
 /dpi600\ecti1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
-pen/ec/dpi600\tcrm1000.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour
-/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/
-ljfour/jknappen/ec/dpi600\ecrm0900.pk> <C:\Users\panto\AppData\Local\MiKTeX\fon
-ts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\panto\AppData\Local\MiKT
-eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\panto\AppData\Loca
-l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\panto\AppDat
-a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\panto\
-AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\
-panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\
-Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk
+pen/ec/dpi600\ecbx1200.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour
+/jknappen/ec/dpi600\ecrm0900.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/
+ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\panto\AppData\Local\MiKTeX\fon
+ts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\panto\AppData\Local\MiKT
+eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\panto\AppData\Loca
+l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\panto\AppDat
+a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\panto\
+AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\
+panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\
+Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk
 > <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1
-440.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600
-\ecrm1728.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb
-><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><C:/Pro
-gram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/M
-iKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/MiKTeX/fonts/t
-ype1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/a
-msfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cm
-r7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/P
-rogram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/
-MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX/fonts/
-type1/public/amsfonts/symbols/msam10.pfb>
-Output written on EV_energy_comm_thesis.pdf (37 pages, 3648231 bytes).
+728.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/P
+rogram Files/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><C:/Program F
+iles/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/
+fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmmi7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb
+><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program
+ Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX/fonts/type1/
+public/amsfonts/symbols/msam10.pfb>
+Output written on EV_energy_comm_thesis.pdf (36 pages, 3644175 bytes).
 PDF statistics:
- 1711 PDF objects out of 1728 (max. 8388607)
- 558 named destinations out of 1000 (max. 500000)
- 282 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1675 PDF objects out of 1728 (max. 8388607)
+ 553 named destinations out of 1000 (max. 500000)
+ 250 words of extra memory for PDF output out of 10000 (max. 10000000)
 
