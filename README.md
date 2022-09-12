@@ -8,6 +8,7 @@ The simulation data is not directly included in this git due to size limitations
 1. Head over to the source website: https://data.open-power-system-data.org/household_data/
 2. Use the following configuration for download: ![instructions](/datasource/data_source_settings.png)
 3. Update relevant settings in relevant jupyter notebooks:
+
   da.folder_path = r"\\path\\"
   keep_cols = ['DE_KN_residential1_grid_import',
                'DE_KN_residential2_grid_import',
