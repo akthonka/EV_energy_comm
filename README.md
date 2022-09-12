@@ -13,4 +13,4 @@ The simulation data is not directly included in this git due to size limitations
 5. Update relevant settings in relevant jupyter notebooks:
 
         da.folder_path = r"\\path\\"
-        da.imp_procc("data_filename.csv", keep_cols")
+        da.imp_procc("data_filename.csv", keep_cols)
