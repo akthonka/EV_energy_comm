@@ -27,6 +27,7 @@
 \usepackage{titlesec} % title section formatting
 \titleformat{\chapter}{\bfseries\LARGE}{\thechapter~}{0em}{}
 \usepackage[autostyle]{csquotes} % better quotes
+\usepackage{fancyhdr} % better headers
 
 \usepackage{xcolor}
 \usepackage{listings} % for code
@@ -50,8 +51,7 @@
 	showspaces=false,                
 	showstringspaces=false,
 	showtabs=false,                  
-	tabsize=2
-}
+	tabsize=2}
 \lstset{style=mystyle}
 
 % DARK-MODE on PDF reader
@@ -64,7 +64,10 @@
 
 
 \begin{document}
-
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small\leftmark\itshape\hfill\rightmark}
+\fancyfoot[C]{\thepage}
 
 \title{
 	\vspace{2cm}
@@ -486,7 +489,7 @@ That being said, the issue can be easily avoided with relatively little interven
 With this discussion we arrive at the transitional phase of semi-smart charging and the comparison between uncoordinated and semi-coordinated scenarios.
 
 
-\section{Random vs energy community comparison}\label{section_rand_vs_comm}
+\section{Random vs energy community}\label{section_rand_vs_comm}
 This section puts the energy community algorithm to the test against a random charging pattern. A representative graphical result is shown in \cref{random_vs_en_comm}.
 
 \FloatBarrier
@@ -574,6 +577,8 @@ In conclusion, the results of this study show potential despite the circumstanti
 
 \chapter*{Appendix}\label{chapter_appendix}
 \addcontentsline{toc}{chapter}{Appendix}
+\pagestyle{empty}
+
 Included is the python class file code. For a complete reference, see the project repository on GitHub: \url{https://github.com/akthonka/EV_energy_comm}
 
 \lstinputlisting[language=Python]{"C:/Users/panto/Documents/git/personal/EV_energy_comm/python/data_process.py"}

@@ -30,7 +30,7 @@
 \contentsline {subsubsection}{Test feeder application}{16}{figure.caption.11}%
 \contentsline {chapter}{\numberline {4}Results and Discussion}{17}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Hosting capacity}{17}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Random vs energy community comparison}{20}{section.4.2}%
+\contentsline {section}{\numberline {4.2}Random vs energy community}{20}{section.4.2}%
 \contentsline {chapter}{\numberline {5}Conclusion}{22}{chapter.5}%
 \contentsline {paragraph}{Spacial:}{22}{chapter.5}%
 \contentsline {paragraph}{Temporal:}{23}{chapter.5}%
