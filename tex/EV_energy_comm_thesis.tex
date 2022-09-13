@@ -55,9 +55,9 @@
 \lstset{style=mystyle}
 
 % DARK-MODE on PDF reader
-\usepackage{xcolor}
-\pagecolor[HTML]{1f1f1f} % dark color
-\color[HTML]{c7c7c7} % light color
+%\usepackage{xcolor}
+%\pagecolor[HTML]{1f1f1f} % dark color
+%\color[HTML]{c7c7c7} % light color
 
 \setcounter{tocdepth}{2}
 %------------------------------------------------------------------
@@ -133,7 +133,7 @@ The inspirational starting point for this thesis was the paper "Electric vehicle
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=\linewidth]{centralized_vs_decentr_ctrl}
-	\caption[Centralized and decentralized control architecture]{Centralized and decentralized control architecture of EV charging system \cite{Das2020}.}
+	\caption[Centralized and decentralized control architecture]{Centralized and decentralized control architecture of EV charging systems \cite{Das2020}.}
 	\label{centralized_vs_decentr_ctrl}
 \end{figure}
 
@@ -211,7 +211,7 @@ Eventually, the abstract example network got superseded by the benchmark Europea
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=0.6\linewidth]{EU_LV_test_feeder}
-	\caption[European Low Voltage Test Feeder layout]{European Low Voltage Test Feeder network illustration. The blue dots are the active busses, representing households \cite{Nousdilis2017}.}
+	\caption[European Low-Voltage Test Feeder layout]{European Low Voltage Test Feeder network illustration. The blue dots are the active busses, representing households \cite{Nousdilis2017}.}
 	\label{EU_LV_test_feeder}
 \end{figure}
 
@@ -366,7 +366,7 @@ In the case of the test feeder, the allocated sgen charging times and cycles can
 		\texttt{05:00:00} & \texttt{05:59:00} & 4\\
 		\bottomrule
 	\end{tabular}
-	\caption[Energy community charging times for test feeder network]{Energy community charging times for test feeder network.}
+	\caption[Energy community temporal distribution of sgens]{Energy community temporal distribution of sgens.}
 	\label{sgen_comm_times}
 \end{table}
 
@@ -459,7 +459,7 @@ The details of time point cases for each example network are shown in \cref{extr
 		max & 1.050 & 1.050 & 1.050 & 1.050 \\
 		\bottomrule
 	\end{tabular}
-	\caption[Hosting capacity voltage magnitudes in detail]{Hosting capacity voltage magnitudes in detail.}
+	\caption[Hosting capacity voltage magnitudes in detail]{Example data of hosting capacity voltage magnitudes in detail.}
 	\label{extremes_summary}
 \end{table}
 
@@ -554,7 +554,7 @@ The energy community spatio-temporal algorithm is in no way optimal and is an ex
 
 Secondly, average sgen distribution in time is not optimal. Ideally, most sgens would be shifted towards the time of vm p.u. minimum, which was computed to be \texttt{02:26:00} based on historical data. Referring back to \cref{sgen_comm_times}, we can see that there are 5 sgens active during the \texttt{18:00:00}--\texttt{00:00:00} interval, followed by the remaining time slots at night to be filled with 4 sgens---this ordering should be reversed. Unfortunately there is no easy fix that comes to mind, since it would require one to separate the spacial from the temporal, thus writing a new algorithm altogether. What this simulation ultimately shows however, is that the spacial component has a far greater impact on the results than the temporal and that this shortcoming could therefore be ignored.
 
-A considerable amount of effort was put into making the data analysis code "proper" (to the best of author's knowledge and ability at the time). Nevertheless, several problems remained unfixed: these should not have had a negative impact on the simulation results, only on the runtime. For instance, the dataframe list splitting function ultimately discards 2 days of data per list (beginning and end). In scope of the total size of the household dataset, this is a negligible loss of information but it could still use improvement. Alternatively, one could make use of additional residential household datasets from the Open Power System Data.
+A considerable amount of effort was put into making the data analysis code proper (to the best of author's knowledge and ability at the time). Nevertheless, several problems remained unfixed: these should not have had a negative impact on the simulation results, only on the runtime. For instance, the dataframe list splitting function ultimately discards 2 days of data per list (beginning and end). In scope of the total size of the household dataset, this is a negligible loss of information but it could still use improvement. Alternatively, one could make use of additional residential household datasets from the Open Power System Data.
 
 A more problematic issue was the following terminal dual warning:
 \noindent
@@ -574,6 +574,7 @@ In conclusion, the results of this study show potential despite the circumstanti
 
 \chapter*{Appendix}\label{chapter_appendix}
 \addcontentsline{toc}{chapter}{Appendix}
+Included is the python class file code. For a complete reference, see the project repository on GitHub: \url{https://github.com/akthonka/EV_energy_comm}
 
 \lstinputlisting[language=Python]{"C:/Users/panto/Documents/git/personal/EV_energy_comm/python/data_process.py"}
 

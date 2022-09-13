@@ -377,7 +377,8 @@ class net_calc:
         return vm_pu
 
     def load_graph(self, time_step):  # helper function
-        # update network with step value
+        """update network with step value"""
+
         run_timeseries(self.net, time_steps=(0, time_step))
 
     def vm_stats(self, vm_pu):
@@ -410,7 +411,9 @@ class net_calc:
         return (min_min_vm, min_min_ind, min_time), (max_max_vm, max_max_ind, max_time)
 
     def plotly_res(self):  # helper function
-        x = pf_res_plotly(self.net, climits_volt=(0.95, 1.05))  # x is arbitrary var
+        """return a network diagram of results"""
+
+        x = pf_res_plotly(self.net, climits_volt=(0.95, 1.05))  # x is arbitrary
 
     def hosting_cap(self, sgen_val):
         """compute hosting capacity"""

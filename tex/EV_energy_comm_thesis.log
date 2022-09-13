@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  13 SEP 2022 10:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28) (preloaded format=pdflatex 2022.8.28)  13 SEP 2022 16:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -876,7 +876,7 @@ Chapter 5.
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 578.
+nput line 579.
 
 (C:/Users/panto/Documents/git/personal/EV_energy_comm/python/data_process.py
 [25
@@ -886,13 +886,13 @@ Package rerunfilecheck Info: File `EV_energy_comm_thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 304C67C46C2A50A7CC3BFA67C1699D59;3189.
  ) 
 Here is how much of TeX's memory you used:
- 23670 strings out of 477843
- 447641 string characters out of 2833414
- 1570177 words of memory out of 3000000
+ 23673 strings out of 477843
+ 447689 string characters out of 2833414
+ 1585280 words of memory out of 3000000
  41740 multiletter control sequences out of 15000+600000
  490907 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,14n,87p,1387b,2759s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 72i,14n,87p,1387b,2711s stack positions out of 10000i,1000n,20000p,200000b,80000s
  <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi525\ectt
 0800.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
 0\ecrm0500.pk> <C:\Users\panto\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
@@ -918,9 +918,9 @@ s/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb
  Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files/MiKTeX
 /fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX/fonts/type1/
 public/amsfonts/symbols/msam10.pfb>
-Output written on EV_energy_comm_thesis.pdf (36 pages, 3644665 bytes).
+Output written on EV_energy_comm_thesis.pdf (36 pages, 3641950 bytes).
 PDF statistics:
- 1675 PDF objects out of 1728 (max. 8388607)
- 553 named destinations out of 1000 (max. 500000)
+ 1679 PDF objects out of 1728 (max. 8388607)
+ 556 named destinations out of 1000 (max. 500000)
  250 words of extra memory for PDF output out of 10000 (max. 10000000)
 
