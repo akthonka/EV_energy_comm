@@ -86,7 +86,7 @@
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
 
-The global trend towards electric vehicle (EV) adoption poses numerous challenges for the traditional electric grid operations and infrastructure. This paper examines the stability of low-voltage European grids in the context of EV integration. For this purpose, a power flow analysis is performed based on historical data of residential load profiles. A critical case scenario is used for computing the hosting capacity's upper and lower limits. The results show $\approx 11\,\%$ and $\approx 22\,\%$ grid hosting capacities for worst and best case scenarios respectively. The coordination of individual households within the grid is explored via a newly proposed spacio-temporal charging algorithm for a basic energy community.  A comparison between a random charging pattern and a semi-coordinated energy community charging pattern is made based on a set of timeseries simulations. The results suggest that the energy community algorithm is $\approx 30\,\%$ more effective than the random case; the proposed energy community model is suggested as an intermediary solution for a transition towards future smart grids.
+The global trend towards electric vehicle (EV) adoption poses numerous challenges for the traditional electric grid operations and infrastructure. This paper examines the stability of low-voltage European grids in the context of EV integration. For this purpose, a power flow analysis is performed based on historical data of residential load profiles. A critical case scenario is used for computing the hosting capacity's upper and lower limits. The results show $\approx 13\,\%$ and $\approx 21\,\%$ grid hosting capacities for worst and best case scenarios respectively. The coordination of individual households within the grid is explored via a newly proposed spacio-temporal charging algorithm for a basic energy community.  A comparison between a random charging pattern and a semi-coordinated energy community charging pattern is made based on a set of timeseries simulations. The results suggest that the energy community algorithm is $\approx 30\,\%$ more effective than the random case; the proposed energy community model is suggested as an intermediary solution for a transition towards future smart grids.
 
 
 \listoftables
@@ -374,7 +374,7 @@ For spacial allocation, the sequence of predefined sgen locations in \texttt{pan
 
 
 \chapter{Results and Discussion}
-The simulation results can be divided into two groups: hosting capacity and random vs energy community scenarios comparison. The hosting capacity results feature single simulation examples chosen at random. The random vs energy community scenarios comparison results are based on a set of simulations and consequent group averages.
+The simulation results can be divided into two groups: hosting capacity and random vs energy community scenarios comparison. The hosting capacity results feature single simulation examples chosen at random, as well as a group average. The random vs energy community scenarios comparison results are based on a set of simulations and consequent group averages.
 
 \section{Hosting capacity}
 Hosting capacity calculations began by computing the timeseries with no sgens active. The network bus load example results can be seen in \cref{hosting_time_series_table}. As expected, the the voltage magnitude per unit drops with each bus load---hereby the extrema are sometimes shared across multiple busses (even at higher significant figure counts). The time points for voltage magnitude extremes are unique however, which leads to two cases: minimum bus vm p.u and maximum bus vm p.u.
@@ -399,7 +399,7 @@ Hosting capacity calculations began by computing the timeseries with no sgens ac
 	\label{hosting_time_series_table}
 \end{table}
 
-The network graphs for hosting capacity time extremes calculation are shown in \cref{hopsting_cap_figures}. Visually, we can see a big difference in color profiles for cases with different starting time points. \Cref{hopsting_cap_figures_a} shows significant line stress in the bottom two branches of the network (seen in yellow), as opposed to \cref{hopsting_cap_figures_c} where the entire network is stabilized, implying less deviation between bus loads. Hereby we expect a greater hosting capacity for the maximum bus voltage time point case due to its color profile homogeneity (shown in red) and a bigger maximum range of vm p.u., which would allow to accommodate more sgens at the lower branches. As far as filled sgen hosting capacity graphs are concerned, there's little visual difference between \cref{hopsting_cap_figures_b} and \cref{hopsting_cap_figures_d} at this scale. For more insight, consider numerical data in \cref{extremes_summary} and \cref{hosting_cap_stats}.
+The example network graphs for hosting capacity time extremes calculation are shown in \cref{hopsting_cap_figures}. Visually, we can see a big difference in color profiles for cases with different starting time points. \Cref{hopsting_cap_figures_a} shows significant line stress in the bottom two branches of the network (seen in yellow), as opposed to \cref{hopsting_cap_figures_c} where the entire network is stabilized, implying less deviation between bus loads. Hereby we expect a greater hosting capacity for the maximum bus voltage time point case due to its color profile homogeneity (shown in red) and a bigger maximum range of vm p.u., which would allow to accommodate more sgens at the lower branches. As far as filled sgen hosting capacity graphs are concerned, there's little visual difference between \cref{hopsting_cap_figures_b} and \cref{hopsting_cap_figures_d} at this scale. For more insight, consider numerical data in \cref{extremes_summary} and \cref{hosting_cap_stats}.
 
 \FloatBarrier
 \begin{figure*}
@@ -436,12 +436,12 @@ The network graphs for hosting capacity time extremes calculation are shown in \
 		\label{hopsting_cap_figures_d}
 	\end{subfigure}
 	\caption[Comparison of hosting capacities for time extremes]
-	{\small Comparison between hosting capacity during minimum (subfigures (a) and (b)) and maximum (subfigures (c) and (d)) load time cases with and without sgens.} 
+	{\small Comparison between hosting capacity during minimum (subfigures (a) and (b)) and maximum (subfigures (c) and (d)) load time cases with and without sgens. These are singular simulation examples.} 
 	\label{hopsting_cap_figures}
 \end{figure*}
 \FloatBarrier
 
-The details of time point cases for each network are shown in \cref{extremes_summary}. We can see a significant difference in minimum vm p.u. values between the "Min bus empty" and "Max bus empty" cases. This is a numerical indication of a greater hosting capacity potential for the maximum time point case. For the columns "Min bus full" and "Max bus full", we observe no significant difference between the two min values---this indicates that the maximum hosting capacity has been reached in both cases at a vm p.u. lower bracket.
+The details of time point cases for each example network are shown in \cref{extremes_summary}. We can see a significant difference in minimum vm p.u. values between the "Min bus empty" and "Max bus empty" cases. This is a numerical indication of a greater hosting capacity potential for the maximum time point case. For the columns "Min bus full" and "Max bus full", we observe no significant difference between the two min values---this indicates that the maximum hosting capacity has been reached in both cases at a vm p.u. lower bracket.
 
 \begin{table}[htpb]
 	\centering
@@ -463,7 +463,7 @@ The details of time point cases for each network are shown in \cref{extremes_sum
 	\label{extremes_summary}
 \end{table}
 
-The key results of the hosting capacity simulations are summarized in \cref{hosting_cap_stats}.
+The key results of the hosting capacity simulations are summarized in \cref{hosting_cap_stats}. This table contains average values based on 10 simulation runs.
 
 \begin{table}[htpb]
 	\centering
@@ -471,15 +471,15 @@ The key results of the hosting capacity simulations are summarized in \cref{host
 		\toprule
 		& Minimum bus voltage & Maximum bus voltage \\
 		\midrule
-		number of sgens & 6 & 12 \\
-		total capacity [\%] & 10.9 & 21.8 \\
+		number of sgens & 7.65 & 11.36 \\
+		total capacity [\%] & 13.14 & 20.75 \\
 		\bottomrule
 	\end{tabular}
-	\caption[Hosting capacity results]{Hosting capacity results.}
+	\caption[Hosting capacity results]{Hosting capacity averages for 10 runs.}
 	\label{hosting_cap_stats}
 \end{table}
 
-The scenario results show a rather low hosting capacity for both time point cases. As expected, the best case of maximum bus voltage has a significantly better hosting capacity---about double that of the worst case of minimum bus voltage. In a way, this is alarming because the probability of a network overload is definitely not negligible: it only takes $\approx10\,\%$ of all households to charge their EVs during peak hours to cause a potential brownout/blackout. Furthermore, this time point is the most probable charging time point for any given individual under our assumptions of European work hours; without the presence of smart meters, a person is most likely to park their EV and set it to charge immediately. Considering the habitual nature of human actions, a network overload is only a matter of time in this case.
+The scenario results show a rather low hosting capacity for both time point cases. As expected, the best case of maximum bus voltage has a better hosting capacity---about $8\,\%$ more total capacity than the worst case of minimum bus voltage. In a way, this is alarming because the probability of a network overload is definitely not negligible: it only takes $\approx13\,\%$ of all households to charge their EVs during peak hours to cause a potential brownout/blackout. Furthermore, this time point is the most probable charging time point for any given individual under our assumptions of European work hours; without the presence of smart meters, a person is most likely to park their EV and set it to charge immediately. Considering the habitual nature of human actions, a network overload is only a matter of time in this case.
 
 That being said, the issue can be easily avoided with relatively little intervention. Undoubtedly, all EV chargers do (and if not, will soon) include a time setting option, which is very easy to implement. Hereby, an EV owner only needs to enable and setup the charging hour parameter once, which is a matter of seconds. At the same time, one cannot deny that not everyone will bother to do so, nor that any potential software/firmware updates will reset the setting. As such, one is able to compensate for technological shortcomings (i.e. lack of smart EV charging) with conscious human intervention (i.e. manually setting the EV to charge outside of peak hours) and vice versa.
 
@@ -542,11 +542,11 @@ Taking the difference of two brackets, we can show that the energy community sce
 
 
 \chapter{Conclusion}\label{section_improvements}
-This paper presents several key findings on the topic of EV integration. Firstly, the hosting capacity of a typical European low-voltage grid is surprisingly low ($\approx10\,\%$) for a worst-case scenario. This serves as a strong motivation for further research and investment required in the topic of grid stability. Secondly, this paper introduces a simple but relatively effective spacio-temporal algorithm for EV charging. The semi-coordinated charging algorithm was proven to be more effective ($\approx30\,\%$) than the uncoordinated charging scenario, which is surprisingly good given its extreme simplicity. One can argue in favor of unoptimized algorithms when taking into account the public's perception of energy transparency. An algorithm such as this one could prove to be a valuable stepping-stone for the purposes of transition towards the future of smart grids and EV integration. Additionally, consider the following limitations of this paper's work.
+This paper presents several key findings on the topic of EV integration. Firstly, the hosting capacity of a typical European low-voltage grid is surprisingly low ($\approx13\,\%$) for a worst-case scenario. This serves as a strong motivation for further research and investment required in the topic of grid stability. Secondly, as part of a solution to this problem, this paper introduces a simple but relatively effective spacio-temporal algorithm for EV charging. The semi-coordinated charging algorithm was proven to be more effective ($\approx30\,\%$) than the uncoordinated charging scenario, which is surprisingly good given its extreme simplicity. One can argue in favor of unoptimized algorithms when taking into account the public's perception of energy transparency. An algorithm such as this one could prove to be a valuable stepping-stone for the purposes of transition towards the future of smart grids and EV integration. Additionally, consider the following limitations of this paper's work.
 
 Perhaps the biggest uncertainty in the simulation parameters was the charging window. Ideally, the charging window should represent the average charging time for a single household under the most common circumstances. If one were to calculate said average from real-world statistics, one would have to consider (at least) the following average values: daily driving distance, daily time spent in traffic, typical EV energy consumption/efficiency and typical battery discharge rate. This paper assumes that the end user will continuously top-up the EV battery on a daily basis. Hereby, the EV battery technology is the key factor to widespread EV adoption. The field is rapidly developing, which makes it hard to predict precise technical details, such as maximum charging rates. At the same time, since it is highly unlikely to expect Level 3 DC charging reach widespread household integration, our assumption for 7.7\,kW charging rate remains plausible. Workplace or public charging stations are most likely to see installation in the near future, which could reduce the total number of household EV charging stations drastically. Lastly, a completely thorough analysis could additionally factor in energy tariffs and their effects on person's charging habits.
 
-The energy community spatio-temporal algorithm is in no way optimal and is an extreme over-simplification of the problem. Its main purpose is to serve as a starting point for when there is none, and to serve as a demonstration for what minimum effort can achieve in the context of grid stability. Consider the shortcomings of both dimensions separately:
+The energy community spatio-temporal algorithm is in no way optimal and is an extreme over-simplification of the problem. Its main purpose is to serve as a starting point for when there is none, and to serve as a demonstration for what minimum effort can achieve in the context of grid stability. Consider the shortcomings of both dimensions separately.
 
 \paragraph{Spacial:} The current algorithm relies on correct ordering of busses for iteration and does not account for significant deviation or branching from linear topology. This implies that the results depend significantly on manual ordering of busses, which can become unintuitive with enough complexity. A possible solution would be to implement a tree path length comparison algorithm, though certain cases such as branches of equal lengths may be difficult to account for. (This is even possible to do in \texttt{pandapower} using \texttt{calc\_distance\_to\_bus()} function.) Alternatively, one could limit the current algorithm to smaller sections of the network and run it locally, since it would still optimize for distance from substation. As last resort, constrained brute-forcing different bus ordering cases should not take long, given the relative simplicity of the simulation.
 
@@ -565,6 +565,8 @@ A more problematic issue was the following terminal dual warning:
 	\texttt{"MatrixRankWarning: Matrix is exactly singular"}
 \end{itemize}
 This would only appear occasionally, seemingly independent of most simulation parameters (such as load magnitudes or sgen values). It did not prevent the power flow from returning a solution and the results always appeared within the expected range. As such, this warning was mostly avoided through re-runs or, in case of the bulk simulation, through averaging of results. Lastly, occasionally there appeared to be mismatch in index and table lengths when parsing the dataframe tables, which would be solved via a simple rerun. It's possible that this bug is kernel-related to the local python installation; like the others above-mentioned, it does not impact the validity of results.
+
+In conclusion, the results of this study show potential despite the circumstantial limitations. Given more time, a sensitivity analysis would have further aided this paper to better establish factor dependence and robustness of results. Overall, the optimal integration of EVs will require a lot more research for a smooth transition towards smart energy systems.
 
 \bibliographystyle{IEEEtran} %displays URLs
 \bibliography{bib_library}
